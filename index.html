@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brian Patrick Wcislo | Your Concept Becomes Reality</title>
+  <meta name="description" content="From idea to functional prototype to production-ready app. Web or native. I bring clarity, purpose, and an executable plan to crystallize your vision.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --charcoal: #2d2d2d;
+      --slate: #4a4a4a;
+      --stone: #6b6b6b;
+      --pewter: #8a8a8a;
+      --silver: #e5e5e5;
+      --cloud: #f5f5f5;
+      --white: #fafafa;
+      --accent: #a5c002;
+      --accent-hover: #8ba600;
+      
+      --font-display: 'Fraunces', serif;
+      --font-body: 'DM Sans', sans-serif;
+      
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 2rem;
+      --space-lg: 4rem;
+      --space-xl: 6rem;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--white);
+      color: var(--charcoal);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+    
+    /* Typography */
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.2;
+    }
+    
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      letter-spacing: -0.02em;
+    }
+    
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      margin-bottom: var(--space-md);
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 500;
+    }
+    
+    p {
+      font-size: 1.1rem;
+      max-width: 65ch;
+    }
+    
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--accent-hover);
+    }
+    
+    /* Layout */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--space-md);
+    }
+    
+    section {
+      padding: var(--space-xl) 0;
+    }
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      position: relative;
+    }
+    
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: var(--space-md);
+      align-items: center;
+      max-width: 950px;
+      margin: 0 auto;
+    }
+    
+    .hero-text {
+      order: 2;
+    }
+    
+    .hero-image-container {
+      order: 1;
+    }
+    
+    .hero-image {
+      transition: transform 0.1s ease-out, opacity 0.1s ease-out;
+    }
+    
+    .hero-text {
+      animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .hero-headline,
+    .hero-subtext,
+    .hero-name,
+    .hero .btn,
+    .hero-image-container {
+      will-change: transform;
+      transition: transform 0.1s ease-out;
+    }
+    
+    .hero-date {
+      font-size: 0.875rem;
+      color: var(--pewter);
+      margin-bottom: var(--space-sm);
+      letter-spacing: 0.05em;
+    }
+    
+    .hero-headline {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: var(--space-md);
+      color: var(--charcoal);
+    }
+    
+    .hero-tagline {
+      margin-bottom: var(--space-md);
+    }
+    
+    .tagline-main {
+      font-size: 1.1rem;
+      color: var(--slate);
+      margin-bottom: var(--space-sm);
+      line-height: 1.6;
+    }
+    
+    .tagline-main strong {
+      color: var(--charcoal);
+      font-weight: 600;
+    }
+    
+    .tagline-platform {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .tagline-secondary {
+      font-size: 0.95rem;
+      color: var(--stone);
+      letter-spacing: 0.03em;
+    }
+    
+    .tagline-secondary .fun {
+      font-style: italic;
+      color: var(--pewter);
+    }
+    
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: var(--space-md);
+    }
+    
+    .hero-image-container {
+      animation: fadeIn 1s ease-out 0.2s both;
+    }
+    
+    .hero-image {
+      width: 100%;
+      max-width: 400px;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 20px 40px -12px rgba(45, 45, 45, 0.15);
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: 0.875rem 2rem;
+      background: #000000;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 500;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.4s ease, color 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      position: relative;
+    }
+    
+    .btn:hover {
+      background: var(--accent);
+      color: #000000;
+      box-shadow: 0 8px 24px -4px rgba(165, 192, 2, 0.4);
+    }
+    
+    .btn.magnetic {
+      transition: background 0.4s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease-out;
+    }
+    
+    /* What I Do Section */
+    .what-i-do {
+      background: #000000;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .what-i-do::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: url('waterfall-bg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      opacity: 0.25;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    .what-i-do .container {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .what-i-do .section-intro h2 {
+      color: var(--white);
+    }
+    
+    .what-i-do .section-intro p {
+      color: var(--silver);
+    }
+    
+    .what-i-do .service-card {
+      background: var(--slate);
+    }
+    
+    .what-i-do .service-card h3 {
+      color: var(--white);
+    }
+    
+    .what-i-do .service-card p {
+      color: var(--silver);
+    }
+    
+    .what-i-do .service-icon {
+      background: var(--charcoal);
+      color: var(--silver);
+    }
+    
+    .section-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto var(--space-lg);
+    }
+    
+    .section-intro h2 {
+      color: var(--charcoal);
+    }
+    
+    .section-intro p {
+      color: var(--slate);
+      margin: 0 auto;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .service-card {
+      padding: var(--space-md);
+      background: var(--white);
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -8px rgba(45, 45, 45, 0.1);
+    }
+    
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--cloud);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-sm);
+      color: var(--slate);
+    }
+    
+    .service-card h3 {
+      margin-bottom: var(--space-xs);
+      color: var(--charcoal);
+    }
+    
+    .service-card p {
+      font-size: 0.95rem;
+      color: var(--stone);
+      margin: 0 auto;
+    }
+    
+    /* Process Section */
+    .process {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+    
+    .process .section-intro h2 {
+      color: var(--white);
+    }
+    
+    .process .section-intro p {
+      color: var(--silver);
+    }
+    
+    .process-description {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto var(--space-lg);
+      color: var(--pewter);
+      line-height: 1.8;
+    }
+    
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-md);
+      margin-top: var(--space-lg);
+    }
+    
+    .process-step {
+      text-align: center;
+    }
+    
+    .process-number {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .process-step h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--white);
+      margin-bottom: var(--space-xs);
+    }
+    
+    .process-step p {
+      font-size: 0.9rem;
+      color: var(--pewter);
+      margin: 0 auto;
+      max-width: 220px;
+    }
+    
+    /* Projects Section */
+    .projects {
+      background: var(--white);
+    }
+    
+    .projects .section-intro {
+      text-align: left;
+      max-width: none;
+      margin-bottom: var(--space-lg);
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .project-card {
+      background: var(--cloud);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -8px rgba(45, 45, 45, 0.12);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      object-position: top;
+    }
+    
+    .project-content {
+      padding: var(--space-md);
+    }
+    
+    .project-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: var(--space-xs);
+      font-weight: 600;
+    }
+    
+    .project-content h3 {
+      color: var(--charcoal);
+      margin-bottom: var(--space-xs);
+      font-size: 1.5rem;
+    }
+    
+    .project-content p {
+      color: var(--stone);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    
+    .project-content .launch-note {
+      display: inline-block;
+      margin-top: var(--space-sm);
+      font-size: 0.85rem;
+      color: var(--slate);
+      font-weight: 500;
+    }
+    
+    /* About Section */
+    .about {
+      background: var(--cloud);
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    
+    .about-text h2 {
+      margin-bottom: var(--space-md);
+    }
+    
+    .about-text p {
+      margin-bottom: var(--space-sm);
+      color: var(--slate);
+    }
+    
+    .about-details {
+      padding: var(--space-md);
+      background: var(--white);
+      border-radius: 8px;
+    }
+    
+    .about-details h3 {
+      margin-bottom: var(--space-sm);
+      color: var(--charcoal);
+      font-size: 1.1rem;
+    }
+    
+    .about-details ul {
+      list-style: none;
+    }
+    
+    .about-details li {
+      padding: var(--space-xs) 0;
+      color: var(--slate);
+      border-bottom: 1px solid var(--silver);
+      font-size: 0.95rem;
+    }
+    
+    .about-details li:last-child {
+      border-bottom: none;
+    }
+    
+    /* Contact Section */
+    .contact {
+      background: var(--white);
+      text-align: center;
+      padding: var(--space-xl) 0;
+    }
+    
+    .contact h2 {
+      color: var(--charcoal);
+    }
+    
+    .contact p {
+      margin: 0 auto var(--space-md);
+      color: var(--slate);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--charcoal);
+      color: var(--pewter);
+      text-align: center;
+      padding: var(--space-md) 0;
+      font-size: 0.875rem;
+    }
+    
+    footer a {
+      color: var(--silver);
+    }
+    
+    footer a:hover {
+      color: var(--white);
+    }
+    
+    /* Divider */
+    .divider {
+      height: 1px;
+      background: var(--silver);
+      max-width: 100px;
+      margin: var(--space-lg) auto;
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    /* Responsive */
+    @media (max-width: 968px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      
+      .hero-image-container {
+        order: -1;
+      }
+      
+      .hero-image {
+        max-width: 280px;
+        margin: 0 auto;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-flow {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-lg) var(--space-md);
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .about-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    @media (max-width: 600px) {
+      section {
+        padding: var(--space-lg) 0;
+      }
+      
+      .container {
+        padding: 0 var(--space-sm);
+      }
+      
+      .process-flow {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <h1 class="hero-headline">Your Concept<br>Becomes Reality</h1>
+          <div class="hero-tagline">
+            <p class="tagline-main">From idea → spec → prototype → <strong>live app</strong></p>
+            <p class="tagline-platform">Web or Native</p>
+            <p class="tagline-secondary">AI · B2B · D2C · P2P · IP <span class="fun">(all the fun letters)</span></p>
+          </div>
+          <a href="mailto:brian@bpwcislo.com" class="btn">Let's Talk</a>
+        </div>
+        <div class="hero-image-container">
+          <img src="Brian-BrandPhotos-Ronan-40.jpg" alt="Brian Patrick Wcislo" class="hero-image">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What I Do Section -->
+  <section class="what-i-do" id="services">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Building IP should be energizing,<br>not exhausting</h2>
+        <p>Let's make the process smooth, creative, and even fun—because it should be! You can stay as hands-on as you want while I handle the complexity behind the scenes.</p>
+      </div>
+      
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h3>Strategy & Vision</h3>
+          <p>Transform fuzzy ideas into crystal-clear product roadmaps with defined scope, features, and milestones.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+            </svg>
+          </div>
+          <h3>Design & Prototyping</h3>
+          <p>Bring your product to life visually. UX flows, UI design, and interactive prototypes that feel real.</p>
+        </div>
+        
+        <div class="service-card">
+          <div class="service-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h3>Development & Launch</h3>
+          <p>Build, test, and ship. I work with world-class dev teams to turn prototypes into production-ready products.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects" id="work">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Selected Work</h2>
+        <p>A few of my favorite projects across industries and platforms.</p>
+      </div>
+      
+      <div class="projects-grid">
+        <div class="project-card">
+          <img src="Sobo_Illustrations.jpg" alt="SoBo App" class="project-image">
+          <div class="project-content">
+            <span class="project-tag">Native iOS App</span>
+            <h3>SoBo</h3>
+            <p>Peer-to-peer borrowing app that helps you lend things and actually get them back. Snap a photo, set a return date, get reminders. Simple.</p>
+            <span class="launch-note">Launching April 2026</span>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform" class="project-image">
+          <div class="project-content">
+            <span class="project-tag">Training Platform</span>
+            <h3>GMAC</h3>
+            <p>Making dense technical learning fast and fun. Focused on preventative maintenance and troubleshooting, the platform empowers employees to instantly implement new skills while tracking patterns and insights in custom dashboards.</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="Mack_Truck_Kiosk-PLAY2_2.jpg" alt="Mack Truck Builder Kiosk" class="project-image">
+          <div class="project-content">
+            <span class="project-tag">Interactive Kiosk</span>
+            <h3>Mack Truck Builder</h3>
+            <p>Interactive educational experience for a children's science museum. Kids design custom trucks while learning about engineering, aerodynamics, and fuel efficiency through play.</p>
+          </div>
+        </div>
+        
+        <div class="project-card">
+          <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz" class="project-image">
+          <div class="project-content">
+            <span class="project-tag">Business Process App</span>
+            <h3>ARS Workflowz</h3>
+            <p>Custom business solution that systematizes complex processes, guides teams through procedures, and collects real-time data for detailed custom reporting and user-specific dashboards.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-intro">
+        <h2>The Execution Bridge</h2>
+        <p>Turning complex ideas into real products.</p>
+      </div>
+      
+      <p class="process-description">
+        Most projects don't fail from bad ideas… they fail in the gaps between phases.<br><br>
+        The handoff from vision to spec.<br>
+        The leap from prototype to production.<br>
+        The moment when "almost ready" needs to become "shipped."<br><br>
+        I bridge those gaps—keeping momentum high and the path clear so you can focus on your business while your product takes shape.
+      </p>
+      
+      <div class="process-flow">
+        <div class="process-step">
+          <span class="process-number">01</span>
+          <h3>Concept</h3>
+          <p>Define the vision and problem space. Who's the customer? What's the acute pain? Is it worth solving?</p>
+        </div>
+        
+        <div class="process-step">
+          <span class="process-number">02</span>
+          <h3>Spec</h3>
+          <p>Translate abstract ideas into concrete requirements. User flows, functional specs, technical feasibility—the blueprint that keeps everyone aligned.</p>
+        </div>
+        
+        <div class="process-step">
+          <span class="process-number">03</span>
+          <h3>Prototype</h3>
+          <p>Make it tangible. Low-fidelity for speed, high-fidelity for validation, then build the MVP. Test with real users. Iterate.</p>
+        </div>
+        
+        <div class="process-step">
+          <span class="process-number">04</span>
+          <h3>Launch</h3>
+          <p>Ship it. Launching isn't the finish line—it's day zero. Deploy, monitor, gather feedback, and begin the next cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-content">
+        <div class="about-text">
+          <h2>About</h2>
+          <p>I'm a strategist, designer, and product builder who helps founders and businesses turn ideas into apps that actually help.</p>
+          <p>I've built enough products to know where things go sideways—and how to keep them on track. My role is to make the journey from concept to launch feel manageable, even enjoyable. You bring the vision; I bring the structure, momentum, and creative problem-solving to make it real.</p>
+          <p>Based in Costa Rica, I stay grounded through yoga, art, and time in nature. It keeps the work sharp and the process human.</p>
+        </div>
+        <div class="about-details">
+          <h3>The Essentials</h3>
+          <ul>
+            <li>🎬 Digital producer, 25+ years</li>
+            <li>📱 Maker of apps</li>
+            <li>🤖 AI practitioner</li>
+            <li>🎯 Strategy to execution</li>
+            <li>🧘 Yogi, artist, builder</li>
+            <li>📍 Based in Costa Rica</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Let's Build Something Helpful</h2>
+      <p>Got an idea? Let's talk about bringing it to life.</p>
+      <a href="mailto:brian@bpwcislo.com" class="btn">Send a Message</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© 2026 Brian Patrick Wcislo · <a href="https://www.linkedin.com/in/brianwcislo/" target="_blank">LinkedIn</a></p>
+    </div>
+  </footer>
+  <script>
+    // Subtle parallax for hero elements
+    const heroHeadline = document.querySelector('.hero-headline');
+    const heroSubtexts = document.querySelectorAll('.hero-subtext');
+    const heroName = document.querySelector('.hero-name');
+    const heroBtn = document.querySelector('.hero .btn');
+    const heroImage = document.querySelector('.hero-image-container');
+    
+    let ticking = false;
+    
+    const heroImageEl = document.querySelector('.hero-image');
+    
+    function updateParallax() {
+      const scrollY = window.scrollY;
+      const heroHeight = document.querySelector('.hero').offsetHeight;
+      
+      // Only apply effect while hero is in view
+      if (scrollY < heroHeight) {
+        // Different speeds for each element (subtle multipliers)
+        heroHeadline.style.transform = `translateY(${scrollY * 0.08}px)`;
+        
+        heroSubtexts.forEach((el, i) => {
+          el.style.transform = `translateY(${scrollY * (0.12 + i * 0.02)}px)`;
+        });
+        
+        heroName.style.transform = `translateY(${scrollY * 0.18}px)`;
+        // Don't override magnetic button transform
+        if (!heroBtn.classList.contains('magnetic-active')) {
+          heroBtn.style.transform = `translateY(${scrollY * 0.22}px)`;
+        }
+        heroImage.style.transform = `translateY(${scrollY * 0.05}px)`;
+        
+        // Photo grows slightly as you scroll (max 8% growth)
+        const growScale = 1 + (scrollY * 0.0002);
+        const maxScale = 1.08;
+        heroImageEl.style.transform = `scale(${Math.min(growScale, maxScale)})`;
+        
+        // Photo fades out to 20% opacity as you scroll
+        const fadeOpacity = 1 - (scrollY / heroHeight) * 0.8;
+        heroImageEl.style.opacity = Math.max(fadeOpacity, 0.2);
+      }
+      
+      ticking = false;
+    }
+    
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+    
+    // Magnetic fluid button effect
+    const magneticButtons = document.querySelectorAll('.btn');
+    
+    magneticButtons.forEach(btn => {
+      btn.classList.add('magnetic');
+      
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        
+        // Subtle magnetic pull (max 8px movement)
+        const pull = 0.3;
+        const moveX = x * pull;
+        const moveY = y * pull;
+        
+        btn.classList.add('magnetic-active');
+        btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+      });
+      
+      btn.addEventListener('mouseleave', () => {
+        btn.classList.remove('magnetic-active');
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+  </script>
+</body>
+</html>
