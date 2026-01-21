@@ -6,31 +6,46 @@
   <title>Brian Patrick Wcislo | Your Concept Becomes Reality</title>
   <meta name="description" content="From idea to functional prototype to production-ready app. Web or native. I bring clarity, purpose, and an executable plan to crystallize your vision.">
   
-  <!-- Fonts -->
+  <!-- Fonts - Clean sans-serif pairing -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --charcoal: #2d2d2d;
-      --slate: #4a4a4a;
-      --stone: #6b6b6b;
-      --pewter: #8a8a8a;
-      --silver: #e5e5e5;
-      --cloud: #f5f5f5;
-      --white: #fafafa;
-      --accent: #a5c002;
-      --accent-hover: #8ba600;
+      /* Slate-based palette from design.md */
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-400: #94a3b8;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --white: #ffffff;
       
-      --font-display: 'Fraunces', serif;
-      --font-body: 'DM Sans', sans-serif;
+      /* Accent - keeping your green but refined */
+      --accent: #65a30d;
+      --accent-hover: #4d7c0f;
+      --accent-light: rgba(101, 163, 13, 0.1);
       
-      --space-xs: 0.5rem;
-      --space-sm: 1rem;
-      --space-md: 2rem;
-      --space-lg: 4rem;
-      --space-xl: 6rem;
+      /* Complementary gold for geometric shape */
+      --gold: #d97706;
+      
+      --font-display: 'Newsreader', serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      /* Spacing scale from design.md */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-24: 96px;
     }
     
     * {
@@ -46,57 +61,81 @@
     body {
       font-family: var(--font-body);
       background: var(--white);
-      color: var(--charcoal);
+      color: var(--slate-600);
       line-height: 1.6;
       font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
     
-    /* Typography */
+    /* Typography from design.md */
     h1, h2, h3 {
       font-family: var(--font-display);
-      font-weight: 400;
+      color: var(--slate-900);
       line-height: 1.2;
     }
     
     h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-size: clamp(2.25rem, 5vw, 3rem);
+      font-weight: 500;
       letter-spacing: -0.02em;
     }
     
     h2 {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      margin-bottom: var(--space-md);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: var(--space-6);
     }
     
     h3 {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
       font-weight: 500;
     }
     
     p {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      line-height: 1.7;
       max-width: 65ch;
     }
     
     a {
       color: var(--accent);
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 200ms ease-out;
     }
     
     a:hover {
       color: var(--accent-hover);
     }
     
+    /* Focus states for accessibility */
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--slate-900);
+      outline-offset: 2px;
+    }
+    
     /* Layout */
     .container {
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
-      padding: 0 var(--space-md);
+      padding: 0 var(--space-6);
+    }
+    
+    @media (min-width: 1024px) {
+      .container {
+        padding: 0 var(--space-8);
+      }
     }
     
     section {
-      padding: var(--space-xl) 0;
+      padding: var(--space-16) 0;
+    }
+    
+    @media (min-width: 768px) {
+      section {
+        padding: var(--space-24) 0;
+      }
     }
     
     /* Hero Section */
@@ -106,140 +145,212 @@
       align-items: center;
       background: var(--white);
       position: relative;
+      overflow: hidden;
+    }
+    
+    /* Geometric Shapes - refined */
+    .hero-shape {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.08;
+      transition: transform 300ms ease-out;
+    }
+    
+    .hero-circle {
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: var(--accent);
+      top: -120px;
+      right: -80px;
+    }
+    
+    .hero-square {
+      width: 320px;
+      height: 320px;
+      background: var(--gold);
+      bottom: -60px;
+      left: -60px;
+      transform: rotate(15deg);
+    }
+    
+    .hero .container {
+      position: relative;
+      z-index: 1;
     }
     
     .hero-content {
       display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: var(--space-md);
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
       align-items: center;
-      max-width: 950px;
-      margin: 0 auto;
+    }
+    
+    @media (min-width: 768px) {
+      .hero-content {
+        grid-template-columns: 1fr 1.1fr;
+        gap: var(--space-12);
+        max-width: 960px;
+        margin: 0 auto;
+      }
     }
     
     .hero-text {
       order: 2;
+      text-align: center;
+    }
+    
+    @media (min-width: 768px) {
+      .hero-text {
+        text-align: left;
+      }
     }
     
     .hero-image-container {
       order: 1;
+      position: relative;
     }
     
-    .hero-image {
-      transition: transform 0.1s ease-out, opacity 0.1s ease-out;
-    }
-    
-    .hero-text {
-      animation: fadeInUp 0.8s ease-out;
-    }
-    
-    .hero-headline,
-    .hero-subtext,
-    .hero-name,
-    .hero .btn,
-    .hero-image-container {
-      will-change: transform;
-      transition: transform 0.1s ease-out;
-    }
-    
-    .hero-date {
-      font-size: 0.875rem;
-      color: var(--pewter);
-      margin-bottom: var(--space-sm);
-      letter-spacing: 0.05em;
-    }
-    
-    .hero-headline {
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      margin-bottom: var(--space-md);
-      color: var(--charcoal);
-    }
-    
-    .hero-tagline {
-      margin-bottom: var(--space-md);
-    }
-    
-    .tagline-main {
-      font-size: 1.1rem;
-      color: var(--slate);
-      margin-bottom: var(--space-sm);
-      line-height: 1.6;
-    }
-    
-    .tagline-main strong {
-      color: var(--charcoal);
-      font-weight: 600;
-    }
-    
-    .tagline-platform {
-      font-size: 1.25rem;
-      font-weight: 500;
-      color: var(--charcoal);
-      margin-bottom: var(--space-xs);
-    }
-    
-    .tagline-secondary {
-      font-size: 0.95rem;
-      color: var(--stone);
-      letter-spacing: 0.03em;
-    }
-    
-    .tagline-secondary .fun {
-      font-style: italic;
-      color: var(--pewter);
-    }
-    
-    .hero-name {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 500;
-      color: var(--charcoal);
-      margin-bottom: var(--space-md);
-    }
-    
-    .hero-image-container {
-      animation: fadeIn 1s ease-out 0.2s both;
+    @media (max-width: 767px) {
+      .hero-image-container {
+        display: flex;
+        justify-content: center;
+      }
     }
     
     .hero-image {
       width: 100%;
-      max-width: 400px;
+      max-width: 360px;
       height: auto;
-      border-radius: 8px;
-      box-shadow: 0 20px 40px -12px rgba(45, 45, 45, 0.15);
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
+      transition: transform 100ms ease-out, opacity 100ms ease-out;
     }
     
+    .hero-name-card {
+      position: absolute;
+      left: -30px;
+      top: 50%;
+      background: rgba(15, 23, 42, 0.95);
+      padding: var(--space-4) var(--space-6);
+      border-radius: 10px;
+      border: none;
+      z-index: 2;
+      cursor: pointer;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      transition: transform 200ms ease-out, background 200ms ease-out, box-shadow 200ms ease-out;
+    }
+    
+    .hero-name-card:hover {
+      background: var(--accent);
+      box-shadow: 0 15px 30px -5px rgba(101, 163, 13, 0.3);
+    }
+    
+    .hero-name-card:hover .hero-name {
+      color: var(--slate-900);
+    }
+    
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--white);
+      white-space: nowrap;
+      transition: color 200ms ease-out;
+    }
+    
+    @media (max-width: 767px) {
+      .hero-name-card {
+        left: 50%;
+        transform: translateX(-50%);
+        top: auto;
+        bottom: -16px;
+      }
+    }
+    
+    .hero-headline {
+      margin-bottom: var(--space-6);
+      color: var(--slate-900);
+    }
+    
+    .hero-headline,
+    .hero-tagline,
+    .hero-image-container {
+      will-change: transform;
+      transition: transform 100ms ease-out;
+    }
+    
+    .hero-tagline {
+      margin-bottom: var(--space-8);
+    }
+    
+    .tagline-main {
+      font-size: 1rem;
+      color: var(--slate-500);
+      margin-bottom: var(--space-4);
+      line-height: 1.6;
+    }
+    
+    .tagline-main strong {
+      color: var(--slate-900);
+      font-weight: 600;
+    }
+    
+    .tagline-platform {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--slate-800);
+      margin-bottom: var(--space-2);
+    }
+    
+    .tagline-secondary {
+      font-size: 0.875rem;
+      color: var(--slate-400);
+      letter-spacing: 0.02em;
+    }
+    
+    .tagline-secondary .fun {
+      font-style: italic;
+    }
+    
+    /* Primary Button - from design.md */
     .btn {
       display: inline-flex;
       align-items: center;
-      gap: var(--space-xs);
-      padding: 0.875rem 2rem;
-      background: #000000;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-6);
+      min-height: 44px;
+      background: var(--slate-900);
       color: var(--white);
       font-family: var(--font-body);
-      font-size: 1rem;
+      font-size: 0.875rem;
       font-weight: 500;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.4s ease, color 0.3s ease, box-shadow 0.3s ease;
+      transition: background 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out, transform 200ms ease-out;
       text-decoration: none;
-      position: relative;
     }
     
     .btn:hover {
       background: var(--accent);
-      color: #000000;
-      box-shadow: 0 8px 24px -4px rgba(165, 192, 2, 0.4);
+      color: var(--slate-900);
+      box-shadow: 0 10px 15px -3px rgba(101, 163, 13, 0.3);
+    }
+    
+    .btn:focus-visible {
+      outline: 2px solid var(--slate-900);
+      outline-offset: 2px;
     }
     
     .btn.magnetic {
-      transition: background 0.4s ease, color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease-out;
+      transition: background 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out, transform 200ms ease-out;
     }
     
-    /* What I Do Section */
+    /* What I Do Section - dark with waterfall */
     .what-i-do {
-      background: #000000;
+      background: var(--slate-900);
       color: var(--white);
       position: relative;
       overflow: hidden;
@@ -256,7 +367,7 @@
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      opacity: 0.25;
+      opacity: 0.15;
       z-index: 0;
       pointer-events: none;
     }
@@ -271,11 +382,66 @@
     }
     
     .what-i-do .section-intro p {
-      color: var(--silver);
+      color: var(--slate-300);
+    }
+    
+    .section-intro {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto var(--space-12);
+    }
+    
+    .section-intro p {
+      color: var(--slate-500);
+      margin: 0 auto;
+    }
+    
+    .section-outro {
+      text-align: center;
+      max-width: 600px;
+      margin: var(--space-12) auto 0;
+      color: var(--slate-300);
+      font-size: 1.0625rem;
+      line-height: 1.7;
+    }
+    
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    
+    @media (min-width: 768px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    
+    /* Card from design.md */
+    .service-card {
+      padding: var(--space-6);
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--slate-200);
+      text-align: center;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.1);
+      transition: box-shadow 200ms ease-out, transform 200ms ease-out;
+    }
+    
+    .service-card:hover {
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
     }
     
     .what-i-do .service-card {
-      background: var(--slate);
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+    }
+    
+    .what-i-do .service-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
     }
     
     .what-i-do .service-card h3 {
@@ -283,74 +449,118 @@
     }
     
     .what-i-do .service-card p {
-      color: var(--silver);
-    }
-    
-    .what-i-do .service-icon {
-      background: var(--charcoal);
-      color: var(--silver);
-    }
-    
-    .section-intro {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto var(--space-lg);
-    }
-    
-    .section-intro h2 {
-      color: var(--charcoal);
-    }
-    
-    .section-intro p {
-      color: var(--slate);
-      margin: 0 auto;
-    }
-    
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-md);
-    }
-    
-    .service-card {
-      padding: var(--space-md);
-      background: var(--white);
-      border-radius: 8px;
-      text-align: center;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px -8px rgba(45, 45, 45, 0.1);
+      color: var(--slate-300);
     }
     
     .service-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--cloud);
-      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      background: var(--slate-100);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto var(--space-sm);
-      color: var(--slate);
+      margin: 0 auto var(--space-4);
+      color: var(--slate-600);
+    }
+    
+    .what-i-do .service-icon {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--slate-300);
     }
     
     .service-card h3 {
-      margin-bottom: var(--space-xs);
-      color: var(--charcoal);
+      margin-bottom: var(--space-2);
+      color: var(--slate-900);
     }
     
     .service-card p {
-      font-size: 0.95rem;
-      color: var(--stone);
+      font-size: 0.875rem;
+      color: var(--slate-500);
       margin: 0 auto;
+    }
+    
+    /* Projects Section */
+    .projects {
+      background: var(--slate-50);
+    }
+    
+    .projects .section-intro {
+      text-align: left;
+      max-width: none;
+      margin-bottom: var(--space-12);
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+    
+    @media (min-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    .project-card {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--slate-200);
+      overflow: hidden;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.1);
+      transition: box-shadow 200ms ease-out, transform 200ms ease-out;
+    }
+    
+    .project-card:hover {
+      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .project-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+    }
+    
+    .project-content {
+      padding: var(--space-6);
+    }
+    
+    .project-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: var(--space-2);
+      font-weight: 600;
+    }
+    
+    .project-content h3 {
+      color: var(--slate-900);
+      margin-bottom: var(--space-2);
+      font-size: 1.25rem;
+    }
+    
+    .project-content p {
+      color: var(--slate-500);
+      font-size: 0.875rem;
+      line-height: 1.6;
+    }
+    
+    .project-content .launch-note {
+      display: inline-block;
+      margin-top: var(--space-4);
+      font-size: 0.75rem;
+      color: var(--slate-400);
+      font-weight: 500;
     }
     
     /* Process Section */
     .process {
-      background: var(--charcoal);
+      background: var(--slate-900);
       color: var(--white);
     }
     
@@ -359,22 +569,28 @@
     }
     
     .process .section-intro p {
-      color: var(--silver);
+      color: var(--slate-400);
     }
     
     .process-description {
       text-align: center;
-      max-width: 650px;
-      margin: 0 auto var(--space-lg);
-      color: var(--pewter);
+      max-width: 600px;
+      margin: 0 auto var(--space-12);
+      color: var(--slate-400);
       line-height: 1.8;
+      font-size: 0.9375rem;
     }
     
     .process-flow {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-md);
-      margin-top: var(--space-lg);
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8) var(--space-6);
+    }
+    
+    @media (min-width: 768px) {
+      .process-flow {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
     
     .process-step {
@@ -383,128 +599,66 @@
     
     .process-number {
       display: inline-block;
-      font-size: 0.75rem;
+      font-size: 0.6875rem;
       font-weight: 600;
       color: var(--accent);
       letter-spacing: 0.1em;
-      margin-bottom: var(--space-xs);
+      margin-bottom: var(--space-2);
     }
     
     .process-step h3 {
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       color: var(--white);
-      margin-bottom: var(--space-xs);
+      margin-bottom: var(--space-2);
     }
     
     .process-step p {
-      font-size: 0.9rem;
-      color: var(--pewter);
+      font-size: 0.8125rem;
+      color: var(--slate-400);
       margin: 0 auto;
-      max-width: 220px;
-    }
-    
-    /* Projects Section */
-    .projects {
-      background: var(--white);
-    }
-    
-    .projects .section-intro {
-      text-align: left;
-      max-width: none;
-      margin-bottom: var(--space-lg);
-    }
-    
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-md);
-    }
-    
-    .project-card {
-      background: var(--cloud);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 32px -8px rgba(45, 45, 45, 0.12);
-    }
-    
-    .project-image {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      object-position: top;
-    }
-    
-    .project-content {
-      padding: var(--space-md);
-    }
-    
-    .project-tag {
-      display: inline-block;
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--accent);
-      margin-bottom: var(--space-xs);
-      font-weight: 600;
-    }
-    
-    .project-content h3 {
-      color: var(--charcoal);
-      margin-bottom: var(--space-xs);
-      font-size: 1.5rem;
-    }
-    
-    .project-content p {
-      color: var(--stone);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    
-    .project-content .launch-note {
-      display: inline-block;
-      margin-top: var(--space-sm);
-      font-size: 0.85rem;
-      color: var(--slate);
-      font-weight: 500;
+      max-width: 200px;
     }
     
     /* About Section */
     .about {
-      background: var(--cloud);
+      background: var(--white);
     }
     
     .about-content {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: var(--space-lg);
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
       align-items: start;
     }
     
+    @media (min-width: 768px) {
+      .about-content {
+        grid-template-columns: 1.5fr 1fr;
+        gap: var(--space-12);
+      }
+    }
+    
     .about-text h2 {
-      margin-bottom: var(--space-md);
+      margin-bottom: var(--space-6);
     }
     
     .about-text p {
-      margin-bottom: var(--space-sm);
-      color: var(--slate);
+      margin-bottom: var(--space-4);
+      color: var(--slate-600);
     }
     
     .about-details {
-      padding: var(--space-md);
-      background: var(--white);
-      border-radius: 8px;
+      padding: var(--space-6);
+      background: var(--slate-50);
+      border-radius: 12px;
+      border: 1px solid var(--slate-200);
     }
     
     .about-details h3 {
-      margin-bottom: var(--space-sm);
-      color: var(--charcoal);
-      font-size: 1.1rem;
+      margin-bottom: var(--space-4);
+      color: var(--slate-900);
+      font-size: 1rem;
     }
     
     .about-details ul {
@@ -512,10 +666,10 @@
     }
     
     .about-details li {
-      padding: var(--space-xs) 0;
-      color: var(--slate);
-      border-bottom: 1px solid var(--silver);
-      font-size: 0.95rem;
+      padding: var(--space-2) 0;
+      color: var(--slate-600);
+      border-bottom: 1px solid var(--slate-200);
+      font-size: 0.875rem;
     }
     
     .about-details li:last-child {
@@ -524,31 +678,30 @@
     
     /* Contact Section */
     .contact {
-      background: var(--white);
+      background: var(--slate-50);
       text-align: center;
-      padding: var(--space-xl) 0;
     }
     
     .contact h2 {
-      color: var(--charcoal);
+      color: var(--slate-900);
     }
     
     .contact p {
-      margin: 0 auto var(--space-md);
-      color: var(--slate);
+      margin: 0 auto var(--space-8);
+      color: var(--slate-500);
     }
     
     /* Footer */
     footer {
-      background: var(--charcoal);
-      color: var(--pewter);
+      background: var(--slate-900);
+      color: var(--slate-400);
       text-align: center;
-      padding: var(--space-md) 0;
+      padding: var(--space-6) 0;
       font-size: 0.875rem;
     }
     
     footer a {
-      color: var(--silver);
+      color: var(--slate-300);
     }
     
     footer a:hover {
@@ -558,16 +711,16 @@
     /* Divider */
     .divider {
       height: 1px;
-      background: var(--silver);
-      max-width: 100px;
-      margin: var(--space-lg) auto;
+      background: var(--slate-200);
+      max-width: 80px;
+      margin: var(--space-12) auto;
     }
     
-    /* Animations */
+    /* Animations - respecting reduced motion */
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(16px);
       }
       to {
         opacity: 1;
@@ -580,51 +733,24 @@
       to { opacity: 1; }
     }
     
-    /* Responsive */
-    @media (max-width: 968px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-text {
+        animation: fadeInUp 600ms ease-out;
       }
       
       .hero-image-container {
-        order: -1;
-      }
-      
-      .hero-image {
-        max-width: 280px;
-        margin: 0 auto;
-      }
-      
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .process-flow {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-lg) var(--space-md);
-      }
-      
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .about-content {
-        grid-template-columns: 1fr;
+        animation: fadeIn 800ms ease-out 150ms both;
       }
     }
     
-    @media (max-width: 600px) {
-      section {
-        padding: var(--space-lg) 0;
-      }
-      
-      .container {
-        padding: 0 var(--space-sm);
-      }
-      
-      .process-flow {
-        grid-template-columns: 1fr;
+    /* Utility for reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -632,6 +758,8 @@
 <body>
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-shape hero-circle"></div>
+    <div class="hero-shape hero-square"></div>
     <div class="container">
       <div class="hero-content">
         <div class="hero-text">
@@ -645,6 +773,9 @@
         </div>
         <div class="hero-image-container">
           <img src="Brian-BrandPhotos-Ronan-40.jpg" alt="Brian Patrick Wcislo" class="hero-image">
+          <div class="hero-name-card">
+            <span class="hero-name">Brian Patrick Wcislo</span>
+          </div>
         </div>
       </div>
     </div>
@@ -655,13 +786,12 @@
     <div class="container">
       <div class="section-intro">
         <h2>Building IP should be energizing,<br>not exhausting</h2>
-        <p>Let's make the process smooth, creative, and even fun—because it should be! You can stay as hands-on as you want while I handle the complexity behind the scenes.</p>
       </div>
       
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
             </svg>
           </div>
@@ -671,7 +801,7 @@
         
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
             </svg>
           </div>
@@ -681,7 +811,7 @@
         
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
             </svg>
           </div>
@@ -689,6 +819,8 @@
           <p>Build, test, and ship. I work with world-class dev teams to turn prototypes into production-ready products.</p>
         </div>
       </div>
+      
+      <p class="section-outro">Let's make the process smooth, creative, and even fun—because it should be! You can stay as hands-on as you want while I handle the complexity behind the scenes.</p>
     </div>
   </section>
 
@@ -761,25 +893,25 @@
         <div class="process-step">
           <span class="process-number">01</span>
           <h3>Concept</h3>
-          <p>Define the vision and problem space. Who's the customer? What's the acute pain? Is it worth solving?</p>
+          <p>Define the vision and problem space. Who's the customer? What's the acute pain?</p>
         </div>
         
         <div class="process-step">
           <span class="process-number">02</span>
           <h3>Spec</h3>
-          <p>Translate abstract ideas into concrete requirements. User flows, functional specs, technical feasibility—the blueprint that keeps everyone aligned.</p>
+          <p>Translate abstract ideas into concrete requirements. User flows, functional specs, technical feasibility.</p>
         </div>
         
         <div class="process-step">
           <span class="process-number">03</span>
           <h3>Prototype</h3>
-          <p>Make it tangible. Low-fidelity for speed, high-fidelity for validation, then build the MVP. Test with real users. Iterate.</p>
+          <p>Make it tangible. Low-fidelity for speed, high-fidelity for validation. Test with real users.</p>
         </div>
         
         <div class="process-step">
           <span class="process-number">04</span>
           <h3>Launch</h3>
-          <p>Ship it. Launching isn't the finish line—it's day zero. Deploy, monitor, gather feedback, and begin the next cycle.</p>
+          <p>Ship it. Launching isn't the finish line—it's day zero. Deploy, monitor, iterate.</p>
         </div>
       </div>
     </div>
@@ -827,19 +959,27 @@
       <p>© 2026 Brian Patrick Wcislo · <a href="https://www.linkedin.com/in/brianwcislo/" target="_blank">LinkedIn</a></p>
     </div>
   </footer>
+
   <script>
     // Subtle parallax for hero elements
     const heroHeadline = document.querySelector('.hero-headline');
-    const heroSubtexts = document.querySelectorAll('.hero-subtext');
-    const heroName = document.querySelector('.hero-name');
+    const heroTagline = document.querySelector('.hero-tagline');
     const heroBtn = document.querySelector('.hero .btn');
     const heroImage = document.querySelector('.hero-image-container');
+    const heroNameCard = document.querySelector('.hero-name-card');
+    const heroCircle = document.querySelector('.hero-circle');
+    const heroSquare = document.querySelector('.hero-square');
     
     let ticking = false;
     
     const heroImageEl = document.querySelector('.hero-image');
     
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
     function updateParallax() {
+      if (prefersReducedMotion) return;
+      
       const scrollY = window.scrollY;
       const heroHeight = document.querySelector('.hero').offsetHeight;
       
@@ -848,15 +988,12 @@
         // Different speeds for each element (subtle multipliers)
         heroHeadline.style.transform = `translateY(${scrollY * 0.08}px)`;
         
-        heroSubtexts.forEach((el, i) => {
-          el.style.transform = `translateY(${scrollY * (0.12 + i * 0.02)}px)`;
-        });
-        
-        heroName.style.transform = `translateY(${scrollY * 0.18}px)`;
-        // Don't override magnetic button transform
-        if (!heroBtn.classList.contains('magnetic-active')) {
-          heroBtn.style.transform = `translateY(${scrollY * 0.22}px)`;
+        if (heroTagline) {
+          heroTagline.style.transform = `translateY(${scrollY * 0.14}px)`;
         }
+        
+        // Button stays anchored - no parallax, just magnetic effect
+        
         heroImage.style.transform = `translateY(${scrollY * 0.05}px)`;
         
         // Photo grows slightly as you scroll (max 8% growth)
@@ -867,6 +1004,15 @@
         // Photo fades out to 20% opacity as you scroll
         const fadeOpacity = 1 - (scrollY / heroHeight) * 0.8;
         heroImageEl.style.opacity = Math.max(fadeOpacity, 0.2);
+        
+        // Name card parallax (slightly different rate than photo)
+        if (heroNameCard) {
+          heroNameCard.style.transform = `translateY(${scrollY * 0.12}px)`;
+        }
+        
+        // Geometric shapes parallax (more vertical movement)
+        heroCircle.style.transform = `translate(${scrollY * 0.1}px, ${scrollY * 0.25}px)`;
+        heroSquare.style.transform = `rotate(${15 + scrollY * 0.05}deg) translate(${scrollY * -0.05}px, ${scrollY * -0.3}px)`;
       }
       
       ticking = false;
@@ -879,14 +1025,49 @@
       }
     });
     
-    // Magnetic fluid button effect
-    const magneticButtons = document.querySelectorAll('.btn');
+    // Mouse magnetism for geometric shapes
+    let mouseX = 0;
+    let mouseY = 0;
+    let shapeAnimating = false;
     
-    magneticButtons.forEach(btn => {
-      btn.classList.add('magnetic');
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {
+      if (prefersReducedMotion) return;
       
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
+      const rect = document.querySelector('.hero').getBoundingClientRect();
+      mouseX = (e.clientX - rect.left - rect.width / 2) / rect.width;
+      mouseY = (e.clientY - rect.top - rect.height / 2) / rect.height;
+      
+      if (!shapeAnimating) {
+        shapeAnimating = true;
+        requestAnimationFrame(updateShapeMagnetism);
+      }
+    });
+    
+    function updateShapeMagnetism() {
+      const scrollY = window.scrollY;
+      // Circle follows mouse slightly (more vertical movement)
+      const circleX = scrollY * 0.1 + mouseX * 30;
+      const circleY = scrollY * 0.25 + mouseY * 25;
+      heroCircle.style.transform = `translate(${circleX}px, ${circleY}px)`;
+      
+      // Square moves opposite to mouse (more vertical movement)
+      const squareX = scrollY * -0.05 + mouseX * -20;
+      const squareY = scrollY * -0.3 + mouseY * -20;
+      heroSquare.style.transform = `rotate(${15 + scrollY * 0.05}deg) translate(${squareX}px, ${squareY}px)`;
+      
+      shapeAnimating = false;
+    }
+    
+    // Magnetic fluid effect for buttons and name card
+    const magneticElements = document.querySelectorAll('.btn, .hero-name-card');
+    
+    magneticElements.forEach(el => {
+      el.classList.add('magnetic');
+      
+      el.addEventListener('mousemove', (e) => {
+        if (prefersReducedMotion) return;
+        
+        const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
         
@@ -895,13 +1076,13 @@
         const moveX = x * pull;
         const moveY = y * pull;
         
-        btn.classList.add('magnetic-active');
-        btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        el.classList.add('magnetic-active');
+        el.style.transform = `translate(${moveX}px, ${moveY}px)`;
       });
       
-      btn.addEventListener('mouseleave', () => {
-        btn.classList.remove('magnetic-active');
-        btn.style.transform = 'translate(0, 0)';
+      el.addEventListener('mouseleave', () => {
+        el.classList.remove('magnetic-active');
+        el.style.transform = 'translate(0, 0)';
       });
     });
   </script>
