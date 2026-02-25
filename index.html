@@ -518,6 +518,89 @@
       color: var(--accent);
       transform: scale(1.15);
     }
+
+    /* Per-card hover animations */
+    .icon-scissors .blade-top,
+    .icon-scissors .blade-bottom {
+      transform-origin: 10px 12px;
+    }
+
+    .service-card:hover .icon-scissors .blade-top {
+      animation: snipTop 600ms ease-in-out;
+    }
+
+    .service-card:hover .icon-scissors .blade-bottom {
+      animation: snipBottom 600ms ease-in-out;
+    }
+
+
+    @keyframes snipTop {
+      0% { transform: rotate(0deg); }
+      30% { transform: rotate(-14deg); }
+      55% { transform: rotate(4deg); }
+      75% { transform: rotate(-10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes snipBottom {
+      0% { transform: rotate(0deg); }
+      30% { transform: rotate(14deg); }
+      55% { transform: rotate(-4deg); }
+      75% { transform: rotate(10deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    .icon-build .build-top,
+    .icon-build .build-left,
+    .icon-build .build-right {
+      transition: transform 400ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 300ms ease;
+    }
+
+    .service-card:hover .icon-build .build-top {
+      animation: buildFromTop 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .service-card:hover .icon-build .build-left {
+      animation: buildFromLeft 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 80ms;
+    }
+
+    .service-card:hover .icon-build .build-right {
+      animation: buildFromRight 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 160ms;
+    }
+
+    .icon-pulse .pulse-line-bg {
+      opacity: 0.4;
+    }
+
+    .icon-pulse .pulse-line-fg {
+      stroke: var(--accent);
+      stroke-dasharray: 60;
+      stroke-dashoffset: 60;
+      transition: stroke-dashoffset 800ms ease-out;
+    }
+
+    .service-card:hover .icon-pulse .pulse-line-fg {
+      stroke-dashoffset: 0;
+    }
+
+    /* funnelDrip removed — replaced by scissors snip */
+
+    @keyframes buildFromTop {
+      0% { transform: translateY(-18px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes buildFromLeft {
+      0% { transform: translateX(-18px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes buildFromRight {
+      0% { transform: translateX(18px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+
+    /* runDash removed — replaced by pulse draw */
     
     .what-i-do .service-icon {
       color: var(--slate-400);
@@ -540,85 +623,123 @@
     
     /* Projects Section */
     .projects {
-      background: var(--slate-50);
+      background: var(--white);
+      padding: 0;
     }
-    
-    .projects .section-intro {
-      text-align: center;
-      max-width: 600px;
-      margin-bottom: var(--space-12);
+
+    .projects > .container {
+      padding-top: var(--space-16);
+      padding-bottom: var(--space-4);
     }
-    
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-6);
-    }
-    
+
     @media (min-width: 768px) {
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .projects > .container {
+        padding-top: var(--space-24);
+        padding-bottom: var(--space-8);
       }
     }
-    
+
     .project-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: var(--space-12) var(--space-6);
       background: var(--white);
-      border-radius: 12px;
-      border: 1px solid var(--slate-200);
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
       overflow: hidden;
-      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.1);
-      transition: box-shadow 200ms ease-out, transform 200ms ease-out;
       position: relative;
       z-index: 20;
     }
-    
-    .project-card:hover {
-      box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1);
-      transform: translateY(-2px);
+
+    @media (min-width: 768px) {
+      .project-card {
+        padding: var(--space-16) var(--space-8);
+      }
     }
-    
+
+    .project-card:hover {
+      box-shadow: none;
+      transform: none;
+    }
+
+    .project-card--dark {
+      background: var(--slate-900);
+    }
+
+    .project-card--dark .project-tag {
+      color: var(--accent);
+    }
+
+    .project-card--dark .project-content h3 {
+      color: var(--white);
+    }
+
+    .project-card--dark .project-content p {
+      color: var(--slate-300);
+    }
+
+    .project-card--dark .launch-note {
+      color: var(--slate-500);
+    }
+
     .project-image {
       width: 100%;
-      height: 200px;
+      max-width: 960px;
+      height: auto;
+      aspect-ratio: 16 / 10;
       object-fit: cover;
       object-position: top;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    .project-card--dark .project-image {
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+
     .project-card:hover .project-image {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
-    
+
     .project-content {
-      padding: var(--space-6);
+      max-width: 640px;
+      margin: 0 auto var(--space-8);
+      padding: 0;
     }
-    
+
     .project-tag {
       display: inline-block;
       font-size: 0.75rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       color: var(--accent);
       margin-bottom: var(--space-2);
       font-weight: 600;
     }
-    
+
     .project-content h3 {
       color: var(--slate-900);
-      margin-bottom: var(--space-2);
-      font-size: 1.25rem;
+      margin-bottom: var(--space-4);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
     }
-    
+
     .project-content p {
       color: var(--slate-500);
-      font-size: 0.875rem;
-      line-height: 1.6;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 auto;
     }
-    
+
     .project-content .launch-note {
       display: inline-block;
       margin-top: var(--space-4);
-      font-size: 0.75rem;
+      font-size: 0.8125rem;
       color: var(--slate-400);
       font-weight: 500;
     }
@@ -694,57 +815,201 @@
     /* About Section */
     .about {
       background: var(--white);
+      padding-bottom: 0;
     }
-    
+
     .about-content {
       display: grid;
       grid-template-columns: 1fr;
       gap: var(--space-8);
-      align-items: start;
+      align-items: center;
     }
-    
+
     @media (min-width: 768px) {
       .about-content {
-        grid-template-columns: 1.5fr 1fr;
+        grid-template-columns: 1.2fr 1fr;
         gap: var(--space-12);
       }
     }
-    
+
+    .about-text {
+      max-width: 640px;
+    }
+
     .about-text h2 {
       margin-bottom: var(--space-6);
     }
-    
+
     .about-text p {
       margin-bottom: var(--space-4);
       color: var(--slate-600);
     }
-    
-    .about-details {
-      padding: var(--space-6);
-      background: var(--slate-50);
-      border-radius: 12px;
-      border: 1px solid var(--slate-200);
+
+    .about-photo {
+      order: -1;
+      display: flex;
+      justify-content: center;
     }
-    
-    .about-details h3 {
-      margin-bottom: var(--space-4);
+
+    @media (min-width: 768px) {
+      .about-photo {
+        order: 0;
+      }
+    }
+
+    .about-photo img {
+      width: 100%;
+      max-width: 420px;
+      height: auto;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
+    }
+
+    /* Essentials Carousel */
+    .essentials {
+      background: var(--slate-100);
+      padding: var(--space-12) 0;
+      margin-top: var(--space-12);
+    }
+
+    @media (min-width: 768px) {
+      .essentials {
+        margin-top: var(--space-16);
+      }
+    }
+
+    .essentials-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-6);
+      max-width: 1120px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 var(--space-6);
+    }
+
+    @media (min-width: 1024px) {
+      .essentials-header {
+        padding: 0 var(--space-8);
+      }
+    }
+
+    .essentials-header h3 {
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 700;
       color: var(--slate-900);
-      font-size: 1rem;
+      margin-bottom: 0;
     }
-    
-    .about-details ul {
-      list-style: none;
+
+    .essentials-nav {
+      display: flex;
+      gap: var(--space-2);
     }
-    
-    .about-details li {
-      padding: var(--space-2) 0;
-      color: var(--slate-600);
-      border-bottom: 1px solid var(--slate-200);
-      font-size: 0.875rem;
+
+    .essentials-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--slate-300);
+      background: var(--white);
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
     }
-    
-    .about-details li:last-child {
-      border-bottom: none;
+
+    .essentials-arrow:hover {
+      background: var(--slate-900);
+      color: var(--white);
+      border-color: var(--slate-900);
+    }
+
+    .essentials-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .essentials-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .essentials-track {
+      display: flex;
+      gap: var(--space-4);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: var(--space-1) var(--space-6);
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 1024px) {
+      .essentials-track {
+        padding: var(--space-1) var(--space-8);
+      }
+    }
+
+    .essentials-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .essential-card {
+      flex: 0 0 260px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: var(--space-6);
+      scroll-snap-align: start;
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 300ms ease, transform 300ms ease;
+    }
+
+    .essential-card:last-child {
+      margin-right: var(--space-6);
+    }
+
+    .essential-card:hover {
+      box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .essential-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: var(--space-4);
+      color: var(--slate-700);
+    }
+
+    .essential-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .essential-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: var(--space-2);
+      line-height: 1.3;
+    }
+
+    .essential-card p {
+      font-size: 0.8125rem;
+      color: var(--slate-500);
+      line-height: 1.6;
+      margin: 0;
     }
     
     /* Contact Section */
@@ -844,16 +1109,16 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 var(--space-6);
-      background: rgba(255, 255, 255, 0.80);
-      backdrop-filter: saturate(180%) blur(20px);
-      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      background: rgba(255, 255, 255, 0.55);
+      backdrop-filter: saturate(120%) blur(12px);
+      -webkit-backdrop-filter: saturate(120%) blur(12px);
       border-bottom: 1px solid transparent;
       transition: background 300ms ease, border-color 300ms ease;
     }
 
     .site-nav.scrolled {
-      background: rgba(255, 255, 255, 0.92);
-      border-bottom-color: rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.7);
+      border-bottom-color: rgba(0, 0, 0, 0.06);
     }
 
     .nav-name {
@@ -885,6 +1150,10 @@
 
     .nav-links a:hover {
       color: var(--slate-900);
+    }
+
+    .nav-links a.active {
+      color: var(--accent);
     }
 
     @media (max-width: 640px) {
@@ -942,9 +1211,9 @@
     <div class="container">
       <div class="hero-content">
         <div class="hero-text">
-          <h1 class="hero-headline">Your Concept<br><strong>Becomes Reality</strong></h1>
+          <h1 class="hero-headline">Apps<br>That Make<br><strong>You Run Better</strong></h1>
           <div class="hero-tagline">
-            <p class="tagline-main">From idea → spec → prototype → <strong>live app</strong></p>
+            <p class="tagline-main">Operational leverage for <strong>boring businesses.</strong></p>
             <p class="tagline-platform">Web or Native</p>
             <p class="tagline-secondary">AI · B2B · D2C · P2P · IP <span class="fun">(all the fun letters)</span></p>
           </div>
@@ -964,41 +1233,49 @@
   <section class="what-i-do" id="services">
     <div class="container">
       <div class="section-intro">
-        <h2>Building digital tools can be:<br><span class="rotating-word">energizing</span></h2>
+        <h2>Your operations could be:<br><span class="rotating-word">energizing</span></h2>
       </div>
       
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            <svg class="icon-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+
+              <circle cx="6" cy="6" r="3" class="blade-top"/>
+              <circle cx="6" cy="18" r="3" class="blade-bottom"/>
+              <path class="blade-top" d="M8.12 8.12L20 20"/>
+              <path class="blade-bottom" d="M8.12 15.88L20 4"/>
             </svg>
           </div>
-          <h3>Spec & Roadmap</h3>
-          <p>Transform fuzzy ideas into crystal-clear product roadmaps with defined scope, features, and milestones.</p>
+          <h3>Remove the Drag</h3>
+          <p>Find the bottlenecks silently capping your growth. Map the process. Build the fix.</p>
         </div>
         
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+            <svg class="icon-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect class="build-top" x="4" y="4" width="16" height="4" rx="1"/>
+              <rect class="build-left" x="4" y="12" width="8" height="8" rx="1"/>
+              <rect class="build-right" x="16" y="12" width="4" height="8" rx="1"/>
             </svg>
           </div>
-          <h3>Design & Prototyping</h3>
-          <p>Bring your product to life visually. UX flows, UI design, and interactive prototypes that feel real.</p>
+          <h3>Build the Thing</h3>
+          <p>From spec to prototype to production-ready app. Web or native. Fast without cutting corners.</p>
         </div>
         
         <div class="service-card">
           <div class="service-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            <svg class="icon-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path class="pulse-line-bg" d="M2 12h4l3-7 4 14 3-7h6"/>
+              <path class="pulse-line-fg" d="M2 12h4l3-7 4 14 3-7h6"/>
             </svg>
           </div>
-          <h3>Develop & Launch</h3>
-          <p>Build, test, and ship. I work with world-class dev teams to turn prototypes into production-ready products.</p>
+          <h3>Make it Run</h3>
+          <p>Deploy, monitor, iterate. The app ships — then gets better. That's when the real leverage kicks in.</p>
         </div>
       </div>
-      
+
+      <p class="section-outro">You stay focused on your craft. I handle the complexity behind the scenes.</p>
     </div>
   </section>
 
@@ -1009,45 +1286,43 @@
         <h2>Selected Work</h2>
         <p>A few gems I've had the pleasure of bringing to life.</p>
       </div>
-      
-      <div class="projects-grid">
-        <div class="project-card">
-          <img src="Sobo_Illustrations.jpg" alt="SoBo App" class="project-image">
-          <div class="project-content">
-            <span class="project-tag">Native iOS App</span>
-            <h3>SoBo</h3>
-            <p>Peer-to-peer borrowing app that helps you lend things and actually get them back. Snap a photo, set a return date, get reminders. Simple.</p>
-            <span class="launch-note">Launching April 2026</span>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform" class="project-image">
-          <div class="project-content">
-            <span class="project-tag">Training Platform</span>
-            <h3>GMAC</h3>
-            <p>Making dense technical learning fast and fun. Focused on preventative maintenance and troubleshooting, the platform empowers employees to instantly implement new skills while tracking patterns and insights in custom dashboards.</p>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <img src="Mack_Truck_Kiosk-PLAY2_2.jpg" alt="Mack Truck Builder Kiosk" class="project-image">
-          <div class="project-content">
-            <span class="project-tag">Interactive Kiosk</span>
-            <h3>Mack Truck Builder</h3>
-            <p>Interactive educational experience for a children's science museum. Kids design custom trucks while learning about engineering, aerodynamics, and fuel efficiency through play.</p>
-          </div>
-        </div>
-        
-        <div class="project-card">
-          <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz" class="project-image">
-          <div class="project-content">
-            <span class="project-tag">Business Process App</span>
-            <h3>ARS Workflowz</h3>
-            <p>Custom business solution that systematizes complex processes, guides teams through procedures, and collects real-time data for detailed custom reporting and user-specific dashboards.</p>
-          </div>
-        </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-content">
+        <span class="project-tag">Native iOS App</span>
+        <h3>SoBo</h3>
+        <p>Peer-to-peer borrowing app that helps you lend things and actually get them back. Snap a photo, set a return date, get reminders. Simple.</p>
+        <span class="launch-note">Launching April 2026</span>
       </div>
+      <img src="Sobo_Illustrations.jpg" alt="SoBo App" class="project-image">
+    </div>
+
+    <div class="project-card project-card--dark">
+      <div class="project-content">
+        <span class="project-tag">Training Platform</span>
+        <h3>GMAC</h3>
+        <p>Making dense technical learning fast and fun. Focused on preventative maintenance and troubleshooting, the platform empowers employees to instantly implement new skills while tracking patterns and insights in custom dashboards.</p>
+      </div>
+      <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform" class="project-image">
+    </div>
+
+    <div class="project-card">
+      <div class="project-content">
+        <span class="project-tag">Interactive Kiosk</span>
+        <h3>Mack Truck Builder</h3>
+        <p>Interactive educational experience for a children's science museum. Kids design custom trucks while learning about engineering, aerodynamics, and fuel efficiency through play.</p>
+      </div>
+      <img src="Mack_Truck_Kiosk-PLAY2_2.jpg" alt="Mack Truck Builder Kiosk" class="project-image">
+    </div>
+
+    <div class="project-card project-card--dark">
+      <div class="project-content">
+        <span class="project-tag">Business Process App</span>
+        <h3>ARS Workflowz</h3>
+        <p>Custom business solution that systematizes complex processes, guides teams through procedures, and collects real-time data for detailed custom reporting and user-specific dashboards.</p>
+      </div>
+      <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz" class="project-image">
     </div>
   </section>
 
@@ -1096,16 +1371,66 @@
           <p>I've built enough products to know where things go sideways—and how to keep them on track. My role is to make the journey from concept to launch feel manageable, even enjoyable. You bring the vision; I bring the structure, momentum, and creative problem-solving to make it real.</p>
           <p>Based in Costa Rica, I stay grounded through yoga, art, and time in nature. It keeps the work sharp and the process human.</p>
         </div>
-        <div class="about-details">
-          <h3>The Essentials</h3>
-          <ul>
-            <li>🎬 Digital producer, 25+ years</li>
-            <li>📱 Maker of apps</li>
-            <li>🤖 AI practitioner</li>
-            <li>🎯 Strategy to execution</li>
-            <li>🧘 Yogi, artist, builder</li>
-            <li>📍 Based in Costa Rica</li>
-          </ul>
+        <div class="about-photo">
+          <img src="brian-costa-rica.png" alt="Brian in the Costa Rica cloud forest">
+        </div>
+      </div>
+    </div>
+
+    <div class="essentials">
+      <div class="essentials-header">
+        <h3>The Essentials</h3>
+        <div class="essentials-nav">
+          <button class="essentials-arrow essentials-prev" aria-label="Scroll left" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="essentials-arrow essentials-next" aria-label="Scroll right">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="essentials-track">
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
+          </div>
+          <h4>Digital producer.</h4>
+          <p>25+ years crafting digital products, campaigns, and experiences across every medium.</p>
+        </div>
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
+          </div>
+          <h4>Maker of apps.</h4>
+          <p>Web and native, from first sketch through App Store launch.</p>
+        </div>
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3M19 9h3m-3 6h3"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
+          </div>
+          <h4>AI practitioner.</h4>
+          <p>Building with intelligence — not bolting it on. Practical AI that solves real problems.</p>
+        </div>
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg>
+          </div>
+          <h4>Strategy to execution.</h4>
+          <p>From big-picture vision to shipped product. No hand-off gaps.</p>
+        </div>
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/></svg>
+          </div>
+          <h4>Yogi, artist, builder.</h4>
+          <p>Grounded creative energy that keeps the work sharp and the process human.</p>
+        </div>
+        <div class="essential-card">
+          <div class="essential-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h4>Based in Costa Rica.</h4>
+          <p>Working across time zones from paradise. Flexible hours, focused output.</p>
         </div>
       </div>
     </div>
@@ -1269,44 +1594,58 @@
     // Start rotation after initial delay
     setInterval(rotateWord, 2500);
     
-    // Magnetic fluid effect for buttons and name card
-    const magneticElements = document.querySelectorAll('.btn, .hero-name-card');
-    
-    magneticElements.forEach(el => {
+    // Magnetic fluid effect for buttons (hero only, disabled once scrolled past)
+    const heroSection = document.querySelector('.hero');
+    const heroButtons = heroSection.querySelectorAll('.btn');
+
+    heroButtons.forEach(el => {
       el.classList.add('magnetic');
-      
+
       el.addEventListener('mousemove', (e) => {
         if (prefersReducedMotion) return;
-        
+        if (window.scrollY > heroSection.offsetHeight * 0.5) return;
+
         const rect = el.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        
-        // Subtle magnetic pull (max 8px movement)
+
         const pull = 0.3;
-        const moveX = x * pull;
-        const moveY = y * pull;
-        
-        el.classList.add('magnetic-active');
-        el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        el.style.transform = `translate(${x * pull}px, ${y * pull}px)`;
       });
-      
+
       el.addEventListener('mouseleave', () => {
-        el.classList.remove('magnetic-active');
-        el.style.transform = 'translate(0, 0)';
+        el.style.transform = '';
       });
     });
 
-    // Sticky nav scroll state
+    // Sticky nav scroll state + active link tracking
     const siteNav = document.querySelector('.site-nav');
-    window.addEventListener('scroll', () => {
+    const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+    const navSections = Array.from(navLinks).map(link =>
+      document.querySelector(link.getAttribute('href'))
+    ).filter(Boolean);
+
+    function updateNav() {
       siteNav.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
+
+      let currentId = '';
+      for (const section of navSections) {
+        if (section.getBoundingClientRect().top <= 100) {
+          currentId = section.id;
+        }
+      }
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
+      });
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
 
     // Scroll reveal animations
     if (!prefersReducedMotion) {
       const revealTargets = document.querySelectorAll(
-        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-card, .partners .section-intro, .partner-card, .about-content, .contact h2, .contact p, .contact .btn'
+        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-image, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .contact .btn'
       );
 
       revealTargets.forEach(el => el.classList.add('reveal'));
@@ -1329,6 +1668,31 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
       revealTargets.forEach(el => revealObserver.observe(el));
+    }
+
+    // Essentials carousel navigation
+    const track = document.querySelector('.essentials-track');
+    const prevBtn = document.querySelector('.essentials-prev');
+    const nextBtn = document.querySelector('.essentials-next');
+
+    if (track && prevBtn && nextBtn) {
+      const scrollAmount = 280;
+
+      function updateArrows() {
+        prevBtn.disabled = track.scrollLeft <= 5;
+        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', updateArrows, { passive: true });
+      updateArrows();
     }
   </script>
 </body>
