@@ -441,11 +441,19 @@
     
     .section-outro {
       text-align: center;
-      max-width: 600px;
+      max-width: 700px;
       margin: var(--space-12) auto 0;
-      color: var(--slate-300);
-      font-size: 1.0625rem;
-      line-height: 1.7;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+      font-weight: 600;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+      line-height: 1.6;
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-repeat: no-repeat;
+      background-position: 0 85%;
+      background-size: 0% 30%;
+      transition: none;
     }
     
     .rotating-word {
@@ -568,19 +576,24 @@
       animation: buildFromRight 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 160ms;
     }
 
-    .icon-pulse .pulse-line-bg {
-      opacity: 0.4;
+    .icon-rocket {
+      transition: transform 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    .icon-pulse .pulse-line-fg {
-      stroke: var(--accent);
-      stroke-dasharray: 60;
-      stroke-dashoffset: 60;
-      transition: stroke-dashoffset 800ms ease-out;
+    .service-card:hover .icon-rocket {
+      transform: translate(4px, -4px);
     }
 
-    .service-card:hover .icon-pulse .pulse-line-fg {
-      stroke-dashoffset: 0;
+    .icon-rocket .rocket-flame {
+      opacity: 0;
+      transform: scale(0.5);
+      transform-origin: center;
+      transition: opacity 200ms ease, transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .service-card:hover .icon-rocket .rocket-flame {
+      opacity: 1;
+      transform: scale(1);
     }
 
     /* funnelDrip removed — replaced by scissors snip */
@@ -1233,7 +1246,7 @@
   <section class="what-i-do" id="services">
     <div class="container">
       <div class="section-intro">
-        <h2>Your operations could be:<br><span class="rotating-word">energizing</span></h2>
+        <h2>Your operations could be more:<br><span class="rotating-word">energizing</span></h2>
       </div>
       
       <div class="services-grid">
@@ -1265,9 +1278,13 @@
         
         <div class="service-card">
           <div class="service-icon">
-            <svg class="icon-pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path class="pulse-line-bg" d="M2 12h4l3-7 4 14 3-7h6"/>
-              <path class="pulse-line-fg" d="M2 12h4l3-7 4 14 3-7h6"/>
+            <svg class="icon-rocket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 00-2.91-.09z"/>
+              <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
+              <circle class="rocket-flame" cx="3.5" cy="20.5" r="2" fill="var(--accent)" stroke="none" opacity="0.5"/>
+              <circle class="rocket-flame" cx="4.5" cy="19.5" r="1" fill="var(--accent)" stroke="none"/>
             </svg>
           </div>
           <h3>Make it Run</h3>
@@ -1275,7 +1292,7 @@
         </div>
       </div>
 
-      <p class="section-outro">You stay focused on your craft. I handle the complexity behind the scenes.</p>
+      <p class="section-outro">You run the business. I remove what's slowing it down.</p>
     </div>
   </section>
 
@@ -1668,6 +1685,36 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
       revealTargets.forEach(el => revealObserver.observe(el));
+    }
+
+    // Green highlight wipe tied to scroll position
+    const outro = document.querySelector('.section-outro');
+    if (outro) {
+      function updateOutroHighlight() {
+        const rect = outro.getBoundingClientRect();
+        const vh = window.innerHeight;
+
+        // Phase 1: wipe ON from bottom of screen to 50% mark
+        const onStart = vh;
+        const onEnd = vh * 0.5;
+        const onProgress = Math.max(0, Math.min(1, (onStart - rect.top) / (onStart - onEnd)));
+
+        // Phase 2: erase from left once past 50% heading to 15%
+        const offStart = vh * 0.5;
+        const offEnd = vh * 0.15;
+        const offProgress = Math.max(0, Math.min(1, (offStart - rect.top) / (offStart - offEnd)));
+
+        if (offProgress > 0) {
+          const size = (1 - offProgress) * 100;
+          outro.style.backgroundSize = `${size}% 30%`;
+          outro.style.backgroundPosition = `100% 85%`;
+        } else {
+          outro.style.backgroundSize = `${onProgress * 100}% 30%`;
+          outro.style.backgroundPosition = `0% 85%`;
+        }
+      }
+      window.addEventListener('scroll', updateOutroHighlight, { passive: true });
+      updateOutroHighlight();
     }
 
     // Essentials carousel navigation
