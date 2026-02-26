@@ -63,6 +63,7 @@
       background: var(--white);
       color: var(--slate-600);
       line-height: 1.6;
+      overflow-x: hidden;
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
     }
@@ -167,6 +168,12 @@
     .hero-shape {
       opacity: 0.12;
     }
+
+    @media (max-width: 480px) {
+      .shape-wrapper {
+        display: none;
+      }
+    }
     
     .hero-circle {
       width: 500px;
@@ -223,9 +230,14 @@
     .hero .container {
       position: relative;
       z-index: 1;
-      max-width: 1040px;
-      margin-left: max(var(--space-6), calc(50vw - 580px));
-      margin-right: auto;
+    }
+
+    @media (min-width: 768px) {
+      .hero .container {
+        max-width: 1040px;
+        margin-left: max(var(--space-6), calc(50vw - 580px));
+        margin-right: auto;
+      }
     }
     
     .hero-content {
@@ -258,9 +270,14 @@
     .hero-image-container {
       order: 1;
       position: relative;
-      margin-left: 100px;
     }
     
+    @media (min-width: 768px) {
+      .hero-image-container {
+        margin-left: 100px;
+      }
+    }
+
     @media (max-width: 767px) {
       .hero-image-container {
         display: flex;
@@ -315,6 +332,10 @@
         transform: translateX(-50%);
         top: auto;
         bottom: -16px;
+        padding: var(--space-2) var(--space-4);
+      }
+      .hero-name {
+        font-size: 1.125rem;
       }
     }
     
@@ -1027,6 +1048,23 @@
       letter-spacing: 0.1em;
     }
 
+    .partner-name {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      margin-top: -2px;
+      transition: color 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 250ms ease;
+    }
+
+    .partner-name:hover {
+      color: var(--accent-hover);
+      transform: scale(1.08);
+      letter-spacing: 0.03em;
+    }
+
     .partners-closing {
       text-align: center;
       max-width: 640px;
@@ -1501,8 +1539,15 @@
     }
 
     @media (max-width: 640px) {
-      .nav-links { gap: var(--space-4); }
-      .nav-links a { font-size: 0.75rem; }
+      .nav-links {
+        gap: var(--space-3, 12px);
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a { font-size: 0.7rem; white-space: nowrap; }
+      .nav-name { font-size: 0.8125rem; }
     }
 
     /* Scroll target offset for fixed nav */
@@ -1980,20 +2025,23 @@
             <img src="pix-icon.png" alt="Pixouls">
           </div>
           <span class="partner-specialty">Development</span>
+          <a href="https://pixouls.com" target="_blank" rel="noopener" class="partner-name">Pixouls</a>
         </div>
 
         <div class="partner-card">
           <div class="partner-logo">
             <img src="CVP-logo_700pxW.png" alt="Custom Video Productions">
           </div>
-          <span class="partner-specialty">Video Production</span>
+          <span class="partner-specialty">Video</span>
+          <a href="https://cvpnj.com" target="_blank" rel="noopener" class="partner-name">CVP</a>
         </div>
 
         <div class="partner-card">
           <div class="partner-logo">
             <img src="CreativeLike-Logo.jpg" alt="CreativeLike.us">
           </div>
-          <span class="partner-specialty">Design, Branding & Marketing</span>
+          <span class="partner-specialty">Marketing</span>
+          <a href="https://creativelike.us" target="_blank" rel="noopener" class="partner-name">Creative Like</a>
         </div>
       </div>
 

@@ -1,0 +1,118 @@
+---
+description: BPWCISLO.com portfolio site — design system, structure, and conventions
+alwaysApply: true
+---
+
+# BPWCISLO.com — Site Rules & PRD
+
+## Owner
+Brian Patrick Wcislo — strategist, designer, product builder. 25+ years in digital. Based in Costa Rica.
+
+## Purpose
+Personal portfolio site selling operational leverage and custom app development to operations-heavy businesses ($5M–$250M).
+
+## Design Language
+Apple-inspired minimalism. Clean, spacious, confident. Every element earns its place.
+
+- **Inspiration**: Apple Mac mini product page (scroll-driven reveals, large imagery, centered typography, alternating light/dark sections)
+- **Tone**: Professional but human. Direct. No fluff.
+
+## Color Palette (CSS Variables)
+
+| Token | Value | Usage |
+|-------|-------|-------|
+| `--accent` | `#65a30d` | Primary green — CTAs, highlights, active states |
+| `--accent-hover` | `#4d7c0f` | Hover state for accent |
+| `--slate-900` | `#0f172a` | Dark backgrounds, primary text |
+| `--slate-50` | `#f8fafc` | Light section backgrounds |
+| `--white` | `#ffffff` | Card backgrounds, body |
+| `--gold` | `#d97706` | Geometric accent shape only |
+
+## Typography
+
+- **Display**: `Sora` (headings, cards) — 400/500/600/700 weights
+- **Body**: `Inter` (paragraphs, UI) — 400/500/600 weights
+- **h1**: `clamp(2.75rem, 6vw, 4rem)` weight 400, bold via `<strong>`
+- **h2**: `clamp(2rem, 4.5vw, 3.25rem)` weight 700
+- **Body**: 1rem / 1.6 line-height
+
+## Spacing Scale
+
+`--space-1` (4px) through `--space-24` (96px). Use variables, never raw pixels for layout spacing.
+
+## Page Sections (top to bottom)
+
+1. **Hero** — Headline with blur-reveal animation, tagline with green underline on "boring businesses", speech-bubble CTA
+2. **What I Do** — Rotating word headline, 3 service cards with animated SVG icons (scissors, building blocks, rocket)
+3. **Selected Work** — Full-width project galleries (Apple-style horizontal scroll, snap, dots, arrows, click-to-navigate)
+4. **Who I Work With** — Testimonial cards (2-col grid, italic quotes, green titles, 3D tilt on hover)
+5. **Trusted Collaborators** — Partner logos with category labels
+6. **About Brian** — Bio + photo grid, Essentials horizontal card carousel
+7. **Contact** — Form with floating labels, green checkmarks, speech-bubble submit button
+
+## Interactive Features
+
+| Feature | Scope | Trigger |
+|---------|-------|---------|
+| Scroll progress bar | Global | Scroll position |
+| Blur-reveal text | Section headings | IntersectionObserver |
+| Stat counters | "25+", "10", "102x" | IntersectionObserver |
+| Speech bubble morph | Hero CTA, Contact submit | Load sequence / scroll |
+| Green underline wipe | "boring businesses", section outro | Load sequence / scroll position |
+| Cursor spotlight | Dark project cards, Partners | mousemove |
+| 3D tilt | Testimonial cards | mousemove |
+| Magnetic buttons | Hero CTA only | mousemove (disabled past 50% scroll) |
+| Gallery dot indicators | Project galleries | scroll sync |
+| Rotating words | Services headline | setInterval |
+| Service icon animations | Scissors, blocks, rocket | hover |
+| Floating shapes | Background circles/squares | mousemove + requestAnimationFrame |
+| Section zoom reveal | All reveal targets | IntersectionObserver (scale 0.97→1) |
+| Form validation | Contact form | input/blur/submit |
+
+## Animation Principles
+
+- Use `cubic-bezier(0.16, 1, 0.3, 1)` for reveals and morphs
+- Respect `prefers-reduced-motion` — all JS animations check this
+- Stagger grid children at 0.12s intervals
+- Hero entrance sequence: headline letters → tagline → button → underline → bubble morph
+- Keep transitions under 1s for interactions, up to 1.2s for reveals
+
+## Project Galleries
+
+- Horizontal scroll with `scroll-snap-type: x mandatory`
+- Slides: `92vw` mobile, `min(72vw, 960px)` desktop
+- Center-snap with peek of adjacent slides
+- Nav arrows + dot indicators + click-to-navigate on partial slides
+- Placeholder slides use gradient backgrounds (`placeholder-cool`, `placeholder-warm`, `placeholder-sage`)
+- Dark cards get inverted placeholder/dot/arrow colors
+
+## Contact Form
+
+- Fields: Name (required), Company, Email (required), Phone, Challenge textarea
+- Name + Company on row 1, Email + Phone on row 2, textarea below
+- Floating labels (lift + turn green on focus)
+- Green checkmark SVG on valid fields
+- Shake animation on invalid submit
+- Submits via mailto:brian@bpwcislo.com (compose in mail client)
+
+## Responsive Breakpoints
+
+| Breakpoint | Behavior |
+|-----------|----------|
+| < 480px | Shapes hidden, form rows stack, smallest text sizes |
+| < 640px | Nav links shrink + scroll, partner grid stacks |
+| < 768px | Hero stacks (text below photo centered), single-column layouts |
+| ≥ 768px | Hero side-by-side, desktop gallery sizes, full nav |
+
+## File Structure
+
+Single-file architecture: all CSS, HTML, and JS in `index.html`. No external stylesheets or script files. Images alongside in project root.
+
+## Coding Conventions
+
+- CSS custom properties for all colors, spacing, and fonts
+- No CSS frameworks — vanilla CSS with modern features (grid, clamp, scroll-snap)
+- Vanilla JS — no libraries or frameworks
+- IntersectionObserver for scroll-triggered effects
+- `passive: true` on all scroll listeners
+- Semantic HTML with accessible labels on interactive elements
