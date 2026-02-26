@@ -280,7 +280,7 @@
     .hero-name-card {
       position: absolute;
       left: -30px;
-      top: 50%;
+      top: calc(50% + 75px);
       background: rgba(15, 23, 42, 0.95);
       padding: var(--space-4) var(--space-6);
       border-radius: 10px;
@@ -323,15 +323,61 @@
       color: var(--slate-900);
     }
     
-    .hero-headline,
-    .hero-tagline,
-    .hero-image-container {
-      will-change: transform;
-      transition: transform 100ms ease-out;
-    }
     
     .hero-tagline {
-      margin-bottom: var(--space-8);
+      margin-bottom: var(--space-4);
+    }
+
+    .hero-tagline,
+    .hero .btn {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .hero-tagline.hero-revealed,
+    .hero .btn.hero-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero .btn {
+      transition: background 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  color 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  border-radius 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.6s ease;
+    }
+
+    .hero .btn::after {
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 14px;
+      width: 12px;
+      height: 12px;
+      background: var(--accent);
+      clip-path: polygon(0 0, 100% 0, 0 100%);
+      opacity: 0;
+      transform: scale(0);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .hero .btn.btn-bubble,
+    .hero .btn:hover {
+      background: var(--accent);
+      color: var(--slate-900);
+      font-weight: 600;
+      border-radius: 20px 20px 20px 4px;
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px -4px rgba(101, 163, 13, 0.35);
+    }
+
+    .hero .btn.btn-bubble::after,
+    .hero .btn:hover::after {
+      opacity: 1;
+      transform: scale(1);
     }
     
     .tagline-main {
@@ -340,10 +386,20 @@
       margin-bottom: var(--space-4);
       line-height: 1.6;
     }
-    
+
     .tagline-main strong {
       color: var(--slate-900);
       font-weight: 600;
+      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.7);
+      background-image: linear-gradient(var(--accent), var(--accent));
+      background-repeat: no-repeat;
+      background-position: 0 88%;
+      background-size: 0% 28%;
+      transition: background-size 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .tagline-main strong.underline-visible {
+      background-size: 100% 28%;
     }
     
     .tagline-platform {
@@ -380,6 +436,8 @@
       cursor: pointer;
       transition: background 200ms ease-out, color 200ms ease-out, box-shadow 200ms ease-out, transform 200ms ease-out;
       text-decoration: none;
+      position: relative;
+      overflow: hidden;
     }
     
     .btn:hover {
@@ -1664,9 +1722,8 @@
           <h1 class="hero-headline">Apps<br>That Make<br><strong>You Run Better</strong></h1>
           <div class="hero-tagline">
             <p class="tagline-main">Operational leverage for <strong>boring businesses.</strong></p>
-            <p class="tagline-platform">Web & Native</p>
           </div>
-          <a href="mailto:brian@bpwcislo.com" class="btn">Let's Talk</a>
+          <a href="#contact" class="btn">Let's Talk</a>
         </div>
         <div class="hero-image-container">
           <img src="Brian-BrandPhotos-Ronan-40.jpg" alt="Brian Patrick Wcislo" class="hero-image">
@@ -2066,65 +2123,11 @@
   </footer>
 
   <script>
-    // Subtle parallax for hero elements
-    const heroHeadline = document.querySelector('.hero-headline');
-    const heroTagline = document.querySelector('.hero-tagline');
-    const heroBtn = document.querySelector('.hero .btn');
-    const heroImage = document.querySelector('.hero-image-container');
-    const heroNameCard = document.querySelector('.hero-name-card');
     const circleWrapper = document.querySelector('.circle-wrapper');
     const squareWrapper = document.querySelector('.square-wrapper');
     
-    let ticking = false;
-    
-    const heroImageEl = document.querySelector('.hero-image');
-    
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    function updateParallax() {
-      if (prefersReducedMotion) return;
-      
-      const scrollY = window.scrollY;
-      const heroHeight = document.querySelector('.hero').offsetHeight;
-      
-      // Only apply effect while hero is in view
-      if (scrollY < heroHeight) {
-        // Different speeds for each element (subtle multipliers)
-        heroHeadline.style.transform = `translateY(${scrollY * 0.08}px)`;
-        
-        if (heroTagline) {
-          heroTagline.style.transform = `translateY(${scrollY * 0.14}px)`;
-        }
-        
-        // Button stays anchored - no parallax, just magnetic effect
-        
-        heroImage.style.transform = `translateY(${scrollY * 0.05}px)`;
-        
-        // Photo grows slightly as you scroll (max 8% growth)
-        const growScale = 1 + (scrollY * 0.0002);
-        const maxScale = 1.08;
-        heroImageEl.style.transform = `scale(${Math.min(growScale, maxScale)})`;
-        
-        // Photo fades out to 20% opacity as you scroll
-        const fadeOpacity = 1 - (scrollY / heroHeight) * 0.8;
-        heroImageEl.style.opacity = Math.max(fadeOpacity, 0.2);
-        
-        // Name card parallax (slightly different rate than photo)
-        if (heroNameCard) {
-          heroNameCard.style.transform = `translateY(${scrollY * 0.12}px)`;
-        }
-      }
-      
-      ticking = false;
-    }
-    
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(updateParallax);
-        ticking = true;
-      }
-    });
     
     // Gentle mouse influence on floating shapes (site-wide)
     let mouseX = 0;
@@ -2501,11 +2504,38 @@
 
       wrapTextNodes(headline);
 
+      const totalRevealTime = 80 + allSpans.length * 35 + 350;
+
       allSpans.forEach((span, i) => {
         setTimeout(() => {
           span.classList.add('revealed');
         }, 80 + i * 35);
       });
+
+      const heroTaglineEl = document.querySelector('.hero-tagline');
+      const heroBtnEl = document.querySelector('.hero .btn');
+      const taglineStrong = document.querySelector('.tagline-main strong');
+
+      setTimeout(() => {
+        if (heroTaglineEl) heroTaglineEl.classList.add('hero-revealed');
+      }, totalRevealTime);
+
+      setTimeout(() => {
+        if (heroBtnEl) heroBtnEl.classList.add('hero-revealed');
+      }, totalRevealTime + 200);
+
+      setTimeout(() => {
+        if (taglineStrong) taglineStrong.classList.add('underline-visible');
+      }, totalRevealTime + 500);
+
+      setTimeout(() => {
+        if (heroBtnEl) {
+          heroBtnEl.classList.add('btn-bubble');
+          setTimeout(() => {
+            heroBtnEl.classList.remove('btn-bubble');
+          }, 1200);
+        }
+      }, totalRevealTime + 1900);
     })();
 
     // Contact form → mailto with validation micro-interactions
