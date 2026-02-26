@@ -698,24 +698,164 @@
       color: var(--slate-500);
     }
 
-    .project-image {
+    /* Project Gallery */
+    .project-gallery {
       width: 100%;
-      max-width: 960px;
-      height: auto;
+      position: relative;
+    }
+
+    .project-gallery-track {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 4px 6vw;
+    }
+
+    .project-gallery-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .project-gallery-track {
+        padding: 4px 8vw;
+      }
+    }
+
+    .project-slide {
+      flex: 0 0 92vw;
+      scroll-snap-align: center;
+      border-radius: 16px;
+      overflow: hidden;
       aspect-ratio: 16 / 10;
+      box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @media (min-width: 768px) {
+      .project-slide {
+        flex: 0 0 min(72vw, 960px);
+      }
+    }
+
+    .project-slide:hover {
+      transform: scale(1.01);
+    }
+
+    .project-card--dark .project-slide {
+      box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.35);
+    }
+
+    .project-slide img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       object-position: top;
-      border-radius: 16px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .project-card--dark .project-image {
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    .project-slide-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      font-size: 0.8125rem;
+      color: var(--slate-400);
+      font-weight: 500;
     }
 
-    .project-card:hover .project-image {
-      transform: scale(1.02);
+    .project-slide-placeholder svg {
+      opacity: 0.5;
+    }
+
+    .placeholder-cool {
+      background: linear-gradient(145deg, #e0e7ef, #c7d2e0);
+    }
+
+    .placeholder-warm {
+      background: linear-gradient(145deg, #f0e6d6, #e4d5c1);
+    }
+
+    .placeholder-sage {
+      background: linear-gradient(145deg, #d5e8d4, #bddcbb);
+    }
+
+    .project-card--dark .placeholder-cool {
+      background: linear-gradient(145deg, #1e293b, #334155);
+    }
+
+    .project-card--dark .placeholder-warm {
+      background: linear-gradient(145deg, #292017, #3d2e1e);
+    }
+
+    .project-card--dark .placeholder-sage {
+      background: linear-gradient(145deg, #1a2e1a, #2d3f2d);
+    }
+
+    .project-card--dark .project-slide-placeholder {
+      color: var(--slate-500);
+    }
+
+    .project-gallery-nav {
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+      padding: 0 6vw;
+    }
+
+    @media (min-width: 768px) {
+      .project-gallery-nav {
+        padding: 0 8vw;
+      }
+    }
+
+    .gallery-arrow {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--slate-300);
+      background: var(--white);
+      color: var(--slate-500);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+
+    .gallery-arrow:hover {
+      background: var(--slate-900);
+      color: var(--white);
+      border-color: var(--slate-900);
+    }
+
+    .gallery-arrow:disabled {
+      opacity: 0.35;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .gallery-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .project-card--dark .gallery-arrow {
+      border-color: var(--slate-600);
+      background: var(--slate-800);
+      color: var(--slate-400);
+    }
+
+    .project-card--dark .gallery-arrow:hover {
+      background: var(--white);
+      color: var(--slate-900);
+      border-color: var(--white);
     }
 
     .project-content {
@@ -823,6 +963,15 @@
       color: var(--slate-400);
       text-transform: uppercase;
       letter-spacing: 0.1em;
+    }
+
+    .partners-closing {
+      text-align: center;
+      max-width: 640px;
+      margin: var(--space-8) auto 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--slate-400);
     }
     
     /* About Section */
@@ -1301,45 +1450,134 @@
     <div class="container">
       <div class="section-intro">
         <h2>Selected Work</h2>
-        <p>A few gems I've had the pleasure of bringing to life.</p>
+        <p>Real problems. Real businesses. Real results.</p>
       </div>
     </div>
 
     <div class="project-card">
       <div class="project-content">
-        <span class="project-tag">Native iOS App</span>
-        <h3>SoBo</h3>
-        <p>Peer-to-peer borrowing app that helps you lend things and actually get them back. Snap a photo, set a return date, get reminders. Simple.</p>
-        <span class="launch-note">Launching April 2026</span>
+        <span class="project-tag">Business Process App</span>
+        <h3>ARS Workflowz</h3>
+        <p>Custom operating system built for a $21M equipment refurbishment program — serving one of the world's most admired brands. Four workflows, 19 guided steps, three role-based dashboards — giving a team of technicians on iPads full visibility across every machine, every step, in real time. Built in 8 weeks. Still running.</p>
+        <span class="launch-note">102x ROI · Phase 2 in progress</span>
       </div>
-      <img src="Sobo_Illustrations.jpg" alt="SoBo App" class="project-image">
+      <div class="project-gallery">
+        <div class="project-gallery-track">
+          <div class="project-slide">
+            <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz — main interface">
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-cool">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Dashboard view</span>
+            </div>
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-warm">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>iPad workflow</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-nav">
+          <button class="gallery-arrow gallery-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="gallery-arrow gallery-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
     </div>
 
     <div class="project-card project-card--dark">
       <div class="project-content">
         <span class="project-tag">Training Platform</span>
         <h3>GMAC</h3>
-        <p>Making dense technical learning fast and fun. Focused on preventative maintenance and troubleshooting, the platform empowers employees to instantly implement new skills while tracking patterns and insights in custom dashboards.</p>
+        <p>Making dense technical knowledge fast and fun. Preventative maintenance and troubleshooting training that employees actually retain — with custom dashboards that show managers exactly where to focus.</p>
       </div>
-      <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform" class="project-image">
+      <div class="project-gallery">
+        <div class="project-gallery-track">
+          <div class="project-slide">
+            <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform — main view">
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-cool">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Training module</span>
+            </div>
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-sage">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Manager dashboard</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-nav">
+          <button class="gallery-arrow gallery-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="gallery-arrow gallery-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
     </div>
 
     <div class="project-card">
       <div class="project-content">
         <span class="project-tag">Interactive Kiosk</span>
         <h3>Mack Truck Builder</h3>
-        <p>Interactive educational experience for a children's science museum. Kids design custom trucks while learning about engineering, aerodynamics, and fuel efficiency through play.</p>
+        <p>Kids design custom trucks while learning engineering, aerodynamics, and fuel efficiency. Built for DaVinci Science Center — proof that the best learning feels like play.</p>
       </div>
-      <img src="Mack_Truck_Kiosk-PLAY2_2.jpg" alt="Mack Truck Builder Kiosk" class="project-image">
+      <div class="project-gallery">
+        <div class="project-gallery-track">
+          <div class="project-slide">
+            <img src="Mack_Truck_Kiosk-PLAY2_2.jpg" alt="Mack Truck Builder Kiosk — main screen">
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-warm">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Build interface</span>
+            </div>
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-cool">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Results screen</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-nav">
+          <button class="gallery-arrow gallery-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="gallery-arrow gallery-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
     </div>
 
     <div class="project-card project-card--dark">
       <div class="project-content">
-        <span class="project-tag">Business Process App</span>
-        <h3>ARS Workflowz</h3>
-        <p>Custom business solution that systematizes complex processes, guides teams through procedures, and collects real-time data for detailed custom reporting and user-specific dashboards.</p>
+        <span class="project-tag">Native iOS App</span>
+        <h3>SoBo</h3>
+        <p>You lend something. You actually get it back. Photo documentation, return dates, reminders — the accountability layer that makes lending between people work.</p>
+        <span class="launch-note">Launching April 2026</span>
       </div>
-      <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz" class="project-image">
+      <div class="project-gallery">
+        <div class="project-gallery-track">
+          <div class="project-slide">
+            <img src="Sobo_Illustrations.jpg" alt="SoBo App — illustrations">
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-sage">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>App screens</span>
+            </div>
+          </div>
+          <div class="project-slide">
+            <div class="project-slide-placeholder placeholder-cool">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              <span>Lending flow</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-gallery-nav">
+          <button class="gallery-arrow gallery-prev" aria-label="Previous slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="gallery-arrow gallery-next" aria-label="Next slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1347,10 +1585,11 @@
   <section class="partners" id="partners">
     <div class="container">
       <div class="section-intro">
-        <h2>Creative Partners</h2>
-        <p>World-class collaborators who help bring visions to life.</p>
+        <h2>Trusted Collaborators</h2>
+        <p>Some projects call for a team. These are the people I trust with mine.</p>
+        <p>I've worked alongside these organizations for years — in some cases decades.</p>
       </div>
-      
+
       <div class="partners-grid">
         <div class="partner-card">
           <div class="partner-logo">
@@ -1358,21 +1597,24 @@
           </div>
           <span class="partner-specialty">Development</span>
         </div>
-        
+
         <div class="partner-card">
           <div class="partner-logo">
-            <img src="CreativeLike-Logo.jpg" alt="Creative Like">
+            <img src="CVP-logo_700pxW.png" alt="Custom Video Productions">
           </div>
-          <span class="partner-specialty">Design</span>
+          <span class="partner-specialty">Video Production</span>
         </div>
-        
+
         <div class="partner-card">
           <div class="partner-logo">
-            <img src="CVP-logo_700pxW.png" alt="CVP">
+            <img src="CreativeLike-Logo.jpg" alt="CreativeLike.us">
           </div>
-          <span class="partner-specialty">Video</span>
+          <span class="partner-specialty">Design, Branding & Marketing</span>
         </div>
       </div>
+
+      <p class="partners-closing">Together we've built training platforms, consumer apps, video productions, and business systems that are still running today. I don't outsource. I collaborate — selectively, and only with people whose work I'd put my name on.</p>
+
     </div>
   </section>
 
@@ -1662,7 +1904,7 @@
     // Scroll reveal animations
     if (!prefersReducedMotion) {
       const revealTargets = document.querySelectorAll(
-        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-image, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .contact .btn'
+        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-gallery, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .contact .btn'
       );
 
       revealTargets.forEach(el => el.classList.add('reveal'));
@@ -1716,6 +1958,36 @@
       window.addEventListener('scroll', updateOutroHighlight, { passive: true });
       updateOutroHighlight();
     }
+
+    // Project gallery navigation
+    document.querySelectorAll('.project-gallery').forEach(gallery => {
+      const galleryTrack = gallery.querySelector('.project-gallery-track');
+      const prevArrow = gallery.querySelector('.gallery-prev');
+      const nextArrow = gallery.querySelector('.gallery-next');
+      if (!galleryTrack || !prevArrow || !nextArrow) return;
+
+      function getSlideWidth() {
+        const slide = galleryTrack.querySelector('.project-slide');
+        if (!slide) return 300;
+        return slide.offsetWidth + 16;
+      }
+
+      function updateGalleryArrows() {
+        prevArrow.disabled = galleryTrack.scrollLeft <= 5;
+        nextArrow.disabled = galleryTrack.scrollLeft >= galleryTrack.scrollWidth - galleryTrack.clientWidth - 5;
+      }
+
+      prevArrow.addEventListener('click', () => {
+        galleryTrack.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
+      });
+
+      nextArrow.addEventListener('click', () => {
+        galleryTrack.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
+      });
+
+      galleryTrack.addEventListener('scroll', updateGalleryArrows, { passive: true });
+      updateGalleryArrows();
+    });
 
     // Essentials carousel navigation
     const track = document.querySelector('.essentials-track');
