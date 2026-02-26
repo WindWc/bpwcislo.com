@@ -1174,6 +1174,66 @@
       margin: 0;
     }
     
+    /* Who I Work With / Testimonials */
+    .testimonials {
+      background: var(--white);
+    }
+
+    .testimonials .section-intro p {
+      color: var(--slate-500);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 640px) {
+      .testimonials-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .testimonial-card {
+      background: var(--slate-50);
+      border-radius: 16px;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 300ms ease, transform 300ms ease;
+    }
+
+    .testimonial-card:hover {
+      box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .testimonial-quote {
+      font-size: 0.9375rem;
+      font-style: italic;
+      color: var(--slate-600);
+      line-height: 1.7;
+      margin: 0 0 var(--space-4);
+      flex: 1;
+    }
+
+    .testimonial-author {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      line-height: 1.3;
+    }
+
+    .testimonial-title {
+      font-size: 0.8125rem;
+      color: var(--accent);
+      line-height: 1.5;
+    }
+
     /* Contact Section */
     .contact {
       background: var(--slate-50);
@@ -1581,6 +1641,43 @@
     </div>
   </section>
 
+  <!-- Who I Work With Section -->
+  <section class="testimonials" id="testimonials">
+    <div class="container">
+      <div class="section-intro">
+        <h2>Who I Work With</h2>
+        <p>I work where the real work happens — with the operators, trainers, and builders who keep big companies running. When those companies need to show up with world-class tools, I'm the reason they can.</p>
+        <p>Typically $5M–$250M. Operations-heavy. Really good at what they do — and slowed down by everything around it.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"I don't think this ambitious new line of business would be possible without the software Brian built in an incredibly short time span. Everything came out better than I could have imagined."</p>
+          <span class="testimonial-author">Phil L.</span>
+          <span class="testimonial-title">Lead Tech, <span class="company">Associated Restaurant Services</span></span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Brian is an enthusiastic innovator and has created a training platform well suited for upskilling today's generation of employees — with excellent dashboards for management to monitor progress and identify areas of opportunity."</p>
+          <span class="testimonial-author">Matt Phillips</span>
+          <span class="testimonial-title">District Manager, <span class="company">Starbucks</span></span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Brian has a unique ability to build and lead highly effective teams. Whether developing immersive interactive experiences or overseeing the entire creative process, he brings a refreshing level of joy and dedication to every project."</p>
+          <span class="testimonial-author">Denis Aumiller</span>
+          <span class="testimonial-title">Creative Director, <span class="company">LVMH</span></span>
+        </div>
+
+        <div class="testimonial-card">
+          <p class="testimonial-quote">"Brian makes things possible we never would have dreamed of. His ability to see all the moving parts and build the bridge from where we are to where we want to be is nothing short of astonishing. Grateful to have him in our corner for the last 17 years."</p>
+          <span class="testimonial-author">Ryan Nedza</span>
+          <span class="testimonial-title">Owner, <span class="company">Associated Restaurant Services</span></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Partners Section -->
   <section class="partners" id="partners">
     <div class="container">
@@ -1904,12 +2001,12 @@
     // Scroll reveal animations
     if (!prefersReducedMotion) {
       const revealTargets = document.querySelectorAll(
-        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-gallery, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .contact .btn'
+        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-gallery, .testimonials .section-intro, .testimonial-card, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .contact .btn'
       );
 
       revealTargets.forEach(el => el.classList.add('reveal'));
 
-      document.querySelectorAll('.services-grid, .projects-grid, .partners-grid').forEach(grid => {
+      document.querySelectorAll('.services-grid, .projects-grid, .testimonials-grid, .partners-grid').forEach(grid => {
         const children = grid.querySelectorAll('.reveal');
         children.forEach((child, i) => {
           child.style.transitionDelay = `${i * 0.12}s`;
