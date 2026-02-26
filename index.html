@@ -341,7 +341,7 @@
       transform: translateY(0);
     }
 
-    .hero .btn {
+    .btn-bubble-target {
       transition: background 1s cubic-bezier(0.16, 1, 0.3, 1),
                   color 1s cubic-bezier(0.16, 1, 0.3, 1),
                   border-radius 1s cubic-bezier(0.16, 1, 0.3, 1),
@@ -350,7 +350,7 @@
                   opacity 0.6s ease;
     }
 
-    .hero .btn::after {
+    .btn-bubble-target::after {
       content: '';
       position: absolute;
       bottom: -6px;
@@ -364,8 +364,8 @@
       transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
-    .hero .btn.btn-bubble,
-    .hero .btn:hover {
+    .btn-bubble-target.btn-bubble,
+    .btn-bubble-target:hover {
       background: var(--accent);
       color: var(--slate-900);
       font-weight: 600;
@@ -374,8 +374,8 @@
       box-shadow: 0 8px 24px -4px rgba(101, 163, 13, 0.35);
     }
 
-    .hero .btn.btn-bubble::after,
-    .hero .btn:hover::after {
+    .btn-bubble-target.btn-bubble::after,
+    .btn-bubble-target:hover::after {
       opacity: 1;
       transform: scale(1);
     }
@@ -1723,7 +1723,7 @@
           <div class="hero-tagline">
             <p class="tagline-main">Operational leverage for <strong>boring businesses.</strong></p>
           </div>
-          <a href="#contact" class="btn">Let's Talk</a>
+          <a href="#contact" class="btn btn-bubble-target">Let's Talk</a>
         </div>
         <div class="hero-image-container">
           <img src="Brian-BrandPhotos-Ronan-40.jpg" alt="Brian Patrick Wcislo" class="hero-image">
@@ -1793,7 +1793,7 @@
   <section class="projects" id="work">
     <div class="container">
       <div class="section-intro">
-        <h2>Selected Work</h2>
+        <h2 class="text-reveal">Selected Work</h2>
         <p>Real problems. Real businesses. Real results.</p>
       </div>
     </div>
@@ -1811,16 +1811,19 @@
             <img src="ARS_WorkFlowz.jpg" alt="ARS Workflowz — main interface">
           </div>
           <div class="project-slide">
-            <div class="project-slide-placeholder placeholder-cool">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>Dashboard view</span>
-            </div>
+            <img src="ARS-purchase-orders.png" alt="ARS Workflowz — purchase orders dashboard">
           </div>
           <div class="project-slide">
-            <div class="project-slide-placeholder placeholder-warm">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>iPad workflow</span>
-            </div>
+            <img src="ARS-machine-detail.png" alt="ARS Workflowz — machine detail & workflow timeline">
+          </div>
+          <div class="project-slide">
+            <img src="ARS-reassembly-testing.png" alt="ARS Workflowz — reassembly testing verification">
+          </div>
+          <div class="project-slide">
+            <img src="ARS-bench-testing.png" alt="ARS Workflowz — bench testing calibration">
+          </div>
+          <div class="project-slide">
+            <img src="ARS-final-qa.png" alt="ARS Workflowz — final QA photos">
           </div>
         </div>
         <div class="project-gallery-nav">
@@ -1929,7 +1932,7 @@
   <section class="testimonials" id="testimonials">
     <div class="container">
       <div class="section-intro">
-        <h2>Who I Work With</h2>
+        <h2 class="text-reveal">Who I Work With</h2>
         <p>I work where the real work happens — with the operators, trainers, and builders who keep big companies running. When those companies need to show up with world-class tools, I'm the reason they can.</p>
         <p>Typically $5M–$250M. Operations-heavy. Really good at what they do — and slowed down by everything around it.</p>
       </div>
@@ -1966,7 +1969,7 @@
   <section class="partners" id="partners">
     <div class="container">
       <div class="section-intro">
-        <h2>Trusted Collaborators</h2>
+        <h2 class="text-reveal">Trusted Collaborators</h2>
         <p>Some projects call for a team. These are the people I trust with mine.</p>
         <p>I've worked alongside these organizations for years — in some cases decades.</p>
       </div>
@@ -2006,7 +2009,7 @@
     <div class="container">
       <div class="about-content">
         <div class="about-text">
-          <h2>About</h2>
+          <h2 class="text-reveal">About Brian</h2>
           <p>I'm a strategist, designer, and product builder with <span class="stat-counter" data-target="25" data-suffix="+">0+</span> years of experience and <span class="stat-counter" data-target="10">0</span> startups behind me — crashed some, sold some, built some. What I know better than most is where things go sideways and exactly how to keep them on track.</p>
           <p>My work lives at the intersection of business operations and technology. I don't just build apps — I build the operational leverage that lets businesses stop duct-taping their processes together and start scaling what they're actually good at.</p>
           <p>Based in Costa Rica. Grounded by yoga, art, and time in nature. It keeps the work sharp and the process human.</p>
@@ -2079,7 +2082,7 @@
   <!-- Contact Section -->
   <section class="contact" id="contact">
     <div class="container">
-      <h2>Let's Remove Some Friction</h2>
+      <h2 class="text-reveal">Let's Remove Some Friction</h2>
       <p>Got a business that's ready to run better? Let's talk.</p>
       <form class="contact-form" id="contactForm">
         <div class="form-row">
@@ -2110,7 +2113,7 @@
           <textarea name="message" placeholder=" "></textarea>
           <label>What's slowing you down?</label>
         </div>
-        <button type="submit" class="btn">Send a Message</button>
+        <button type="submit" class="btn btn-bubble-target">Send a Message</button>
       </form>
     </div>
   </section>
@@ -2378,6 +2381,19 @@
       });
       gallery.querySelector('.project-gallery-nav').after(dotsContainer);
 
+      slides.forEach(slide => {
+        slide.style.cursor = 'pointer';
+        slide.addEventListener('click', () => {
+          const active = getActiveIndex();
+          const trackRect = galleryTrack.getBoundingClientRect();
+          const trackCenter = trackRect.left + trackRect.width / 2;
+          const slideRect = slide.getBoundingClientRect();
+          const slideCenter = slideRect.left + slideRect.width / 2;
+          if (Math.abs(slideCenter - trackCenter) < 20) return;
+          slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        });
+      });
+
       function getSlideWidth() {
         const slide = galleryTrack.querySelector('.project-slide');
         if (!slide) return 300;
@@ -2440,6 +2456,68 @@
 
       track.addEventListener('scroll', updateArrows, { passive: true });
       updateArrows();
+    }
+
+    // Scroll-triggered bubble animation for contact submit button
+    if (!prefersReducedMotion) {
+      const contactBtn = document.querySelector('.contact-form .btn-bubble-target');
+      if (contactBtn) {
+        const contactBubbleObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            setTimeout(() => {
+              contactBtn.classList.add('btn-bubble');
+              setTimeout(() => {
+                contactBtn.classList.remove('btn-bubble');
+              }, 1200);
+            }, 600);
+            contactBubbleObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.5 });
+        contactBubbleObserver.observe(contactBtn);
+      }
+    }
+
+    // Scroll-triggered text reveal (same blur-reveal as hero headline)
+    if (!prefersReducedMotion) {
+      document.querySelectorAll('.text-reveal').forEach(el => {
+        const allSpans = [];
+
+        function wrapTextNodes(node) {
+          const children = Array.from(node.childNodes);
+          children.forEach(child => {
+            if (child.nodeType === 3) {
+              const frag = document.createDocumentFragment();
+              child.textContent.split('').forEach(ch => {
+                const span = document.createElement('span');
+                span.className = 'scramble-letter' + (/\s/.test(ch) ? ' space' : '');
+                span.textContent = ch;
+                frag.appendChild(span);
+                if (!/\s/.test(ch)) allSpans.push(span);
+              });
+              child.replaceWith(frag);
+            } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+              wrapTextNodes(child);
+            }
+          });
+        }
+
+        wrapTextNodes(el);
+
+        const textRevealObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            allSpans.forEach((span, i) => {
+              setTimeout(() => {
+                span.classList.add('revealed');
+              }, 80 + i * 35);
+            });
+            textRevealObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.3 });
+
+        textRevealObserver.observe(el);
+      });
     }
 
     // Cursor spotlight on dark sections
