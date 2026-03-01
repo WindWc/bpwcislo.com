@@ -1088,26 +1088,13 @@
     /* About Section */
     .about {
       background: var(--white);
-      padding-top: var(--space-12);
+      padding-top: var(--space-8);
       padding-bottom: 0;
     }
 
     .about-content {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: var(--space-8);
-      align-items: center;
-    }
-
-    @media (min-width: 768px) {
-      .about-content {
-        grid-template-columns: 1.2fr 1fr;
-        gap: var(--space-12);
-      }
-    }
-
-    .about-text {
-      max-width: 640px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
     .about-text h2 {
@@ -1119,138 +1106,41 @@
       color: var(--slate-600);
     }
 
-    .about-photo {
-      order: -1;
-      display: flex;
-      justify-content: center;
-    }
-
-    @media (min-width: 768px) {
-      .about-photo {
-        order: 0;
-      }
-    }
-
-    .about-photo img {
-      width: 100%;
-      max-width: 420px;
-      height: auto;
-      border-radius: 16px;
-      object-fit: cover;
-      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.12);
-    }
-
-    /* Essentials Carousel */
+    /* Essentials Grid */
     .essentials {
       background: var(--slate-100);
-      padding: var(--space-12) 0;
-      margin-top: var(--space-12);
+      padding: var(--space-8) 0;
+      margin-top: var(--space-8);
     }
 
-    @media (min-width: 768px) {
-      .essentials {
-        margin-top: var(--space-16);
-      }
-    }
-
-    .essentials-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--space-6);
-      max-width: 1120px;
-      margin-left: auto;
-      margin-right: auto;
-      padding: 0 var(--space-6);
-    }
-
-    @media (min-width: 1024px) {
-      .essentials-header {
-        padding: 0 var(--space-8);
-      }
-    }
-
-    .essentials-header h3 {
-      font-family: var(--font-display);
-      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-      font-weight: 700;
-      color: var(--slate-900);
-      margin-bottom: 0;
-    }
-
-    .essentials-nav {
-      display: flex;
-      gap: var(--space-2);
-    }
-
-    .essentials-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: 1px solid var(--slate-300);
-      background: var(--white);
-      color: var(--slate-500);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
-    }
-
-    .essentials-arrow:hover {
-      background: var(--slate-900);
-      color: var(--white);
-      border-color: var(--slate-900);
-    }
-
-    .essentials-arrow:disabled {
-      opacity: 0.35;
-      cursor: default;
-      pointer-events: none;
-    }
-
-    .essentials-arrow svg {
-      width: 16px;
-      height: 16px;
-    }
-
-    .essentials-track {
-      display: flex;
+    .essentials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
       gap: var(--space-4);
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      padding: var(--space-1) var(--space-6);
-      max-width: 1120px;
+      padding: 0 var(--space-6);
+      max-width: 960px;
       margin: 0 auto;
     }
 
-    @media (min-width: 1024px) {
-      .essentials-track {
-        padding: var(--space-1) var(--space-8);
+    @media (min-width: 640px) {
+      .essentials-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    .essentials-track::-webkit-scrollbar {
-      display: none;
+    @media (min-width: 900px) {
+      .essentials-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .essential-card {
-      flex: 0 0 260px;
       background: var(--white);
       border-radius: 16px;
       padding: var(--space-6);
-      scroll-snap-align: start;
-      min-height: 200px;
       display: flex;
       flex-direction: column;
       transition: box-shadow 300ms ease, transform 300ms ease;
-    }
-
-    .essential-card:last-child {
-      margin-right: var(--space-6);
     }
 
     .essential-card:hover {
@@ -2274,25 +2164,11 @@
           <p>My work lives at the intersection of business operations and technology. I don't just build apps — I build the operational leverage that lets businesses stop duct-taping their processes together and start scaling what they're actually good at.</p>
           <p>Based in Costa Rica. Grounded by yoga, art, and time in nature. It keeps the work sharp and the process human.</p>
         </div>
-        <div class="about-photo">
-          <img src="brian-costa-rica.png" alt="Brian in the Costa Rica cloud forest">
-        </div>
       </div>
     </div>
 
     <div class="essentials">
-      <div class="essentials-header">
-        <h3>The Essentials</h3>
-        <div class="essentials-nav">
-          <button class="essentials-arrow essentials-prev" aria-label="Scroll left" disabled>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
-          </button>
-          <button class="essentials-arrow essentials-next" aria-label="Scroll right">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-          </button>
-        </div>
-      </div>
-      <div class="essentials-track">
+      <div class="essentials-grid">
         <div class="essential-card">
           <div class="essential-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M10 9l5 3-5 3V9z"/></svg>
@@ -2500,7 +2376,7 @@
     // Scroll reveal animations
     if (!prefersReducedMotion) {
       const revealTargets = document.querySelectorAll(
-        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-gallery, .testimonials .section-intro, .testimonial-card, .partners .section-intro, .partner-card, .about-text, .about-photo, .essentials, .contact h2, .contact p, .flowform'
+        '.what-i-do .section-intro, .service-card, .projects .section-intro, .project-content, .project-gallery, .testimonials .section-intro, .testimonial-card, .partners .section-intro, .partner-card, .about-text, .essential-card, .contact h2, .contact p, .flowform'
       );
 
       revealTargets.forEach(el => el.classList.add('reveal'));
@@ -2669,30 +2545,6 @@
       updateGalleryState();
     });
 
-    // Essentials carousel navigation
-    const track = document.querySelector('.essentials-track');
-    const prevBtn = document.querySelector('.essentials-prev');
-    const nextBtn = document.querySelector('.essentials-next');
-
-    if (track && prevBtn && nextBtn) {
-      const scrollAmount = 280;
-
-      function updateArrows() {
-        prevBtn.disabled = track.scrollLeft <= 5;
-        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
-      }
-
-      prevBtn.addEventListener('click', () => {
-        track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-      });
-
-      nextBtn.addEventListener('click', () => {
-        track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-      });
-
-      track.addEventListener('scroll', updateArrows, { passive: true });
-      updateArrows();
-    }
 
 
     // Scroll-triggered text reveal (same blur-reveal as hero headline)
