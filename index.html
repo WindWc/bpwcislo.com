@@ -1622,7 +1622,7 @@
     /* FlowForm confirmation */
     .flowform-confirmation {
       text-align: center;
-      padding: var(--space-8) 0;
+      padding: 100px 0 var(--space-8);
     }
 
     .flowform-confirmation h3 {
@@ -1639,24 +1639,28 @@
       color: var(--slate-500);
     }
 
-    .flowform-confirmation .ff-leaf {
-      margin: var(--space-8) auto var(--space-6);
-      opacity: 0.6;
+    .ff-gears {
+      margin: var(--space-6) auto var(--space-4);
+      width: 200px;
+      height: 100px;
     }
 
-    .flowform-reset {
-      background: none;
-      border: none;
-      color: var(--slate-400);
-      font-family: var(--font-body);
-      font-size: 0.75rem;
-      cursor: pointer;
-      padding: 8px 16px;
-      transition: color 200ms ease;
+    .ff-gears svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
-    .flowform-reset:hover {
-      color: var(--slate-600);
+    .ff-g1 { animation: ffSpin 8s linear infinite; }
+    .ff-g2 { animation: ffSpin 6s linear infinite reverse; }
+    .ff-g3 { animation: ffSpin 10s linear infinite; }
+    .ff-g4 { animation: ffSpin 5s linear infinite reverse; }
+    .ff-g5 { animation: ffSpin 12s linear infinite; }
+    .ff-g6 { animation: ffSpin 7s linear infinite reverse; }
+    .ff-g7 { animation: ffSpin 9s linear infinite; }
+
+    @keyframes ffSpin {
+      to { transform: rotate(360deg); }
     }
 
     /* FlowForm animations */
@@ -2979,11 +2983,45 @@
         }
 
         if (screen.type === 'confirmation') {
+          var gp = function(cx, cy, r, teeth, th) {
+            var d = '', ri = r, ro = r + th;
+            for (var i = 0; i < teeth; i++) {
+              var a = (Math.PI * 2 * i) / teeth - Math.PI / 2;
+              var s = (Math.PI * 2) / teeth;
+              var g = s * 0.12;
+              d += (i === 0 ? 'M' : 'L');
+              d += (cx + ri * Math.cos(a)).toFixed(1) + ',' + (cy + ri * Math.sin(a)).toFixed(1);
+              d += 'L' + (cx + ri * Math.cos(a + g)).toFixed(1) + ',' + (cy + ri * Math.sin(a + g)).toFixed(1);
+              d += 'L' + (cx + ro * Math.cos(a + g + s * 0.06)).toFixed(1) + ',' + (cy + ro * Math.sin(a + g + s * 0.06)).toFixed(1);
+              d += 'L' + (cx + ro * Math.cos(a + s * 0.5 - s * 0.06)).toFixed(1) + ',' + (cy + ro * Math.sin(a + s * 0.5 - s * 0.06)).toFixed(1);
+              d += 'L' + (cx + ri * Math.cos(a + s * 0.5 - g)).toFixed(1) + ',' + (cy + ri * Math.sin(a + s * 0.5 - g)).toFixed(1);
+              d += 'L' + (cx + ri * Math.cos(a + s * 0.5 + g)).toFixed(1) + ',' + (cy + ri * Math.sin(a + s * 0.5 + g)).toFixed(1);
+            }
+            return d + 'Z';
+          };
+          var gears = [
+            { cx: 30,  cy: 50, r: 18, t: 12, th: 6,   hub: 7,   cls: 'ff-g1', sw: 2,   clr: 'var(--slate-600)' },
+            { cx: 62,  cy: 38, r: 14, t: 10, th: 5,   hub: 5.5, cls: 'ff-g2', sw: 1.8, clr: 'var(--accent)' },
+            { cx: 90,  cy: 50, r: 16, t: 11, th: 5.5, hub: 6,   cls: 'ff-g3', sw: 1.8, clr: 'var(--slate-600)' },
+            { cx: 118, cy: 40, r: 12, t: 9,  th: 4.5, hub: 4.5, cls: 'ff-g4', sw: 1.5, clr: 'var(--accent)' },
+            { cx: 148, cy: 50, r: 17, t: 12, th: 5.5, hub: 6.5, cls: 'ff-g5', sw: 2,   clr: 'var(--slate-600)' },
+            { cx: 76,  cy: 62, r: 8,  t: 8,  th: 3,   hub: 3,   cls: 'ff-g6', sw: 1.2, clr: 'var(--accent-hover)' },
+            { cx: 130, cy: 62, r: 7,  t: 7,  th: 2.5, hub: 2.5, cls: 'ff-g7', sw: 1,   clr: 'var(--accent-hover)' }
+          ];
+          var svg = '<svg viewBox="10 18 160 60" fill="none" xmlns="http://www.w3.org/2000/svg">';
+          for (var gi = 0; gi < gears.length; gi++) {
+            var g = gears[gi];
+            svg += '<g class="' + g.cls + '" style="transform-origin:' + g.cx + 'px ' + g.cy + 'px">';
+            svg += '<path d="' + gp(g.cx, g.cy, g.r, g.t, g.th) + '" stroke="' + g.clr + '" stroke-width="' + g.sw + '" fill="none" stroke-linejoin="round"/>';
+            svg += '<circle cx="' + g.cx + '" cy="' + g.cy + '" r="' + g.hub + '" stroke="' + g.clr + '" stroke-width="' + g.sw + '" fill="none"/>';
+            svg += '<circle cx="' + g.cx + '" cy="' + g.cy + '" r="1.5" fill="' + g.clr + '"/>';
+            svg += '</g>';
+          }
+          svg += '</svg>';
           html = '<div class="flowform-confirmation ff-fade-up">'
-            + '<h3>You\'ve got my wheels turning.</h3>'
+            + '<div class="ff-gears">' + svg + '</div>'
+            + '<h3>You\'ve got my gears turning.</h3>'
             + '<p>Sent from Costa Rica. I\'ll be in touch within 24 hours.</p>'
-            + '<svg class="ff-leaf" width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M24 44C24 44 8 34 8 20C8 12 14 6 22 8C23 8.2 23.6 8.6 24 9C24.4 8.6 25 8.2 26 8C34 6 40 12 40 20C40 34 24 44 24 44Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"/><path d="M24 14V34" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5" style="color:var(--accent)"/><path d="M24 20C20 18 17 20 17 23" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5" style="color:var(--accent)"/><path d="M24 26C28 24 31 26 31 29" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5" style="color:var(--accent)"/></svg>'
-            + '<button class="flowform-reset" id="ffReset">Start over</button>'
             + '</div>';
         }
 
@@ -3064,19 +3102,6 @@
           });
         }
 
-        // Reset
-        var resetBtn = document.getElementById('ffReset');
-        if (resetBtn) {
-          resetBtn.addEventListener('click', function() {
-            step = 0;
-            direction = 1;
-            selections = {};
-            multiSelections = [];
-            stepHistory = [0];
-            contactData = { name: '', email: '', contact_pref: '', phone: '', one_thing: '' };
-            render();
-          });
-        }
 
         // Contact form bindings
         if (screen.type === 'contact') {
@@ -3180,8 +3205,6 @@
               + '\nBudget: ' + payload.budget
               + '\n\nOne thing: ' + payload.one_thing
             );
-            window.open('mailto:brian@bpwcislo.com?subject=' + subject + '&body=' + body, '_blank');
-
             direction = 1;
             step = TOTAL - 1;
             render();
