@@ -1404,17 +1404,31 @@
       font-size: 0.9375rem;
       font-weight: 500;
       cursor: pointer;
-      transition: border-color 200ms ease, background 200ms ease, box-shadow 200ms ease, transform 200ms ease;
+      transition: border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  background 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  box-shadow 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  padding-left 300ms cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 1px 2px rgba(0,0,0,0.04);
       opacity: 0;
       animation: ffStaggerIn 0.3s ease-out forwards;
     }
 
     .flowform-option:hover {
-      border-color: var(--slate-300);
-      background: var(--slate-50);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border-color: var(--accent);
+      background: rgba(101, 163, 13, 0.03);
+      transform: translateX(6px) scale(1.01);
+      box-shadow: 0 6px 20px rgba(101, 163, 13, 0.1);
+      padding-left: 24px;
+    }
+
+    .flowform-option:hover .flowform-option-indicator {
+      border-color: var(--accent);
+      transform: scale(1.15);
+    }
+
+    .flowform-option:active {
+      transform: translateX(6px) scale(0.99);
     }
 
     .flowform-option.selected {
@@ -1432,7 +1446,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: border-color 200ms ease, background 200ms ease;
+      transition: border-color 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  background 300ms cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
       margin-left: auto;
     }
 
@@ -1442,7 +1458,6 @@
     }
 
     .flowform-next-btn {
-      margin-top: var(--space-4);
       width: 100%;
       padding: 14px 24px;
       background: var(--accent);
@@ -1472,21 +1487,39 @@
       transform: scale(0.97);
     }
 
+    .flowform-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: var(--space-4);
+    }
+
+    .flowform-btn-row.single-btn {
+      grid-template-columns: 1fr;
+    }
+
     .flowform-back {
-      display: block;
-      margin: var(--space-4) auto 0;
-      background: none;
-      border: none;
-      color: var(--slate-400);
-      font-family: var(--font-body);
-      font-size: 0.8125rem;
+      padding: 14px 24px;
+      background: var(--white);
+      border: 1.5px solid var(--slate-200);
+      border-radius: 12px;
+      color: var(--slate-500);
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: 0.9375rem;
       cursor: pointer;
-      padding: 8px 16px;
-      transition: color 200ms ease;
+      transition: border-color 200ms ease, color 200ms ease, transform 200ms ease;
+      letter-spacing: -0.01em;
     }
 
     .flowform-back:hover {
-      color: var(--slate-600);
+      border-color: var(--slate-400);
+      color: var(--slate-700);
+      transform: scale(0.99);
+    }
+
+    .flowform-back:active {
+      transform: scale(0.97);
     }
 
     /* FlowForm contact step */
@@ -1548,7 +1581,6 @@
     }
 
     .flowform-submit {
-      margin-top: var(--space-2);
       width: 100%;
       padding: 16px 32px;
       background: var(--accent);
@@ -2764,9 +2796,10 @@
           type: 'single',
           options: [
             "I need to make something boring actually exciting",
-            "My process is chaos",
-            "My tools are bloated — I need something built for me",
+            "Bloated tools — I need a custom solution",
             "I have an idea but need help building it",
+            "My process is chaos",
+            "I just want to email you",
           ],
         },
         {
@@ -2842,6 +2875,7 @@
       let multiSelections = [];
       let contactData = { name: '', email: '', contact_pref: '', phone: '', one_thing: '' };
       let advanceTimer = null;
+      let stepHistory = [0];
 
       function buildProgress() {
         ffProgress.innerHTML = '';
@@ -2857,8 +2891,7 @@
         const isConfirmation = screen.type === 'confirmation';
 
         ffProgress.style.display = isConfirmation ? 'none' : '';
-        ffStepLabel.style.display = isConfirmation ? 'none' : '';
-        ffStepLabel.textContent = (step + 1) + ' of ' + (TOTAL - 1);
+        ffStepLabel.style.display = 'none';
         buildProgress();
 
         ffCard.style.border = isConfirmation ? 'none' : '';
@@ -2894,9 +2927,17 @@
           html += '</div>';
 
           if (screen.type === 'multi') {
+            var hasBack = step > 0;
+            html += '<div class="flowform-btn-row' + (hasBack ? '' : ' single-btn') + '">';
+            if (hasBack) html += '<button class="flowform-back" id="ffBack">← Back</button>';
             html += '<button class="flowform-next-btn" id="ffMultiNext"'
               + (multiSelections.length === 0 ? ' disabled' : '')
               + '>Next →</button>';
+            html += '</div>';
+          } else if (screen.type === 'single' && step > 0) {
+            html += '<div class="flowform-btn-row single-btn">';
+            html += '<button class="flowform-back" id="ffBack">← Back</button>';
+            html += '</div>';
           }
         }
 
@@ -2916,7 +2957,10 @@
             + '<div id="ffPhoneErr"></div>'
             + '</div>'
             + '<textarea placeholder="One thing you want me to know" id="ffOneThing" rows="3">' + esc(contactData.one_thing) + '</textarea>'
+            + '<div class="flowform-btn-row">'
+            + '<button class="flowform-back" id="ffBack">← Back</button>'
             + '<button class="flowform-submit" id="ffSubmit">Send it</button>'
+            + '</div>'
             + '</div>';
         }
 
@@ -2931,12 +2975,7 @@
 
         ffCard.innerHTML = html;
 
-        // Back button
-        if (step > 0 && !isConfirmation) {
-          ffBackWrap.innerHTML = '<button class="flowform-back ff-fade-up" id="ffBack">← Back</button>';
-        } else {
-          ffBackWrap.innerHTML = '';
-        }
+        ffBackWrap.innerHTML = '';
 
         bindEvents();
       }
@@ -2956,9 +2995,12 @@
               selections[screen.id] = val;
               btn.classList.add('selected');
               clearTimeout(advanceTimer);
+              var skipToContact = val === 'I just want to email you';
+              var contactIdx = FF_SCREENS.findIndex(function(s) { return s.type === 'contact'; });
               advanceTimer = setTimeout(function() {
                 direction = 1;
-                step = Math.min(step + 1, TOTAL - 1);
+                step = skipToContact ? contactIdx : Math.min(step + 1, TOTAL - 1);
+                stepHistory.push(step);
                 render();
               }, 380);
             } else {
@@ -2986,6 +3028,7 @@
             selections[screen.id] = multiSelections.slice();
             direction = 1;
             step++;
+            stepHistory.push(step);
             multiSelections = [];
             render();
           });
@@ -2997,7 +3040,12 @@
           backBtn.addEventListener('click', function() {
             clearTimeout(advanceTimer);
             direction = -1;
-            step = Math.max(step - 1, 0);
+            if (stepHistory.length > 1) stepHistory.pop();
+            step = stepHistory[stepHistory.length - 1];
+            var targetScreen = FF_SCREENS[step];
+            if (targetScreen.type === 'multi' && selections[targetScreen.id]) {
+              multiSelections = selections[targetScreen.id].slice();
+            }
             render();
           });
         }
@@ -3010,6 +3058,7 @@
             direction = 1;
             selections = {};
             multiSelections = [];
+            stepHistory = [0];
             contactData = { name: '', email: '', contact_pref: '', phone: '', one_thing: '' };
             render();
           });
