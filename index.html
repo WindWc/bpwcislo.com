@@ -1744,7 +1744,7 @@
     /* FlowForm confirmation */
     .flowform-confirmation {
       text-align: center;
-      padding: 100px 0 var(--space-8);
+      padding: 30px 0 var(--space-8);
     }
 
     .flowform-confirmation h3 {
@@ -2461,29 +2461,29 @@
           <div class="essential-icon">
             <svg class="icon-leverage" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path class="icon-play" d="M10 9l5 3-5 3V9z"/></svg>
           </div>
-          <h4>Operational leverage builder.</h4>
-          <p>I find the friction, map the fix, and build the tool that removes it permanently.</p>
+          <h4>Ops builder.</h4>
+          <p>I find the friction, map the fix, and build the tool that gets it out of the way.</p>
         </div>
         <div class="essential-card">
           <div class="essential-icon">
             <svg class="icon-apps" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect class="icon-screen" x="6" y="2" width="12" height="20" rx="2"/><path d="M10 18h4"/></svg>
           </div>
-          <h4>Maker of apps.</h4>
+          <h4>App architect.</h4>
           <p>Web and native, from first sketch through App Store launch.</p>
         </div>
         <div class="essential-card">
           <div class="essential-icon">
             <svg class="icon-digital" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="14" rx="2"/><path class="icon-pins" d="M9 2v3m6-3v3M9 19v3m6-3v3M2 9h3m-3 6h3M19 9h3m-3 6h3"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg>
           </div>
-          <h4>25+ years in digital.</h4>
-          <p>Products, campaigns, and experiences across every medium and industry.</p>
+          <h4>25+ years building digital.</h4>
+          <p>Products, campaigns, and interactive experiences across industries and mediums.</p>
         </div>
         <div class="essential-card">
           <div class="essential-icon">
             <svg class="icon-ai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon class="icon-needle" points="16.24,7.76 14.12,14.12 7.76,16.24 9.88,9.88"/></svg>
           </div>
-          <h4>AI practitioner.</h4>
-          <p>Building with intelligence — not bolting it on. Practical AI that solves real problems.</p>
+          <h4>Applied AI strategist.</h4>
+          <p>Building with intelligence, not bolting it on. Practical AI that solves real problems.</p>
         </div>
         <div class="essential-card">
           <div class="essential-icon">
@@ -2507,7 +2507,7 @@
   <section class="contact" id="contact">
     <div class="container">
       <h2 class="text-reveal">Let's Remove Some Friction</h2>
-      <p>Got a business that's ready to run better? Let's talk.</p>
+      <p>Start with what's getting in the way. I'll help you find the right next move.</p>
 
       <div class="flowform reveal" id="flowform">
         <div class="flowform-progress" id="ffProgress"></div>
@@ -3085,11 +3085,11 @@
           heading: "What's slowing you down?",
           type: 'single',
           options: [
-            "I need to make something boring actually exciting",
-            "Bloated tools — I need a custom solution",
-            "I have an idea but need help building it",
+            "I need to make something boring actually engaging",
+            "My tools are bloated — I need a better system",
+            "I have an idea and need help building it",
             "My process is chaos",
-            "I just want to email you",
+            "I'd rather just email you",
           ],
         },
         {
@@ -3098,10 +3098,10 @@
           sub: "Pick all that apply",
           type: 'multi',
           options: [
-            "App — web or mobile",
-            "Website",
-            "AI or automation workflow",
-            "Strategy + product roadmap",
+            "A website",
+            "A web or mobile app",
+            "An AI or automation workflow",
+            "Strategy and product roadmap",
             "Not sure yet — help me figure it out",
           ],
         },
@@ -3113,7 +3113,7 @@
             "Just an idea so far",
             "I have notes or a brief",
             "I have a prototype or MVP",
-            "I'm live and need to level up",
+            "I'm live and ready to level up",
           ],
         },
         {
@@ -3124,7 +3124,7 @@
             "I want to be thoughtful about this",
             "A few months out",
             "We needed this yesterday",
-            "Not sure yet",
+            "Not totally sure yet",
           ],
         },
         {
@@ -3132,17 +3132,18 @@
           heading: "What's your budget comfort zone?",
           type: 'single',
           options: [
-            "Under $5k",
-            "$5k–$15k",
-            "$15k–$50k",
-            "$50k+",
+            "Under $10K",
+            "$10K - $25K",
+            "$25K - $50K",
+            "$50K - $100K",
+            "$100K +",
             "Not sure yet — let's talk",
           ],
         },
         {
           id: 'contact',
           heading: "Let's connect.",
-          sub: "I read every submission personally.<br>You'll hear from me within 24 hours.",
+          sub: "I read every submission myself.<br>You'll hear from me within 24 hours.",
           type: 'contact',
         },
         {
@@ -3252,7 +3253,7 @@
             + '<input type="tel" placeholder="Phone number" id="ffPhone" value="' + esc(contactData.phone) + '">'
             + '<div id="ffPhoneErr"></div>'
             + '</div>'
-            + '<textarea placeholder="One thing you want me to know" id="ffOneThing" rows="3">' + esc(contactData.one_thing) + '</textarea>'
+            + '<textarea placeholder="Anything else I should know?" id="ffOneThing" rows="3">' + esc(contactData.one_thing) + '</textarea>'
             + '<div class="flowform-btn-row">'
             + '<button class="flowform-back" id="ffBack">← Back</button>'
             + '<button class="flowform-submit" id="ffSubmit">Send it</button>'
@@ -3297,9 +3298,9 @@
           }
           svg += '</svg>';
           html = '<div class="flowform-confirmation ff-fade-up">'
+            + '<h3>Message received here in the jungle of Costa Rica. 🐒</h3>'
             + '<div class="ff-gears">' + svg + '</div>'
-            + '<h3>You\'ve got my gears turning.</h3>'
-            + '<p>Sent from Costa Rica. I\'ll be in touch within 24 hours.</p>'
+            + '<p>You\'ve got my gears turning. I\'ll be in touch within 24 hours.</p>'
             + '</div>';
         }
 
@@ -3325,7 +3326,7 @@
               selections[screen.id] = val;
               btn.classList.add('selected');
               clearTimeout(advanceTimer);
-              var skipToContact = val === 'I just want to email you';
+              var skipToContact = val === "I'd rather just email you";
               var contactIdx = FF_SCREENS.findIndex(function(s) { return s.type === 'contact'; });
               advanceTimer = setTimeout(function() {
                 direction = 1;
