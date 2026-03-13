@@ -283,6 +283,7 @@
       .hero-image-container {
         display: flex;
         justify-content: center;
+        margin-bottom: var(--space-6);
       }
     }
     
@@ -1939,6 +1940,45 @@
       user-select: none;
       position: relative;
       top: -0.5px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .site-score:hover { opacity: 1; }
+
+    .site-score-tooltip {
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 8px);
+      transform: translateY(-50%) translateX(-4px);
+      background: var(--slate-900);
+      color: var(--white);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 200ms ease, transform 200ms ease;
+    }
+
+    .site-score-tooltip::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-right-color: var(--slate-900);
+    }
+
+    .site-score:hover .site-score-tooltip,
+    .site-score:focus-visible .site-score-tooltip {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
     }
 
     .site-score.pop {
@@ -1951,9 +1991,126 @@
       100% { transform: scale(1); }
     }
 
+    /* Points Modal */
+    .score-modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 300ms ease;
+      padding: var(--space-4);
+    }
+
+    .score-modal-overlay[hidden] {
+      display: none;
+    }
+
+    .score-modal-overlay.visible {
+      opacity: 1;
+    }
+
+    .score-modal {
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      padding: var(--space-8);
+      position: relative;
+      transform: translateY(12px) scale(0.97);
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+
+    .score-modal-overlay.visible .score-modal {
+      transform: translateY(0) scale(1);
+    }
+
+    .score-modal-close {
+      position: absolute;
+      top: var(--space-4);
+      right: var(--space-4);
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: var(--slate-400);
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      transition: background 200ms ease, color 200ms ease;
+    }
+
+    .score-modal-close:hover {
+      background: var(--slate-100);
+      color: var(--slate-900);
+    }
+
+    .score-modal h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      margin-bottom: var(--space-4);
+      letter-spacing: -0.02em;
+    }
+
+    .score-modal p {
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--slate-900);
+      margin-bottom: var(--space-4);
+    }
+
+    .score-modal h4 {
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-4);
+    }
+
+    .score-formula {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .score-formula-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--slate-50);
+      border-radius: 8px;
+      font-size: 0.8125rem;
+    }
+
+    .score-formula-row .sf-action {
+      color: var(--slate-900);
+      font-weight: 500;
+    }
+
+    .score-formula-row .sf-pts {
+      color: var(--accent);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
     @media (max-width: 640px) {
       .nav-left { gap: var(--space-3, 12px); }
       .site-score { font-size: 0.6rem; }
+      .score-modal { padding: var(--space-6); }
     }
 
     .nav-links {
@@ -1967,15 +2124,41 @@
       color: var(--slate-900);
       text-decoration: none;
       font-weight: 500;
-      transition: color 200ms ease;
+      position: relative;
+      padding-bottom: 2px;
+      transition: color 200ms ease, transform 200ms ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .nav-links a:hover {
-      color: var(--slate-900);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
     }
 
     .nav-links a.active {
       color: var(--accent);
+    }
+
+    .nav-links a.active::after {
+      transform: scaleX(1);
     }
 
     @media (max-width: 640px) {
@@ -2120,7 +2303,10 @@
   <nav class="site-nav">
     <div class="nav-left">
       <a href="#" class="nav-name">Brian Wcislo</a>
-      <span class="site-score" id="siteScore">0 pts</span>
+      <button class="site-score" id="siteScore" aria-label="Points counter — click to learn more" aria-haspopup="dialog">
+        <span class="site-score-value">0 pts</span>
+        <span class="site-score-tooltip" aria-hidden="true">What's this?</span>
+      </button>
     </div>
     <ul class="nav-links">
       <li><a href="#services">Services</a></li>
@@ -2131,6 +2317,18 @@
       <li><a href="#contact">Contact</a></li>
     </ul>
   </nav>
+
+  <!-- Points Modal -->
+  <div class="score-modal-overlay" id="scoreModalOverlay" role="dialog" aria-modal="true" aria-labelledby="scoreModalTitle" hidden>
+    <div class="score-modal">
+      <button class="score-modal-close" id="scoreModalClose" aria-label="Close">&times;</button>
+      <h3 id="scoreModalTitle">This is an experiment.</h3>
+      <p>My site is one of my digital playgrounds, and I thought it'd be fun to see how much gamification I could sneak in without turning the whole thing into a casino. This is round one.</p>
+      <p>I may expand it, simplify it, or scrap it completely. For now, I'm learning and having fun with it.</p>
+      <h4>Here's how the points work:</h4>
+      <div class="score-formula" id="scoreFormula"></div>
+    </div>
+  </div>
 
   <!-- Floating Background Shapes -->
   <div class="shape-wrapper circle-wrapper">
@@ -2489,7 +2687,7 @@
           <div class="essential-icon">
             <svg class="icon-strategy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8L12 2z"/></svg>
           </div>
-          <h4>Strategy to execution.</h4>
+          <h4>Vision to execution.</h4>
           <p>From big-picture vision to shipped product. No handoff gaps.</p>
         </div>
         <div class="essential-card">
@@ -2525,6 +2723,22 @@
     </div>
   </footer>
 
+  <!-- Hidden form for Netlify Forms detection (JS-rendered FlowForm posts here) -->
+  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+    <input name="bot-field">
+    <input name="slow_down">
+    <input name="building">
+    <input name="stage">
+    <input name="urgency">
+    <input name="budget">
+    <input name="name">
+    <input name="email">
+    <input name="contact_pref">
+    <input name="phone">
+    <input name="one_thing">
+    <input name="submitted_at">
+  </form>
+
   <script>
     const circleWrapper = document.querySelector('.circle-wrapper');
     const squareWrapper = document.querySelector('.square-wrapper');
@@ -2551,6 +2765,7 @@
     // Site Score gamification engine
     const SiteScore = (function() {
       const el = document.getElementById('siteScore');
+      const valEl = el ? el.querySelector('.site-score-value') : null;
       let score = parseInt(sessionStorage.getItem('siteScore') || '0', 10);
       const cooldowns = {};
       const awarded = JSON.parse(sessionStorage.getItem('siteScoreAwarded') || '{}');
@@ -2560,7 +2775,7 @@
         sessionStorage.setItem('siteScoreAwarded', JSON.stringify(awarded));
       }
 
-      if (score > 0 && el) el.textContent = score + ' pts';
+      if (score > 0 && valEl) valEl.textContent = score + ' pts';
 
       return {
         award: function(pts, key, cooldownMs) {
@@ -2572,9 +2787,9 @@
           }
           score += pts;
           save();
-          if (el) {
-            el.textContent = score + ' pts';
-            if (!prefersReducedMotion) {
+          if (valEl) {
+            valEl.textContent = score + ' pts';
+            if (!prefersReducedMotion && el) {
               el.classList.remove('pop');
               void el.offsetWidth;
               el.classList.add('pop');
@@ -2588,6 +2803,60 @@
         },
         get score() { return score; }
       };
+    })();
+
+    // Points modal
+    (function() {
+      var overlay = document.getElementById('scoreModalOverlay');
+      var closeBtn = document.getElementById('scoreModalClose');
+      var scoreBtn = document.getElementById('siteScore');
+      var formulaEl = document.getElementById('scoreFormula');
+      if (!overlay || !scoreBtn) return;
+
+      var formula = [
+        ['Hover on a card or element', '3–7 pts'],
+        ['Click a nav link', '10 pts'],
+        ['Scroll to a new section', '15 pts'],
+        ['Scroll or navigate the portfolio', '7–10 pts'],
+        ['Each FlowForm step', '50 pts'],
+        ['Complete the FlowForm', '1,000 pts'],
+      ];
+
+      var html = '';
+      formula.forEach(function(row) {
+        html += '<div class="score-formula-row">'
+          + '<span class="sf-action">' + row[0] + '</span>'
+          + '<span class="sf-pts">' + row[1] + '</span>'
+          + '</div>';
+      });
+      formulaEl.innerHTML = html;
+
+      function openModal() {
+        overlay.hidden = false;
+        requestAnimationFrame(function() {
+          overlay.classList.add('visible');
+        });
+        closeBtn.focus();
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        overlay.classList.remove('visible');
+        setTimeout(function() {
+          overlay.hidden = true;
+          document.body.style.overflow = '';
+          scoreBtn.focus();
+        }, 300);
+      }
+
+      scoreBtn.addEventListener('click', openModal);
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeModal();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !overlay.hidden) closeModal();
+      });
     })();
     
     // Gentle mouse influence on floating shapes (site-wide)
@@ -3456,8 +3725,9 @@
             }
 
             var payload = {
+              'form-name': 'contact',
               slow_down: selections.slow_down || '',
-              building: selections.building || [],
+              building: Array.isArray(selections.building) ? selections.building.join(', ') : (selections.building || ''),
               stage: selections.stage || '',
               urgency: selections.urgency || '',
               budget: selections.budget || '',
@@ -3469,24 +3739,32 @@
               submitted_at: new Date().toISOString(),
             };
 
-            console.log('FlowForm Payload:', JSON.stringify(payload, null, 2));
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
 
-            var subject = encodeURIComponent('New inquiry from ' + payload.name);
-            var body = encodeURIComponent(
-              'Name: ' + payload.name
-              + '\nEmail: ' + payload.email
-              + '\nPhone: ' + payload.phone
-              + '\nContact Pref: ' + payload.contact_pref
-              + '\n\nWhat slows them down: ' + payload.slow_down
-              + '\nBuilding: ' + (Array.isArray(payload.building) ? payload.building.join(', ') : payload.building)
-              + '\nStage: ' + payload.stage
-              + '\nUrgency: ' + payload.urgency
-              + '\nBudget: ' + payload.budget
-              + '\n\nOne thing: ' + payload.one_thing
-            );
-            direction = 1;
-            step = TOTAL - 1;
-            render();
+            fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(payload).toString(),
+            })
+            .then(function(res) {
+              if (!res.ok) throw new Error('Network response was not ok');
+              direction = 1;
+              step = TOTAL - 1;
+              render();
+            })
+            .catch(function(err) {
+              console.error('Form submission error:', err);
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Send it';
+              var errDiv = document.createElement('div');
+              errDiv.className = 'ff-error-msg';
+              errDiv.style.textAlign = 'center';
+              errDiv.style.marginTop = 'var(--space-4)';
+              errDiv.textContent = 'Something went wrong. Please try again.';
+              ffCard.appendChild(errDiv);
+              setTimeout(function() { errDiv.remove(); }, 4000);
+            });
           });
         }
       }
