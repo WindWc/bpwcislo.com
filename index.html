@@ -61,7 +61,7 @@
     body {
       font-family: var(--font-body);
       background: var(--white);
-      color: var(--slate-600);
+      color: var(--slate-900);
       line-height: 1.6;
       overflow-x: hidden;
       font-size: 16px;
@@ -445,7 +445,7 @@
     
     .tagline-secondary {
       font-size: 0.875rem;
-      color: var(--slate-400);
+      color: var(--slate-900);
       letter-spacing: 0.02em;
     }
     
@@ -532,7 +532,7 @@
     }
     
     .section-intro p {
-      color: var(--slate-500);
+      color: var(--slate-900);
       margin: 0 auto;
     }
     
@@ -791,6 +791,20 @@
       color: var(--slate-300);
     }
 
+    .project-card--dark .project-content p strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .project-card--dark .project-quote {
+      border-left-color: var(--accent);
+      color: var(--slate-200);
+    }
+
+    .project-card--dark .project-quote cite {
+      color: var(--accent);
+    }
+
     .project-card--dark .launch-note {
       color: var(--slate-500);
     }
@@ -862,7 +876,7 @@
       justify-content: center;
       gap: var(--space-2);
       font-size: 0.8125rem;
-      color: var(--slate-400);
+      color: var(--slate-900);
       font-weight: 500;
     }
 
@@ -918,7 +932,7 @@
       border-radius: 50%;
       border: 1px solid var(--slate-300);
       background: var(--white);
-      color: var(--slate-500);
+      color: var(--slate-900);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -980,18 +994,48 @@
     }
 
     .project-content p {
-      color: var(--slate-500);
+      color: var(--slate-900);
       font-size: 1rem;
       line-height: 1.7;
       margin: 0 auto;
+    }
+
+    .project-content p strong {
+      font-weight: 600;
+      color: var(--slate-900);
     }
 
     .project-content .launch-note {
       display: inline-block;
       margin-top: var(--space-4);
       font-size: 0.8125rem;
-      color: var(--slate-400);
+      color: var(--slate-900);
       font-weight: 500;
+    }
+
+    .project-content .launch-note em {
+      font-style: italic;
+      color: #1e3a5f;
+      font-weight: 600;
+    }
+
+    .project-quote {
+      margin-top: var(--space-4);
+      padding-left: var(--space-4);
+      border-left: 3px solid var(--slate-300);
+      font-style: italic;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--slate-900);
+    }
+
+    .project-quote cite {
+      display: block;
+      margin-top: var(--space-2);
+      font-style: normal;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #1e3a5f;
     }
     
     /* Partners Section */
@@ -1031,7 +1075,7 @@
     }
     
     .partner-logo {
-      height: 160px;
+      height: 112px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1039,8 +1083,8 @@
     }
     
     .partner-logo img {
-      max-height: 160px;
-      max-width: 280px;
+      max-height: 112px;
+      max-width: 196px;
       object-fit: contain;
       opacity: 0.85;
       transition: opacity 300ms ease-out, transform 300ms ease-out, filter 300ms ease-out;
@@ -1106,7 +1150,76 @@
 
     .about-text p {
       margin-bottom: var(--space-4);
-      color: var(--slate-600);
+      color: var(--slate-900);
+    }
+
+    .about-expandable {
+      margin-top: var(--space-4);
+    }
+
+    .about-expandable summary {
+      font-family: var(--font-display);
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .about-expandable summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .about-expandable summary::before {
+      content: '+';
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--slate-900);
+      transition: transform 300ms ease;
+    }
+
+    .about-expandable[open] summary::before {
+      transform: rotate(45deg);
+    }
+
+    .about-expandable .expandable-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 400ms ease;
+    }
+
+    .about-expandable[open] .expandable-body {
+      grid-template-rows: 1fr;
+    }
+
+    .about-expandable .expandable-inner {
+      overflow: hidden;
+    }
+
+    .about-expandable .expandable-inner p {
+      padding-top: var(--space-4);
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--slate-900);
+      margin: 0;
+      opacity: 0;
+      transition: opacity 300ms ease 100ms;
+    }
+
+    .about-expandable[open] .expandable-inner p {
+      opacity: 1;
+    }
+
+    .about-expandable.closing .expandable-body {
+      grid-template-rows: 0fr;
+    }
+
+    .about-expandable.closing .expandable-inner p {
+      opacity: 0;
+      transition: opacity 200ms ease;
     }
 
     /* Essentials Grid */
@@ -1240,7 +1353,7 @@
 
     .essential-card p {
       font-size: 0.8125rem;
-      color: var(--slate-500);
+      color: var(--slate-900);
       line-height: 1.6;
       margin: 0;
     }
@@ -1251,7 +1364,7 @@
     }
 
     .testimonials .section-intro p {
-      color: var(--slate-500);
+      color: var(--slate-900);
     }
 
     .testimonials .section-intro p + p {
@@ -1294,7 +1407,7 @@
     .testimonial-quote {
       font-size: 0.9375rem;
       font-style: italic;
-      color: var(--slate-600);
+      color: var(--slate-900);
       line-height: 1.7;
       margin: 0 0 var(--space-4);
       flex: 1;
@@ -1326,7 +1439,7 @@
     
     .contact p {
       margin: 0 auto var(--space-8);
-      color: var(--slate-500);
+      color: var(--slate-900);
     }
 
     /* FlowForm — multi-step lead funnel */
@@ -1362,7 +1475,7 @@
       text-align: center;
       font-size: 0.75rem;
       font-weight: 500;
-      color: var(--slate-400);
+      color: var(--slate-900);
       letter-spacing: 0.05em;
       margin-bottom: var(--space-4);
     }
@@ -1387,7 +1500,7 @@
 
     .flowform-sub {
       font-size: 0.875rem;
-      color: var(--slate-500);
+      color: var(--slate-900);
       text-align: center;
       margin-bottom: var(--space-6);
     }
@@ -1526,7 +1639,7 @@
       background: var(--white);
       border: 1.5px solid var(--slate-200);
       border-radius: 12px;
-      color: var(--slate-500);
+      color: var(--slate-900);
       font-family: var(--font-display);
       font-weight: 600;
       font-size: 0.9375rem;
@@ -1645,7 +1758,7 @@
 
     .flowform-confirmation p {
       font-size: 0.9375rem;
-      color: var(--slate-500);
+      color: var(--slate-900);
     }
 
     .ff-gears {
@@ -1851,7 +1964,7 @@
 
     .nav-links a {
       font-size: 0.8125rem;
-      color: var(--slate-500);
+      color: var(--slate-900);
       text-decoration: none;
       font-weight: 500;
       transition: color 200ms ease;
@@ -2113,10 +2226,10 @@
 
     <div class="project-card">
       <div class="project-content">
-        <span class="project-tag">Business Process App</span>
-        <h3>ARS Workflowz</h3>
-        <p>Custom operating system built for a $21M equipment refurbishment program — serving one of the world's most admired brands. Four workflows, 19 guided steps, three role-based dashboards — giving a team of technicians on iPads full visibility across every machine, every step, in real time. Built in 8 weeks. Still running.</p>
-        <span class="launch-note"><span class="stat-counter" data-target="102" data-suffix="x">0x</span> ROI · Phase 2 in progress</span>
+        <span class="project-tag">Workflow & Ledger App</span>
+        <h3>ARS Flows</h3>
+        <p>Custom operating system built for a fast-moving <strong>equipment refurbishment program</strong> supporting one of the world's most admired brands. <strong>Four workflows</strong>, <strong>19 guided steps</strong>, and <strong>four role-based dashboards</strong> give technicians, admins, and clients <strong>real-time visibility</strong> across every machine and step. Built in <strong>9 weeks</strong>. Still humming.</p>
+        <span class="launch-note"><em>Phase 2 in progress</em>, expanding into additional lines of business.</span>
       </div>
       <div class="project-gallery">
         <div class="project-gallery-track">
@@ -2148,9 +2261,11 @@
 
     <div class="project-card project-card--dark">
       <div class="project-content">
-        <span class="project-tag">Training Platform</span>
+        <span class="project-tag">Tech Training Platform</span>
         <h3>GMAC</h3>
-        <p>Making dense technical knowledge fast and fun. Preventative maintenance and troubleshooting training that employees actually retain — with custom dashboards that show managers exactly where to focus.</p>
+        <p>Built for <strong>real-world adoption</strong>, not just compliance. Average scores climbed from <strong>50% at entry to 96% at exit</strong>. <strong>99%</strong> of store managers would recommend it. <strong>23,400+ modules</strong> completed across <strong>580+ stores</strong>.</p>
+        <blockquote class="project-quote">"It's just so much better than any other digital training that our team has experienced."<cite>— Dillan J., ASM</cite></blockquote>
+        <p style="margin-top: var(--space-4);">Two-sided training platform built to make dense technical knowledge <strong>faster, easier, and actually enjoyable</strong> for frontline teams to learn. <strong>Tablet-first microlearning</strong>, <strong>interactive 3D tools</strong>, <strong>gamified quizzes</strong>, and <strong>role-based dashboards</strong> turned preventative maintenance, troubleshooting, and parts identification into something people could actually use — while giving managers real visibility and training scalability from the <strong>individual level up through store, district, area, and region</strong>.</p>
       </div>
       <div class="project-gallery">
         <div class="project-gallery-track">
@@ -2283,8 +2398,7 @@
     <div class="container">
       <div class="section-intro">
         <h2 class="text-reveal">Trusted Collaborators</h2>
-        <p>Some projects call for a team. These are the people I trust with mine.</p>
-        <p>I've worked alongside these organizations for years — in some cases decades.</p>
+        <p>Some projects call for a team. These are the collaborators I trust when the work needs more depth. I've worked alongside these teams for years — in some cases decades.</p>
       </div>
 
       <div class="partners-grid">
@@ -2313,7 +2427,7 @@
         </div>
       </div>
 
-      <p class="partners-closing">Together we've built training platforms, consumer apps, video productions, and business systems that are still running today. I don't outsource. I collaborate — selectively, and only with people whose work I'd put my name on.</p>
+      <p class="partners-closing">Together, we've built training platforms, consumer apps, interactive videos, and business systems that are still running today. I don't outsource. I collaborate selectively, and only with people whose work I'd gladly put my name on.</p>
 
     </div>
   </section>
@@ -2326,10 +2440,17 @@
       <div class="about-content">
         <div class="about-text">
           <h2 class="text-reveal">About Brian</h2>
-          <p>I'm a designer who got obsessed with making things actually work.</p>
-          <p><span class="stat-counter" data-target="25">0</span> years. <span class="stat-counter" data-target="10">0</span> startups. Crashed some, sold some, learned something from every one.</p>
-          <p>I build two kinds of things: experiences people genuinely enjoy using, and systems that quietly fix what's been quietly breaking. The best projects are both.</p>
-          <p>Based in Costa Rica. Grounded by yoga, art, and time in nature. Keeps the work sharp. Keeps the process human.</p>
+          <p>I'm a designer who got obsessed with <strong>making things actually work</strong>.</p>
+          <p><strong><span class="stat-counter" data-target="25">0</span> years</strong>. <strong><span class="stat-counter" data-target="10">0</span> startups</strong>. Crashed some, sold some, <strong>learned something from every one</strong>.</p>
+          <p>I build two kinds of things: <strong>experiences people genuinely enjoy using</strong>, and <strong>systems that quietly fix what's been quietly breaking</strong>. The best projects are both.</p>
+          <p>Based in <strong>Costa Rica</strong>. Grounded by yoga, art, and time in nature. Keeps the work sharp. <strong>Keeps the process human</strong>.</p>
+
+          <details class="about-expandable">
+            <summary>Earlier Chapter: The Agency Years</summary>
+            <div class="expandable-body"><div class="expandable-inner">
+              <p>Before the apps, workflows, and training platforms, I spent a decade building an <strong>interactive creative agency</strong> with my college roommate, grew it into an <strong>award-winning team of a dozen</strong>, and was <strong>acquired in year eight</strong>. We built digital tools and experiences for national organizations including <strong>Mack Trucks</strong>, <strong>Olympus</strong>, and the <strong>YWCA</strong>. That chapter sharpened the skills I still lean on today: <strong>strategy, storytelling, product vision, team leadership</strong>, and building things people actually enjoy using.</p>
+            </div></div>
+          </details>
         </div>
       </div>
     </div>
@@ -2410,6 +2531,22 @@
     
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Smooth expand/collapse for <details> elements
+    document.querySelectorAll('.about-expandable').forEach(function(details) {
+      details.querySelector('summary').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (details.open) {
+          details.classList.add('closing');
+          setTimeout(function() {
+            details.open = false;
+            details.classList.remove('closing');
+          }, 420);
+        } else {
+          details.open = true;
+        }
+      });
+    });
 
     // Site Score gamification engine
     const SiteScore = (function() {
