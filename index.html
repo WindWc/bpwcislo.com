@@ -318,15 +318,27 @@
       display: none;
     }
 
-    .hero-name-card:hover {
+    .hero-name-card:hover,
+    .hero-name-card.scroll-active {
       background: rgba(101, 163, 13, 0.9);
       border-radius: 20px;
       box-shadow: 0 15px 30px -5px rgba(101, 163, 13, 0.35);
     }
 
-    
-    .hero-name-card:hover .hero-name {
+    .hero-name-card:hover .hero-name,
+    .hero-name-card.scroll-active .hero-name {
       color: var(--slate-900);
+    }
+
+    @media (max-width: 768px) {
+      .hero-name-card:hover {
+        background: rgba(15, 23, 42, 0.95);
+        border-radius: 10px;
+        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
+      }
+      .hero-name-card:hover .hero-name {
+        color: var(--white);
+      }
     }
     
     .hero-name {
@@ -3039,6 +3051,7 @@
 
       el.addEventListener('mousemove', (e) => {
         if (prefersReducedMotion) return;
+        if (window.matchMedia('(max-width: 768px)').matches) return;
         if (window.scrollY > heroSection.offsetHeight * 0.5) return;
 
         const rect = el.getBoundingClientRect();
@@ -3102,6 +3115,22 @@
 
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+    // Scroll-triggered rollover for hero name card on mobile
+    var nameCard = document.querySelector('.hero-name-card');
+    if (nameCard) {
+      function checkNameCard() {
+        if (!window.matchMedia('(max-width: 768px)').matches) {
+          nameCard.classList.remove('scroll-active');
+          return;
+        }
+        var rect = nameCard.getBoundingClientRect();
+        var mid = window.innerHeight / 2;
+        nameCard.classList.toggle('scroll-active', rect.top <= mid && rect.bottom >= 0);
+      }
+      window.addEventListener('scroll', checkNameCard, { passive: true });
+      checkNameCard();
+    }
 
     // Score: hover + click on nav links
     navLinks.forEach((link, i) => {
