@@ -1581,16 +1581,18 @@
       animation: ffStaggerIn 0.3s ease-out forwards;
     }
 
-    .flowform-option:hover {
-      border-color: var(--slate-200);
-      background: rgba(101, 163, 13, 0.03);
-      transform: translateX(6px) scale(1.01);
-      box-shadow: 0 6px 20px rgba(101, 163, 13, 0.1);
-      padding-left: 24px;
+    @media (hover: hover) {
+      .flowform-option:hover {
+        border-color: var(--slate-200);
+        background: rgba(101, 163, 13, 0.03);
+        transform: translateX(6px) scale(1.01);
+        box-shadow: 0 6px 20px rgba(101, 163, 13, 0.1);
+        padding-left: 24px;
+      }
     }
 
     .flowform-option:active {
-      transform: translateX(6px) scale(0.99);
+      transform: scale(0.99);
     }
 
     .flowform-option.selected {
@@ -1626,8 +1628,10 @@
       transition: height 400ms cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .flowform-option:hover .flowform-option-indicator::before {
-      height: 100%;
+    @media (hover: hover) {
+      .flowform-option:hover .flowform-option-indicator::before {
+        height: 100%;
+      }
     }
 
     .flowform-option.selected .flowform-option-indicator {
@@ -2853,7 +2857,7 @@
   </footer>
 
   <!-- Hidden form for Netlify Forms detection (JS-rendered FlowForm posts here) -->
-  <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+  <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
     <input name="bot-field">
     <input name="slow_down">
     <input name="building">
