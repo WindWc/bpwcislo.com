@@ -301,6 +301,14 @@
         justify-content: center;
         margin-bottom: var(--space-6);
       }
+      .hero-image {
+        max-width: 280px;
+        max-height: 45vh;
+        object-fit: cover;
+        object-position: top center;
+        transition: none;
+        transform: none !important;
+      }
     }
     
     .hero-image {
@@ -334,26 +342,19 @@
       display: none;
     }
 
-    .hero-name-card:hover,
-    .hero-name-card.scroll-active {
+    .hero-name-card:hover {
       background: rgba(101, 163, 13, 0.9);
       border-radius: 20px;
       box-shadow: 0 15px 30px -5px rgba(101, 163, 13, 0.35);
     }
 
-    .hero-name-card:hover .hero-name,
-    .hero-name-card.scroll-active .hero-name {
+    .hero-name-card:hover .hero-name {
       color: var(--slate-900);
     }
 
     @media (max-width: 768px) {
-      .hero-name-card:hover {
-        background: rgba(15, 23, 42, 0.95);
-        border-radius: 10px;
-        box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.25);
-      }
-      .hero-name-card:hover .hero-name {
-        color: var(--white);
+      .hero-name-card {
+        pointer-events: none;
       }
     }
     
@@ -3139,20 +3140,7 @@
     updateNav();
 
     // Scroll-triggered rollover for hero name card on mobile
-    var nameCard = document.querySelector('.hero-name-card');
-    if (nameCard) {
-      function checkNameCard() {
-        if (!window.matchMedia('(max-width: 768px)').matches) {
-          nameCard.classList.remove('scroll-active');
-          return;
-        }
-        var rect = nameCard.getBoundingClientRect();
-        var mid = window.innerHeight / 2;
-        nameCard.classList.toggle('scroll-active', rect.top <= mid && rect.bottom >= 0);
-      }
-      window.addEventListener('scroll', checkNameCard, { passive: true });
-      checkNameCard();
-    }
+    
 
     // Scroll-triggered icon animations for service and essential cards
     (function() {
@@ -3526,9 +3514,22 @@
         if (heroBtnEl) heroBtnEl.classList.add('hero-revealed');
       }, totalRevealTime + 200);
 
-      setTimeout(() => {
-        if (taglineStrong) taglineStrong.classList.add('underline-visible');
-      }, totalRevealTime + 500);
+      if (taglineStrong && window.matchMedia('(max-width: 768px)').matches) {
+        taglineStrong.style.transition = 'none';
+        function scrollUnderline() {
+          var rect = taglineStrong.getBoundingClientRect();
+          var start = window.innerHeight * 0.8;
+          var end = window.innerHeight * 0.45;
+          var pct = Math.max(0, Math.min(1, (start - rect.top) / (start - end)));
+          taglineStrong.style.backgroundSize = (pct * 100) + '% 22%';
+        }
+        window.addEventListener('scroll', scrollUnderline, { passive: true });
+        scrollUnderline();
+      } else {
+        setTimeout(() => {
+          if (taglineStrong) taglineStrong.classList.add('underline-visible');
+        }, totalRevealTime + 500);
+      }
 
       setTimeout(() => {
         if (heroBtnEl) {
