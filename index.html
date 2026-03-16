@@ -169,9 +169,25 @@
       opacity: 0.12;
     }
 
-    @media (max-width: 480px) {
-      .shape-wrapper {
-        display: none;
+    @media (max-width: 768px) {
+      .hero-circle {
+        width: 250px;
+        height: 250px;
+      }
+      .hero-square {
+        width: 175px;
+        height: 175px;
+      }
+      .shape-wrapper.circle-wrapper {
+        top: -80px;
+        right: -80px;
+      }
+      .shape-wrapper.square-wrapper {
+        bottom: -60px;
+        left: -60px;
+      }
+      .hero-shape {
+        opacity: 0.08;
       }
     }
     
@@ -2879,16 +2895,9 @@
     const SiteScore = (function() {
       const el = document.getElementById('siteScore');
       const valEl = el ? el.querySelector('.site-score-value') : null;
-      let score = parseInt(sessionStorage.getItem('siteScore') || '0', 10);
+      let score = 0;
       const cooldowns = {};
-      const awarded = JSON.parse(sessionStorage.getItem('siteScoreAwarded') || '{}');
-
-      function save() {
-        sessionStorage.setItem('siteScore', score);
-        sessionStorage.setItem('siteScoreAwarded', JSON.stringify(awarded));
-      }
-
-      if (score > 0 && valEl) valEl.textContent = score + ' pts';
+      const awarded = {};
 
       return {
         award: function(pts, key, cooldownMs) {
@@ -2899,7 +2908,6 @@
             cooldowns[key] = now;
           }
           score += pts;
-          save();
           if (valEl) {
             valEl.textContent = score + ' pts';
             if (!prefersReducedMotion && el) {
@@ -3004,26 +3012,20 @@
       mouseY += (targetMouseY - mouseY) * 0.03;
       currentScrollY += (targetScrollY - currentScrollY) * 0.08;
       
-      // Calculate parallax offset
-      // Circle starts at top, flows DOWN as you scroll
-      // Square starts at bottom, flows UP as you scroll
-      
-      // Circle moves down (positive Y increases with scroll)
-      const circleParallaxY = currentScrollY * 0.18;
-      // Clamp so it doesn't go too far down
-      const clampedCircleY = Math.min(circleParallaxY, window.innerHeight * 0.7);
-      
-      // Square moves up (negative Y increases with scroll)
-      const squareParallaxY = -currentScrollY * 0.2;
-      // Clamp so it doesn't fully exit top
-      const clampedSquareY = Math.max(squareParallaxY, -window.innerHeight * 0.65);
-      
-      // Combine parallax + subtle mouse influence
-      const circleX = mouseX * 12;
-      const circleY = clampedCircleY + mouseY * 12;
-      
-      const squareX = mouseX * -8;
-      const squareY = clampedSquareY + mouseY * -8;
+      var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      var scrollPct = maxScroll > 0 ? currentScrollY / maxScroll : 0;
+
+      var circleTravel = window.innerHeight * 0.7;
+      var squareTravel = window.innerHeight * 0.6;
+
+      var circleParallaxY = scrollPct * circleTravel;
+      var squareParallaxY = -scrollPct * squareTravel;
+
+      var circleX = mouseX * 12;
+      var circleY = circleParallaxY + mouseY * 12;
+
+      var squareX = mouseX * -8;
+      var squareY = squareParallaxY + mouseY * -8;
       
       circleWrapper.style.transform = `translate(${circleX}px, ${circleY}px)`;
       squareWrapper.style.transform = `translate(${squareX}px, ${squareY}px)`;
