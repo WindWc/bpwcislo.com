@@ -3157,6 +3157,13 @@
 
       cards.forEach(function(card) { wasBelow.set(card, true); });
 
+      function fireAnimation(card) {
+        card.classList.remove('scroll-active');
+        void card.offsetWidth;
+        card.classList.add('scroll-active');
+        setTimeout(function() { card.classList.remove('scroll-active'); }, 900);
+      }
+
       function checkCards() {
         var threshold = window.innerHeight * triggerPoint;
         cards.forEach(function(card) {
@@ -3164,15 +3171,7 @@
           var isBelow = rect.top > threshold;
           var wasIt = wasBelow.get(card);
 
-          if (wasIt && !isBelow) {
-            card.classList.remove('scroll-active');
-            void card.offsetWidth;
-            card.classList.add('scroll-active');
-          } else if (!wasIt && isBelow) {
-            card.classList.remove('scroll-active');
-            void card.offsetWidth;
-            card.classList.add('scroll-active');
-          }
+          if (wasIt !== isBelow) fireAnimation(card);
 
           wasBelow.set(card, isBelow);
         });
