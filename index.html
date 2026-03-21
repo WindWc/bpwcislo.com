@@ -656,36 +656,50 @@
     }
 
     /* Per-card hover animations */
-    .icon-scissors .blade-top,
-    .icon-scissors .blade-bottom {
-      transform-origin: 10px 12px;
+    .icon-eye .eye-lid-top,
+    .icon-eye .eye-lid-bottom {
+      transform-origin: 12px 12px;
+      transition: d 400ms ease;
     }
 
-    .service-card:hover .icon-scissors .blade-top,
-    .service-card.scroll-active .icon-scissors .blade-top {
-      animation: snipTop 600ms ease-in-out;
+    .icon-eye .eye-pupil {
+      transform-origin: 12px 12px;
     }
 
-    .service-card:hover .icon-scissors .blade-bottom,
-    .service-card.scroll-active .icon-scissors .blade-bottom {
-      animation: snipBottom 600ms ease-in-out;
+    .service-card:hover .icon-eye .eye-lid-top,
+    .service-card.scroll-active .icon-eye .eye-lid-top {
+      animation: eyeOpenTop 700ms ease-in-out;
     }
 
-
-    @keyframes snipTop {
-      0% { transform: rotate(0deg); }
-      30% { transform: rotate(-14deg); }
-      55% { transform: rotate(4deg); }
-      75% { transform: rotate(-10deg); }
-      100% { transform: rotate(0deg); }
+    .service-card:hover .icon-eye .eye-lid-bottom,
+    .service-card.scroll-active .icon-eye .eye-lid-bottom {
+      animation: eyeOpenBottom 700ms ease-in-out;
     }
 
-    @keyframes snipBottom {
-      0% { transform: rotate(0deg); }
-      30% { transform: rotate(14deg); }
-      55% { transform: rotate(-4deg); }
-      75% { transform: rotate(10deg); }
-      100% { transform: rotate(0deg); }
+    .service-card:hover .icon-eye .eye-pupil,
+    .service-card.scroll-active .icon-eye .eye-pupil {
+      animation: pupilFocus 700ms ease-in-out;
+    }
+
+    @keyframes eyeOpenTop {
+      0% { transform: scaleY(1); }
+      40% { transform: scaleY(1.35); }
+      70% { transform: scaleY(1.1); }
+      100% { transform: scaleY(1); }
+    }
+
+    @keyframes eyeOpenBottom {
+      0% { transform: scaleY(1); }
+      40% { transform: scaleY(1.35); }
+      70% { transform: scaleY(1.1); }
+      100% { transform: scaleY(1); }
+    }
+
+    @keyframes pupilFocus {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.25); }
+      70% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
 
     .icon-build .build-top,
@@ -2503,12 +2517,10 @@
       <div class="services-grid">
         <div class="service-card">
           <div class="service-icon">
-            <svg class="icon-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-
-              <circle cx="6" cy="6" r="3" class="blade-top"/>
-              <circle cx="6" cy="18" r="3" class="blade-bottom"/>
-              <path class="blade-top" d="M8.12 8.12L20 20"/>
-              <path class="blade-bottom" d="M8.12 15.88L20 4"/>
+            <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path class="eye-lid-top" d="M1 12s4-8 11-8 11 8 11 8"/>
+              <path class="eye-lid-bottom" d="M1 12s4 8 11 8 11-8 11-8"/>
+              <circle class="eye-pupil" cx="12" cy="12" r="3"/>
             </svg>
           </div>
           <h3>See the Full Picture</h3>
