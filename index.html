@@ -864,6 +864,83 @@
       color: var(--slate-500);
     }
 
+    .stat-pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: var(--space-4);
+      margin-bottom: var(--space-4);
+    }
+
+    .stat-pill {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      line-height: 1.3;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--slate-300);
+    }
+
+    .stat-pill strong {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.05em;
+    }
+
+    .stat-pill--accent {
+      background: rgba(76, 175, 80, 0.1);
+      border-color: rgba(76, 175, 80, 0.25);
+    }
+
+    .stat-pill--accent strong {
+      color: var(--accent);
+    }
+
+    .project-expand {
+      margin-top: var(--space-4);
+      border: none;
+    }
+
+    .project-expand summary {
+      cursor: pointer;
+      color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 500;
+      list-style: none;
+      text-align: center;
+    }
+
+    .project-expand summary::-webkit-details-marker { display: none; }
+    .project-expand summary::marker { display: none; content: ''; }
+
+    .project-expand summary::after {
+      content: ' +';
+      font-weight: 600;
+    }
+
+    .project-expand[open] summary::after {
+      content: ' −';
+    }
+
+    .project-expand-content {
+      padding-top: var(--space-4);
+    }
+
+    .project-expand[open] .project-expand-content {
+      animation: expandFade 300ms ease-out;
+    }
+
+    @keyframes expandFade {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* Project Gallery */
     .project-gallery {
       width: 100%;
@@ -2609,9 +2686,22 @@
       <div class="project-content">
         <span class="project-tag">Tech Training Platform</span>
         <h3>GMAC</h3>
-        <p>Built for <strong>genuine mastery</strong>… the kind teams actually carry into the field. Teams knowledge soared from <strong>50% on entry to 96% after completion</strong>! Proof of what happens when training is built for how people actually learn. <strong>99%</strong> of store managers would recommend it. <strong>23,400+ modules</strong> completed across <strong>580+ stores</strong>.</p>
-        <blockquote class="project-quote">"It's just so much better than any other digital training that our team has experienced."<cite>— Dillan J., ASM</cite></blockquote>
-        <p style="margin-top: var(--space-4);">Two-sided training platform built to make dense technical knowledge <strong>faster, easier, and actually enjoyable</strong> for frontline teams to learn. <strong>Tablet-first microlearning</strong>, <strong>interactive 3D tools</strong>, <strong>gamified quizzes</strong>, and <strong>role-based dashboards</strong> transformed dense technical knowledge into something frontline teams genuinely engage with — while giving managers <strong>clear visibility from individual performance up through store, district, area, and region</strong>.</p>
+        <p>Built for <strong>genuine mastery</strong>… the kind teams actually carry into the field. <strong>Tablet-first microlearning</strong>, <strong>interactive 3D tools</strong>, <strong>gamified quizzes</strong>, and <strong>role-based dashboards</strong>.</p>
+        <div class="stat-pills">
+          <span class="stat-pill stat-pill--accent"><strong>50% → 96%</strong> knowledge scores</span>
+          <span class="stat-pill"><strong>99%</strong> manager approval</span>
+          <span class="stat-pill"><strong>95%</strong> feel more supported</span>
+          <span class="stat-pill"><strong>23,400+</strong> modules completed</span>
+          <span class="stat-pill"><strong>300,000+</strong> videos consumed</span>
+          <span class="stat-pill"><strong>580+</strong> stores</span>
+        </div>
+        <details class="project-expand">
+          <summary>More about this project</summary>
+          <div class="project-expand-content">
+            <p>Transforming dense technical knowledge into something frontline teams genuinely engage with, while giving managers <strong>clear visibility from individual performance up through store, district, area, and region</strong>.</p>
+            <blockquote class="project-quote">"It's just so much better than any other digital training that our team has experienced."<cite>— Dillan J., ASM</cite></blockquote>
+          </div>
+        </details>
       </div>
       <div class="project-gallery">
         <div class="project-gallery-track">
