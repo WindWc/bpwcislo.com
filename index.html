@@ -882,23 +882,41 @@
       font-size: 0.82rem;
       font-weight: 500;
       line-height: 1.3;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--slate-300);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      color: var(--slate-600);
     }
 
     .stat-pill strong {
-      color: var(--white);
+      color: var(--slate-900);
       font-weight: 700;
       font-size: 1.05em;
     }
 
     .stat-pill--accent {
-      background: rgba(76, 175, 80, 0.1);
+      background: rgba(76, 175, 80, 0.08);
       border-color: rgba(76, 175, 80, 0.25);
     }
 
     .stat-pill--accent strong {
+      color: var(--accent);
+    }
+
+    .project-card--dark .stat-pill {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: var(--slate-300);
+    }
+
+    .project-card--dark .stat-pill strong {
+      color: var(--white);
+    }
+
+    .project-card--dark .stat-pill--accent {
+      background: rgba(76, 175, 80, 0.1);
+    }
+
+    .project-card--dark .stat-pill--accent strong {
       color: var(--accent);
     }
 
@@ -986,6 +1004,22 @@
 
     .project-slide:hover {
       transform: scale(1.01);
+    }
+
+    .project-slide.project-slide--video {
+      background: #000;
+      aspect-ratio: 16 / 10;
+    }
+
+    .project-slide--video iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .project-slide--video:hover {
+      transform: none;
     }
 
     .project-card--dark .project-slide {
@@ -2651,8 +2685,21 @@
       <div class="project-content">
         <span class="project-tag">Workflow & Ledger App</span>
         <h3>ARS Flows</h3>
-        <p>Custom operating system designed to power a fast-moving <strong>equipment refurbishment program</strong> supporting one of the world's most admired brands. <strong>Four workflows</strong>, <strong>19 guided steps</strong>, and <strong>four role-based dashboards</strong> give technicians, admins, and clients <strong>real-time visibility</strong> across every machine and step. Built in <strong>9 weeks</strong>. Still humming.</p>
-        <span class="launch-note"><em>Phase 2 in progress</em>, expanding into additional lines of business.</span>
+        <p>Custom operating system designed to power a fast-moving <strong>equipment services operation</strong> supporting one of the world's most recognized brands. Technicians, admins, and the owner each get a <strong>purpose-built experience</strong> — four guided workflows with 19 steps that move jobs from intake through invoicing with <strong>full visibility at every stage</strong>. Built in <strong>9 weeks</strong> on React, TypeScript, and Supabase. Still humming.</p>
+        <div class="stat-pills">
+          <span class="stat-pill stat-pill--accent"><strong>4</strong> workflows, <strong>19</strong> guided steps</span>
+          <span class="stat-pill"><strong>4</strong> role-based dashboards</span>
+          <span class="stat-pill"><strong>6</strong>-phase job lifecycle</span>
+          <span class="stat-pill"><strong>3</strong> distinct user roles</span>
+          <span class="stat-pill"><strong>9</strong>-week initial build</span>
+          <span class="stat-pill stat-pill--accent"><strong>Phase 2</strong> in progress</span>
+        </div>
+        <details class="project-expand">
+          <summary>More about this project</summary>
+          <div class="project-expand-content">
+            <p>One platform that gives every facility job a clear path — from the moment a work task is dispatched through final invoice. Phase 2 was blueprinted from real job data — <strong>12 process documents</strong> from an actual project were reverse-engineered into swim lane diagrams, a <strong>13-table data model</strong>, and screen-by-screen wireframes before a single line of code was written. The highest-value screen — a <strong>proposal builder</strong> with line-item management, auto-totals, and one-click PDF export — turns what used to take manual effort every time into something that flows in minutes.</p>
+          </div>
+        </details>
       </div>
       <div class="project-gallery">
         <div class="project-gallery-track">
@@ -2686,7 +2733,7 @@
       <div class="project-content">
         <span class="project-tag">Tech Training Platform</span>
         <h3>GMAC</h3>
-        <p>Built for <strong>genuine mastery</strong>… the kind teams actually carry into the field. <strong>Tablet-first microlearning</strong>, <strong>interactive 3D tools</strong>, <strong>gamified quizzes</strong>, and <strong>role-based dashboards</strong>.</p>
+        <p>Built for <strong>genuine mastery</strong> — the kind teams actually carry into the field. Two-sided training platform that turns dense technical knowledge into <strong>tablet-first microlearning</strong>, <strong>interactive 3D tools</strong>, and <strong>gamified quizzes</strong> frontline teams genuinely engage with. <strong>Role-based dashboards</strong> give managers clear visibility from <strong>individual performance up through store, district, area, and region</strong>.</p>
         <div class="stat-pills">
           <span class="stat-pill stat-pill--accent"><strong>50% → 96%</strong> knowledge scores</span>
           <span class="stat-pill"><strong>99%</strong> manager approval</span>
@@ -2698,7 +2745,7 @@
         <details class="project-expand">
           <summary>More about this project</summary>
           <div class="project-expand-content">
-            <p>Transforming dense technical knowledge into something frontline teams genuinely engage with, while giving managers <strong>clear visibility from individual performance up through store, district, area, and region</strong>.</p>
+            <p>Preventive maintenance, troubleshooting, and parts identification — transformed from binder-and-slide training into something people look forward to completing. Built to scale across every level of the organization while keeping the learning experience personal, fast, and genuinely useful.</p>
             <blockquote class="project-quote">"It's just so much better than any other digital training that our team has experienced."<cite>— Dillan J., ASM</cite></blockquote>
           </div>
         </details>
@@ -2706,19 +2753,19 @@
       <div class="project-gallery">
         <div class="project-gallery-track">
           <div class="project-slide">
-            <img src="GMAC-04-Platform.jpg" alt="GMAC Training Platform — main view">
+            <img src="GMAC-slide-cover.png" alt="GMAC Training Platform — multi-device overview">
+          </div>
+          <div class="project-slide project-slide--video">
+            <iframe src="https://player.vimeo.com/video/857298696?h=bf1839b8be&badge=0&autopause=0&player_id=0" title="GMAC Hero" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-slide">
-            <div class="project-slide-placeholder placeholder-cool">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>Training module</span>
-            </div>
+            <img src="GMAC-Web-RDO.png" alt="GMAC — 95% trainee support and 99% manager approval stats">
+          </div>
+          <div class="project-slide project-slide--video" style="background:#fff;">
+            <iframe src="https://player.vimeo.com/video/908757633?badge=0&autopause=0&player_id=0" title="GMAC Training Module" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-slide">
-            <div class="project-slide-placeholder placeholder-sage">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              <span>Manager dashboard</span>
-            </div>
+            <img src="GMAC-Web-Steps.png" alt="GMAC — engage, train, support, retain, upskill">
           </div>
         </div>
         <div class="project-gallery-nav">
