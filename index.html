@@ -31,6 +31,15 @@
   <meta name="twitter:description" content="Operational leverage for organizations ready to scale. Custom apps, training platforms, and workflow systems — from first sketch to production-ready product.">
   <meta name="twitter:image" content="https://bpwcislo.com/og-share.jpg">
   
+  <!-- Theme: apply saved preference before paint to avoid flash -->
+  <script>
+    (function(){
+      var t=localStorage.getItem('wind-theme');
+      var valid=['jungle','miami','ocean','ember'];
+      if(t && valid.indexOf(t)>-1) document.documentElement.setAttribute('data-theme',t);
+    })();
+  </script>
+
   <!-- Fonts - Modern pairing -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -73,6 +82,112 @@
       --space-24: 96px;
     }
     
+    /* ─── THEMES ─────────────────────────────────────────── */
+
+    /* Jungle (default — accent vars already set in :root) */
+    [data-theme="jungle"] {
+      --accent: #65a30d;
+      --accent-hover: #4d7c0f;
+      --accent-light: rgba(101, 163, 13, 0.1);
+      --gold: #d97706;
+    }
+
+    /* Ocean — crisp sky blue */
+    [data-theme="ocean"] {
+      --accent: #0ea5e9;
+      --accent-hover: #0284c7;
+      --accent-light: rgba(14, 165, 233, 0.1);
+      --gold: #6366f1;
+    }
+
+    /* Miami Night — dark mode + hot pink + teal */
+    [data-theme="miami"] {
+      --accent: #f472b6;
+      --accent-hover: #ec4899;
+      --accent-light: rgba(244, 114, 182, 0.12);
+      --gold: #2dd4bf;
+      --white:      #0d1117;
+      --slate-50:   #111827;
+      --slate-100:  #1a2235;
+      --slate-200:  #1e293b;
+      --slate-300:  #334155;
+      --slate-400:  #475569;
+      --slate-500:  #64748b;
+      --slate-600:  #94a3b8;
+      --slate-700:  #cbd5e1;
+      --slate-800:  #e2e8f0;
+      --slate-900:  #f1f5f9;
+    }
+
+    /* Ember Night — dark mode + warm amber */
+    [data-theme="ember"] {
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-light: rgba(245, 158, 11, 0.12);
+      --gold: #ef4444;
+      --white:      #0d1117;
+      --slate-50:   #111827;
+      --slate-100:  #1a2235;
+      --slate-200:  #1e293b;
+      --slate-300:  #334155;
+      --slate-400:  #475569;
+      --slate-500:  #64748b;
+      --slate-600:  #94a3b8;
+      --slate-700:  #cbd5e1;
+      --slate-800:  #e2e8f0;
+      --slate-900:  #f1f5f9;
+    }
+
+    /* Dark theme nav/UI patches (shared by Miami + Ember) */
+    [data-theme="miami"] .site-nav,
+    [data-theme="ember"] .site-nav {
+      background: rgba(13, 17, 23, 0.65);
+    }
+    [data-theme="miami"] .site-nav.scrolled,
+    [data-theme="ember"] .site-nav.scrolled {
+      background: rgba(13, 17, 23, 0.88);
+      border-bottom-color: rgba(255, 255, 255, 0.07);
+    }
+    [data-theme="miami"] .nav-links,
+    [data-theme="ember"] .nav-links {
+      background: rgba(13, 17, 23, 0.97) !important;
+      border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+    }
+    [data-theme="miami"] .score-modal,
+    [data-theme="ember"] .score-modal {
+      background: var(--slate-100);
+    }
+    [data-theme="miami"] .nav-hamburger span,
+    [data-theme="ember"] .nav-hamburger span {
+      background: var(--slate-900);
+    }
+    [data-theme="miami"] .hero-name-card,
+    [data-theme="ember"] .hero-name-card {
+      background: rgba(241, 245, 249, 0.95);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+    }
+    [data-theme="miami"] .hero-name,
+    [data-theme="ember"] .hero-name {
+      color: #0d1117;
+    }
+    [data-theme="miami"] .hero-name-card:hover,
+    [data-theme="ember"] .hero-name-card:hover {
+      background: rgba(101, 163, 13, 0.9);
+    }
+    [data-theme="miami"] .hero-name-card:hover .hero-name {
+      color: #0d1117;
+    }
+    [data-theme="ember"] .hero-name-card:hover .hero-name {
+      color: #0d1117;
+    }
+
+    /* Smooth theme transitions */
+    body, .site-nav, section, .service-card, .project-card,
+    .essential-card, .score-modal, .flowform-card {
+      transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+    }
+    /* ─── END THEMES ──────────────────────────────────────── */
+
     * {
       margin: 0;
       padding: 0;
@@ -2327,6 +2442,38 @@
       .score-modal { padding: var(--space-6); }
     }
 
+    /* Theme Picker */
+    .theme-picker {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .theme-dot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--dot-color);
+      border: 2px solid transparent;
+      padding: 0;
+      cursor: pointer;
+      transition: transform 200ms ease, box-shadow 200ms ease;
+      flex-shrink: 0;
+    }
+
+    .theme-dot:hover {
+      transform: scale(1.25);
+    }
+
+    .theme-dot.active {
+      box-shadow: 0 0 0 2px var(--white), 0 0 0 3.5px var(--dot-color);
+    }
+
+    @media (max-width: 768px) {
+      .theme-picker { gap: 6px; }
+      .theme-dot { width: 11px; height: 11px; }
+    }
+
     .nav-links {
       display: flex;
       gap: var(--space-6);
@@ -2760,6 +2907,13 @@
         <span class="site-score-tooltip" aria-hidden="true">What's this?</span>
       </button>
     </div>
+    <div class="theme-picker" role="group" aria-label="Color theme">
+      <button class="theme-dot" data-theme="jungle" aria-label="Jungle theme" style="--dot-color:#65a30d"></button>
+      <button class="theme-dot" data-theme="miami"  aria-label="Miami Night theme" style="--dot-color:#f472b6"></button>
+      <button class="theme-dot" data-theme="ocean"  aria-label="Ocean theme"  style="--dot-color:#0ea5e9"></button>
+      <button class="theme-dot" data-theme="ember"  aria-label="Ember Night theme"  style="--dot-color:#f59e0b"></button>
+    </div>
+
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -3294,6 +3448,34 @@
   </form>
 
   <script>
+    // ─── THEME PICKER ────────────────────────────────────────
+    (function() {
+      var THEMES = ['jungle', 'miami', 'ocean', 'ember'];
+      var STORAGE_KEY = 'wind-theme';
+
+      function applyTheme(theme) {
+        if (THEMES.indexOf(theme) === -1) theme = 'jungle';
+        document.documentElement.setAttribute('data-theme', theme);
+        document.querySelectorAll('.theme-dot').forEach(function(dot) {
+          dot.classList.toggle('active', dot.dataset.theme === theme);
+        });
+        try { localStorage.setItem(STORAGE_KEY, theme); } catch(e) {}
+      }
+
+      // Restore saved or default
+      var saved;
+      try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+      applyTheme(saved || 'jungle');
+
+      // Wire up dots
+      document.querySelectorAll('.theme-dot').forEach(function(dot) {
+        dot.addEventListener('click', function() {
+          applyTheme(dot.dataset.theme);
+        });
+      });
+    })();
+    // ─── END THEME PICKER ────────────────────────────────────
+
     const circleWrapper = document.querySelector('.circle-wrapper');
     const squareWrapper = document.querySelector('.square-wrapper');
     

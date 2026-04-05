@@ -6,22 +6,25 @@ alwaysApply: true
 # BPWCISLO.com — Site Rules & PRD
 
 ## Owner
-Brian Patrick Wcislo — strategist, designer, product builder. 25+ years in digital. Based in Costa Rica.
+Brian Patrick Wcislo — app architect, operations builder, product designer. 23+ years in digital. Based in Costa Rica.
 
 ## Purpose
-Personal portfolio site selling operational leverage and custom app development to operations-heavy businesses ($5M–$250M).
+Personal portfolio site selling operational leverage and custom app development to operations-driven businesses ready to scale. Forward-momentum positioning — the messaging centers on building, potential, and what's ready to move (not friction or problem framing).
+
+## Target Audience
+Operations-driven businesses ($5M–$250M) with real complexity, real stakes, and teams ready for systems that match their ambition.
 
 ## Design Language
 Apple-inspired minimalism. Clean, spacious, confident. Every element earns its place.
 
 - **Inspiration**: Apple Mac mini product page (scroll-driven reveals, large imagery, centered typography, alternating light/dark sections)
-- **Tone**: Professional but human. Direct. No fluff.
+- **Tone**: Professional but human. Direct. No fluff. Forward energy.
 
 ## Color Palette (CSS Variables)
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--accent` | `#65a30d` | Primary green — CTAs, highlights, active states |
+| `--accent` | `#65a30d` | Primary green — CTAs, highlights, active states, stat pill accents |
 | `--accent-hover` | `#4d7c0f` | Hover state for accent |
 | `--slate-900` | `#0f172a` | Dark backgrounds, primary text |
 | `--slate-50` | `#f8fafc` | Light section backgrounds |
@@ -30,11 +33,12 @@ Apple-inspired minimalism. Clean, spacious, confident. Every element earns its p
 
 ## Typography
 
-- **Display**: `Sora` (headings, cards) — 400/500/600/700 weights
+- **Display**: `Sora` (headings, cards, FlowForm, nav) — 400/500/600/700 weights
 - **Body**: `Inter` (paragraphs, UI) — 400/500/600 weights
 - **h1**: `clamp(2.75rem, 6vw, 4rem)` weight 400, bold via `<strong>`
 - **h2**: `clamp(2rem, 4.5vw, 3.25rem)` weight 700
 - **Body**: 1rem / 1.6 line-height
+- Google Fonts loaded with `display=swap` to prevent FOIT
 
 ## Spacing Scale
 
@@ -42,13 +46,69 @@ Apple-inspired minimalism. Clean, spacious, confident. Every element earns its p
 
 ## Page Sections (top to bottom)
 
-1. **Hero** — Headline with blur-reveal animation, tagline with green underline on "boring businesses", speech-bubble CTA
-2. **What I Do** — Rotating word headline, 3 service cards with animated SVG icons (scissors, building blocks, rocket)
-3. **Selected Work** — Full-width project galleries (Apple-style horizontal scroll, snap, dots, arrows, click-to-navigate)
-4. **Who I Work With** — Testimonial cards (2-col grid, italic quotes, green titles, 3D tilt on hover)
-5. **Trusted Collaborators** — Partner logos with category labels
-6. **About Brian** — Bio + photo grid, Essentials horizontal card carousel
-7. **Contact** — Form with floating labels, green checkmarks, speech-bubble submit button
+1. **Hero** — Headline with blur-reveal animation, tagline, speech-bubble CTA ("Let's Build"), hero photo with name card linking to About
+2. **What I Do** — Rotating word headline ("Make your operation: [word]"), 3 service cards with animated SVG icons (eye, building blocks, rocket). Icons animate on scroll with 500ms stagger.
+3. **Selected Work** — Full-width project galleries with stat pills, expandable details sections, and team credit labels
+4. **Who I Work With** — Testimonial cards (2-col grid, italic quotes, 3D tilt on hover)
+5. **Trusted Collaborators** — Partner logos (Pixouls, CVP, CreativeLike) with category labels
+6. **About Brian** — Bio with animated stat counters (23 years, 10 startups), expandable "Agency Years" section, Essentials card carousel
+7. **Contact / FlowForm** — Multi-step lead qualification funnel (6 screens + confirmation)
+
+## Portfolio Projects
+
+### ARS Flows
+- **Card style**: Light
+- **Team**: Solo build
+- **Stack**: React, TypeScript, Supabase
+- **Key stats**: 4 workflows / 19 steps, 4 dashboards, 6-phase lifecycle, 9-week build
+- **Gallery**: 9 slides (photos + screenshots)
+
+### GMAC Training Platform
+- **Card style**: Dark
+- **Team**: Pixouls
+- **Key stats**: 50%→96% scores, 99% manager approval, 580+ stores, 300K+ videos
+- **Gallery**: 5 slides (images + 2 Vimeo embeds)
+
+### Mack Truck Builder
+- **Card style**: Light
+- **Team**: 4O1! Creative
+- **Key stats**: 5-step experience, 60+ configs, 10,000+ kids, 60fps physics
+- **Gallery**: 11 slides (all images)
+
+### SoBo
+- **Card style**: Dark
+- **Team**: Pixouls
+- **Stack**: React Native, Supabase
+- **Key stats**: iOS + Google Play, 5 loan statuses, AI nudges, Discover nearby
+- **Gallery**: 4 slides (3 images + 1 placeholder for post-launch screens)
+- **Launch**: April 20, 2026
+
+## Stat Pills
+Centered flex layout below project descriptions. Base style for light cards, `--accent` variant for highlighted pills. Dark cards get inverted colors via `.project-card--dark .stat-pill`.
+
+## Expandable Sections
+`<details class="project-expand">` with `<summary>More about this project</summary>` pattern. Used on all four portfolio projects and the About "Agency Years" section.
+
+## FlowForm (Contact Funnel)
+
+6-screen multi-step lead qualification form:
+
+1. **What's ready to move?** (single select, "I'd rather just email you" skips to contact)
+2. **What are we building?** (multi select)
+3. **Where are you in the process?** (single)
+4. **How urgent is this?** (single)
+5. **Budget comfort zone** (single)
+6. **Contact info** (name, email, preferred contact, optional phone, textarea)
+
+Confirmation screen with animated gear SVG. Submits to Netlify Forms. Integrated with gamification scoring.
+
+## Gamification System
+
+Point-based scoring system tracking user engagement:
+- Scroll depth, hover interactions, nav clicks, gallery navigation
+- FlowForm steps (50 pts each), FlowForm completion (1,000 pts)
+- Score displayed in nav bar, modal explainer on click
+- Stored in localStorage
 
 ## Interactive Features
 
@@ -56,24 +116,26 @@ Apple-inspired minimalism. Clean, spacious, confident. Every element earns its p
 |---------|-------|---------|
 | Scroll progress bar | Global | Scroll position |
 | Blur-reveal text | Section headings | IntersectionObserver |
-| Stat counters | "25+", "10", "102x" | IntersectionObserver |
-| Speech bubble morph | Hero CTA, Contact submit | Load sequence / scroll |
-| Green underline wipe | "boring businesses", section outro | Load sequence / scroll position |
+| Stat counters | "23+", "10" | IntersectionObserver |
+| Speech bubble morph | Hero CTA | Load sequence / scroll |
+| Green underline wipe | Section outro | Load sequence / scroll position |
 | Cursor spotlight | Dark project cards, Partners | mousemove |
-| 3D tilt | Testimonial cards | mousemove |
+| 3D tilt | Testimonial + essential cards | mousemove |
 | Magnetic buttons | Hero CTA only | mousemove (disabled past 50% scroll) |
 | Gallery dot indicators | Project galleries | scroll sync |
 | Rotating words | Services headline | setInterval |
-| Service icon animations | Scissors, blocks, rocket | hover |
+| Service icon animations | Eye, blocks, rocket | scroll (500ms stagger) + hover |
 | Floating shapes | Background circles/squares | mousemove + requestAnimationFrame |
 | Section zoom reveal | All reveal targets | IntersectionObserver (scale 0.97→1) |
-| Form validation | Contact form | input/blur/submit |
+| FlowForm progression | Contact section | Click-driven step navigation |
+| Gamification scoring | Global | Various interactions |
 
 ## Animation Principles
 
 - Use `cubic-bezier(0.16, 1, 0.3, 1)` for reveals and morphs
 - Respect `prefers-reduced-motion` — all JS animations check this
 - Stagger grid children at 0.12s intervals
+- Service card scroll animations stagger at 500ms
 - Hero entrance sequence: headline letters → tagline → button → underline → bubble morph
 - Keep transitions under 1s for interactions, up to 1.2s for reveals
 
@@ -81,19 +143,49 @@ Apple-inspired minimalism. Clean, spacious, confident. Every element earns its p
 
 - Horizontal scroll with `scroll-snap-type: x mandatory`
 - Slides: `92vw` mobile, `min(72vw, 960px)` desktop
+- Ideal image dimensions: **1920 × 1200** (16:10) for retina, minimum 1024px wide
 - Center-snap with peek of adjacent slides
 - Nav arrows + dot indicators + click-to-navigate on partial slides
-- Placeholder slides use gradient backgrounds (`placeholder-cool`, `placeholder-warm`, `placeholder-sage`)
+- Team credit label centered between nav arrows via CSS Grid
+- Placeholder slides use gradient backgrounds or inline styles
 - Dark cards get inverted placeholder/dot/arrow colors
+- Vimeo embeds use `loading="lazy"` and `object-fit: cover`
 
-## Contact Form
+## Performance
 
-- Fields: Name (required), Company, Email (required), Phone, Challenge textarea
-- Name + Company on row 1, Email + Phone on row 2, textarea below
-- Floating labels (lift + turn green on focus)
-- Green checkmark SVG on valid fields
-- Shake animation on invalid submit
-- Submits via mailto:brian@bpwcislo.com (compose in mail client)
+- **Lazy loading**: All images and iframes below the fold use `loading="lazy"`
+- **Hero preload**: `<link rel="preload">` for the hero image (LCP element)
+- **Hero image**: Compressed to 136KB (from 1.1MB original)
+- **Font display**: `display=swap` on Google Fonts to prevent FOIT
+- **Initial load**: ~280KB (down from ~5.5MB)
+- **Single-file architecture**: All CSS/JS inline in `index.html`, no external scripts
+
+## SEO & AI Indexability
+
+- **robots.txt**: Welcomes all search engines + AI crawlers (GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Cohere)
+- **sitemap.xml**: Homepage + /uses page
+- **llms.txt**: Plain-text site summary for AI model ingestion
+- **Canonical URL**: `<link rel="canonical" href="https://bpwcislo.com/">`
+- **JSON-LD structured data**: Person, ProfessionalService, WebSite, 4 CreativeWork entries, 4 Review entries
+- **Open Graph + Twitter Card**: 1200×630 landscape OG image (`og-share.jpg`)
+- **Semantic HTML**: `<main>`, `<nav>`, `<section>`, `<footer>`, aria-labels throughout
+
+## File Structure
+
+```
+bpwcislo.com/
+├── index.html          # Main site (all CSS, HTML, JS inline)
+├── uses.html           # /uses page — tools, tech, setup
+├── robots.txt          # Search engine + AI crawler permissions
+├── sitemap.xml         # Sitemap for crawlers
+├── llms.txt            # Plain-text summary for AI models
+├── og-share.jpg        # 1200×630 social share image
+├── favicon.ico         # Legacy browser favicon
+├── favicon.svg         # Modern browser favicon (Wc mark)
+├── apple-touch-icon.png # iOS home screen icon
+├── *.png / *.jpg       # Portfolio and site images
+└── .cursor/rules/      # Cursor AI rules (this file)
+```
 
 ## Responsive Breakpoints
 
@@ -104,10 +196,6 @@ Apple-inspired minimalism. Clean, spacious, confident. Every element earns its p
 | < 768px | Hero stacks (text below photo centered), single-column layouts |
 | ≥ 768px | Hero side-by-side, desktop gallery sizes, full nav |
 
-## File Structure
-
-Single-file architecture: all CSS, HTML, and JS in `index.html`. No external stylesheets or script files. Images alongside in project root.
-
 ## Coding Conventions
 
 - CSS custom properties for all colors, spacing, and fonts
@@ -116,3 +204,20 @@ Single-file architecture: all CSS, HTML, and JS in `index.html`. No external sty
 - IntersectionObserver for scroll-triggered effects
 - `passive: true` on all scroll listeners
 - Semantic HTML with accessible labels on interactive elements
+- `loading="lazy"` on all images/iframes below the fold
+
+## Deployment
+
+- **Hosting**: Netlify
+- **Repo**: github.com/WindWc/bpwcislo.com (public)
+- **Domain**: bpwcislo.com
+- **Forms**: Netlify Forms (hidden form + JS submission)
+
+## Roadmap / Future Ideas
+
+- **Timeline page**: Visual career arc — 4O1! Creative, startups, solo building from Costa Rica
+- **Case study pages**: Standalone pages per project for long-tail SEO
+- **Blog / building log**: Lightweight content for freshness signals and AI surface area
+- **Google Search Console + Bing Webmaster**: Submit sitemap (manual step)
+- **Analytics**: Plausible or similar privacy-friendly analytics
+- **Hero photo crop**: Explored anamorphic/organic border-radius — revisit when ready
