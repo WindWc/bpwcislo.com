@@ -547,7 +547,7 @@
 
     .btn.btn-bubble-target {
       background: var(--accent);
-      color: #ffffff;
+      color: #0d1117;
       transition: background 1s cubic-bezier(0.16, 1, 0.3, 1),
                   color 1s cubic-bezier(0.16, 1, 0.3, 1),
                   border-radius 1s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2446,7 +2446,7 @@
     .theme-picker {
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 24px;
     }
 
     .theme-dot {
@@ -2454,23 +2454,25 @@
       height: 13px;
       border-radius: 50%;
       background: var(--dot-color);
-      border: 2px solid transparent;
+      border: none;
       padding: 0;
       cursor: pointer;
-      transition: transform 200ms ease, box-shadow 200ms ease;
+      opacity: 0.4;
+      transition: transform 200ms ease, opacity 200ms ease;
       flex-shrink: 0;
     }
 
     .theme-dot:hover {
       transform: scale(1.25);
+      opacity: 1;
     }
 
     .theme-dot.active {
-      box-shadow: 0 0 0 2px var(--white), 0 0 0 3.5px var(--dot-color);
+      opacity: 1;
     }
 
     @media (max-width: 768px) {
-      .theme-picker { gap: 6px; }
+      .theme-picker { gap: 20px; }
       .theme-dot { width: 11px; height: 11px; }
     }
 
