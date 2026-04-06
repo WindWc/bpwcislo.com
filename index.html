@@ -2475,9 +2475,6 @@
 
     @media (max-width: 768px) {
       .theme-picker {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
         gap: 21px;
       }
       .theme-dot { width: 11px; height: 11px; }
@@ -2556,11 +2553,12 @@
     }
 
     .nav-hamburger span:nth-child(1) { top: 0; }
-    .nav-hamburger span:nth-child(2) { top: 9px; }
+    .nav-hamburger span:nth-child(2) { top: 9px; background: var(--accent); }
     .nav-hamburger span:nth-child(3) { top: 18px; }
 
     .nav-hamburger.open span:nth-child(1) {
       transform: translateY(9px) rotate(45deg);
+      background: var(--accent);
     }
     .nav-hamburger.open span:nth-child(2) {
       opacity: 0;
