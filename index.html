@@ -150,7 +150,7 @@
     }
     [data-theme="miami"] .nav-links,
     [data-theme="ember"] .nav-links {
-      background: rgba(13, 17, 23, 0.97) !important;
+      background: rgba(13, 17, 23, 0.94) !important;
       border-bottom-color: rgba(255, 255, 255, 0.06) !important;
     }
     [data-theme="miami"] .score-modal,
@@ -2474,7 +2474,12 @@
     }
 
     @media (max-width: 768px) {
-      .theme-picker { gap: 20px; }
+      .theme-picker {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        gap: 21px;
+      }
       .theme-dot { width: 11px; height: 11px; }
     }
 
@@ -2564,23 +2569,34 @@
       transform: translateY(-9px) rotate(-45deg);
     }
 
+    .nav-name-short { display: none; }
+
+    .nav-mobile-header,
+    .nav-mobile-theme {
+      display: none;
+    }
+
     @media (max-width: 768px) {
       .nav-hamburger { display: block; }
       .nav-name { font-size: 0.8125rem; }
+      .nav-name-full { display: none; }
+      .nav-name-short { display: inline; }
 
       .nav-links {
         position: fixed;
         top: 48px;
         left: 0;
         right: 0;
-        background: rgba(255, 255, 255, 0.96);
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: var(--space-10, 40px);
+        row-gap: 0;
+        justify-content: start;
+        background: rgba(255, 255, 255, 0.94);
         backdrop-filter: saturate(120%) blur(16px);
         -webkit-backdrop-filter: saturate(120%) blur(16px);
         border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-        flex-direction: column;
-        align-items: center;
-        gap: 0;
-        padding: var(--space-2) var(--space-6);
+        padding: var(--space-4) var(--space-6) var(--space-4) 22%;
         transform: translateY(-100%);
         opacity: 0;
         pointer-events: none;
@@ -2594,29 +2610,50 @@
         pointer-events: auto;
       }
 
-      .nav-links li {
-        width: 100%;
-        text-align: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      .nav-mobile-header {
+        display: none;
       }
 
-      .nav-links li:last-child {
-        border-bottom: none;
+      .nav-mobile-name {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--slate-900);
+        letter-spacing: -0.01em;
+      }
+
+      .nav-mobile-score {
+        font-family: var(--font-body);
+        font-size: 0.6875rem;
+        font-weight: 600;
+        color: var(--accent);
+        letter-spacing: 0.02em;
+      }
+
+      .nav-mobile-theme {
+        display: none;
+      }
+
+      .nav-links li {
+        text-align: left;
       }
 
       .nav-links a {
         display: block;
-        padding: 10px 0;
+        padding: var(--space-2) var(--space-2);
         font-size: 0.9375rem;
         font-weight: 600;
+        border-radius: 8px;
+        transition: background 150ms ease, color 150ms ease;
+      }
+
+      .nav-links a:hover {
+        background: var(--accent-light);
+        transform: none;
       }
 
       .nav-links a::after {
         display: none;
-      }
-
-      .nav-links a:hover {
-        transform: none;
       }
     }
 
@@ -2905,7 +2942,7 @@
   <!-- Navigation -->
   <nav class="site-nav">
     <div class="nav-left">
-      <a href="#" class="nav-name">Brian Wcislo</a>
+      <a href="#" class="nav-name"><span class="nav-name-full">Brian Wcislo</span><span class="nav-name-short">BPW</span></a>
       <button class="site-score" id="siteScore" aria-label="Points counter — click to learn more" aria-haspopup="dialog">
         <span class="site-score-value">0 pts</span>
         <span class="site-score-tooltip" aria-hidden="true">What's this?</span>
@@ -2922,12 +2959,22 @@
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links" id="navLinks">
+      <li class="nav-mobile-header" aria-hidden="true">
+        <span class="nav-mobile-name">Brian Wcislo</span>
+        <span class="nav-mobile-score" id="mobileScoreValue">0 pts</span>
+      </li>
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
       <li><a href="#testimonials">Testimonials</a></li>
       <li><a href="#partners">Partners</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li class="nav-mobile-theme" aria-hidden="true">
+        <button class="theme-dot" data-theme="jungle" aria-label="Jungle theme" style="--dot-color:#65a30d"></button>
+        <button class="theme-dot" data-theme="miami"  aria-label="Miami Night theme" style="--dot-color:#f472b6"></button>
+        <button class="theme-dot" data-theme="ocean"  aria-label="Ocean theme"  style="--dot-color:#0ea5e9"></button>
+        <button class="theme-dot" data-theme="ember"  aria-label="Ember Night theme"  style="--dot-color:#f59e0b"></button>
+      </li>
     </ul>
   </nav>
 
@@ -3506,6 +3553,7 @@
     const SiteScore = (function() {
       const el = document.getElementById('siteScore');
       const valEl = el ? el.querySelector('.site-score-value') : null;
+      const mobileValEl = document.getElementById('mobileScoreValue');
       let score = 0;
       const cooldowns = {};
       const awarded = {};
@@ -3519,14 +3567,16 @@
             cooldowns[key] = now;
           }
           score += pts;
+          var label = score + ' pts';
           if (valEl) {
-            valEl.textContent = score + ' pts';
+            valEl.textContent = label;
             if (!prefersReducedMotion && el) {
               el.classList.remove('pop');
               void el.offsetWidth;
               el.classList.add('pop');
             }
           }
+          if (mobileValEl) mobileValEl.textContent = label;
         },
         once: function(pts, key) {
           if (awarded[key]) return;
