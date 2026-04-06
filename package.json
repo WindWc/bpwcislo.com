@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snapshot": "node scripts/snapshot.js"
   },
   "keywords": [],
   "author": "",
@@ -12,5 +13,8 @@
   "type": "commonjs",
   "dependencies": {
     "live-server": "^1.2.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.40.0"
   }
 }

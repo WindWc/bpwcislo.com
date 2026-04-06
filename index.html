@@ -3527,10 +3527,10 @@ if (window.location.hash) {
           applyTheme(dot.dataset.theme);
           if (dot.dataset.theme !== prev) {
             if (themeFirstSwitch) {
-              SiteScore.award(50, 'theme-first');
+              SiteScore.award(72, 'theme-first');
               themeFirstSwitch = false;
             } else {
-              SiteScore.award(25, 'theme-switch', 3000);
+              SiteScore.award(27, 'theme-switch', 3000);
             }
           }
         });
@@ -3615,14 +3615,14 @@ if (window.location.hash) {
       if (!overlay || !scoreBtn) return;
 
       var formula = [
-        ['Hover on a card or element', '3–7 pts'],
-        ['Click a nav link', '10 pts'],
-        ['Switch a color theme', '25–50 pts'],
-        ['Scroll to a new section', '15 pts'],
-        ['Scroll or navigate the portfolio', '7–10 pts'],
-        ['Each FlowForm step', '50 pts'],
+        ['Hover on a card or element', '3–11 pts'],
+        ['Click a nav link', '13 pts'],
+        ['Scroll to a new section', '21 pts'],
+        ['Switch a color theme', '27–72 pts'],
+        ['Scroll or navigate the portfolio', '8–9 pts'],
+        ['Each FlowForm step', '33 pts'],
         ['Visit the /uses page', '401 pts'],
-        ['Complete the FlowForm', '1,000 pts'],
+        ['Complete the FlowForm', '1,008 pts'],
       ];
 
       var html = '';
@@ -3745,7 +3745,7 @@ if (window.location.hash) {
       el.classList.add('magnetic');
 
       el.addEventListener('mouseenter', () => {
-        var pts = el.classList.contains('btn') ? 7 : 5;
+        var pts = el.classList.contains('btn') ? 11 : 9;
         SiteScore.award(pts, 'hero-' + (el.classList.contains('btn') ? 'cta' : 'name'), 5000);
       });
 
@@ -3868,10 +3868,10 @@ if (window.location.hash) {
     // Score: hover + click on nav links
     navLinks.forEach((link, i) => {
       link.addEventListener('mouseenter', () => {
-        SiteScore.award(2, 'nav-hover-' + i, 5000);
+        SiteScore.award(3, 'nav-hover-' + i, 5000);
       });
       link.addEventListener('click', () => {
-        SiteScore.once(10, 'nav-click-' + i);
+        SiteScore.once(13, 'nav-click-' + i);
       });
     });
 
@@ -3907,7 +3907,7 @@ if (window.location.hash) {
       const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            SiteScore.once(15, 'section-' + entry.target.id);
+            SiteScore.once(21, 'section-' + entry.target.id);
           }
         });
       }, { threshold: 0.2 });
@@ -4000,7 +4000,7 @@ if (window.location.hash) {
         dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
         dot.addEventListener('click', () => {
           slides[i].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-          SiteScore.award(7, 'gal-dot', 2000);
+          SiteScore.award(8, 'gal-dot', 2000);
         });
         dotsContainer.appendChild(dot);
         dots.push(dot);
@@ -4049,17 +4049,17 @@ if (window.location.hash) {
 
       prevArrow.addEventListener('click', () => {
         galleryTrack.scrollBy({ left: -getSlideWidth(), behavior: 'smooth' });
-        SiteScore.award(7, 'gal-arrow', 2000);
+        SiteScore.award(8, 'gal-arrow', 2000);
       });
 
       nextArrow.addEventListener('click', () => {
         galleryTrack.scrollBy({ left: getSlideWidth(), behavior: 'smooth' });
-        SiteScore.award(7, 'gal-arrow', 2000);
+        SiteScore.award(8, 'gal-arrow', 2000);
       });
 
       galleryTrack.addEventListener('scroll', updateGalleryState, { passive: true });
       galleryTrack.addEventListener('scroll', function() {
-        SiteScore.award(10, 'gal-scroll', 3000);
+        SiteScore.award(9, 'gal-scroll', 3000);
       }, { passive: true });
       updateGalleryState();
     });
@@ -4143,13 +4143,13 @@ if (window.location.hash) {
 
     // Score: hover on service, testimonial, essential, partner cards
     document.querySelectorAll('.service-card').forEach((c, i) => {
-      c.addEventListener('mouseenter', () => SiteScore.award(5, 'svc-' + i, 5000));
+      c.addEventListener('mouseenter', () => SiteScore.award(7, 'svc-' + i, 5000));
     });
     document.querySelectorAll('.testimonial-card').forEach((c, i) => {
-      c.addEventListener('mouseenter', () => SiteScore.award(5, 'tst-' + i, 5000));
+      c.addEventListener('mouseenter', () => SiteScore.award(8, 'tst-' + i, 5000));
     });
     document.querySelectorAll('.essential-card').forEach((c, i) => {
-      c.addEventListener('mouseenter', () => SiteScore.award(3, 'ess-' + i, 5000));
+      c.addEventListener('mouseenter', () => SiteScore.award(5, 'ess-' + i, 5000));
     });
     document.querySelectorAll('.partner-name').forEach((c, i) => {
       c.addEventListener('mouseenter', () => SiteScore.award(3, 'prt-' + i, 5000));
@@ -4340,9 +4340,9 @@ if (window.location.hash) {
         ffCard.className = 'flowform-card ' + animClass;
 
         if (screen.type === 'confirmation') {
-          SiteScore.once(1000, 'ff-complete');
+          SiteScore.once(1008, 'ff-complete');
         } else if (step > 0) {
-          SiteScore.once(50, 'ff-step-' + step);
+          SiteScore.once(33, 'ff-step-' + step);
         }
 
         let html = '';
