@@ -64,6 +64,7 @@
       --accent: #65a30d;
       --accent-hover: #4d7c0f;
       --accent-light: rgba(101, 163, 13, 0.1);
+      --accent-secondary: #d97706;
       
       /* Complementary gold for geometric shape */
       --gold: #d97706;
@@ -89,6 +90,7 @@
       --accent: #65a30d;
       --accent-hover: #4d7c0f;
       --accent-light: rgba(101, 163, 13, 0.1);
+      --accent-secondary: #d97706;
       --gold: #d97706;
     }
 
@@ -97,6 +99,7 @@
       --accent: #0ea5e9;
       --accent-hover: #0284c7;
       --accent-light: rgba(14, 165, 233, 0.1);
+      --accent-secondary: #6366f1;
       --gold: #6366f1;
     }
 
@@ -105,6 +108,7 @@
       --accent: #f472b6;
       --accent-hover: #ec4899;
       --accent-light: rgba(244, 114, 182, 0.12);
+      --accent-secondary: #2dd4bf;
       --gold: #2dd4bf;
       --white:      #0d1117;
       --slate-50:   #111827;
@@ -124,6 +128,7 @@
       --accent: #f59e0b;
       --accent-hover: #d97706;
       --accent-light: rgba(245, 158, 11, 0.12);
+      --accent-secondary: #ef4444;
       --gold: #ef4444;
       --white:      #0d1117;
       --slate-50:   #111827;
@@ -172,7 +177,7 @@
     }
     [data-theme="miami"] .hero-name-card:hover,
     [data-theme="ember"] .hero-name-card:hover {
-      background: rgba(101, 163, 13, 0.9);
+      background: var(--accent-secondary);
     }
     [data-theme="miami"] .hero-name-card:hover .hero-name {
       color: #0d1117;
@@ -484,9 +489,9 @@
     }
 
     .hero-name-card:hover {
-      background: rgba(101, 163, 13, 0.9);
+      background: var(--accent-secondary);
       border-radius: 20px;
-      box-shadow: 0 15px 30px -5px rgba(101, 163, 13, 0.35);
+      box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.25);
     }
 
     .hero-name-card:hover .hero-name {
@@ -794,7 +799,7 @@
     
     .service-card:hover .service-icon,
     .service-card.scroll-active .service-icon {
-      color: var(--accent);
+      color: var(--accent-secondary);
       transform: scale(1.15);
     }
 
@@ -913,7 +918,7 @@
     
     .what-i-do .service-card:hover .service-icon,
     .what-i-do .service-card.scroll-active .service-icon {
-      color: var(--accent);
+      color: var(--accent-secondary);
     }
     
     .service-card h3 {
@@ -1068,7 +1073,7 @@
 
     .project-expand summary {
       cursor: pointer;
-      color: var(--accent);
+      color: var(--accent-secondary);
       font-size: 0.9rem;
       font-weight: 500;
       list-style: none;
@@ -1480,7 +1485,7 @@
       font-family: var(--font-display);
       font-size: 0.9375rem;
       font-weight: 600;
-      color: var(--accent);
+      color: var(--accent-secondary);
       cursor: pointer;
       list-style: none;
       display: inline-flex;
@@ -1793,7 +1798,7 @@
     }
 
     .flowform-progress-bar.active {
-      background: var(--accent);
+      background: var(--accent-secondary);
       transform: scaleY(1);
     }
 
@@ -3057,8 +3062,8 @@
               <path d="M12 15l-3-3a22 22 0 012-3.95A12.88 12.88 0 0122 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 01-4 2z"/>
               <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/>
               <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>
-              <circle class="rocket-flame" cx="3.5" cy="20.5" r="2" fill="var(--accent)" stroke="none" opacity="0.5"/>
-              <circle class="rocket-flame" cx="4.5" cy="19.5" r="1" fill="var(--accent)" stroke="none"/>
+              <circle class="rocket-flame" cx="3.5" cy="20.5" r="2" fill="var(--accent-secondary)" stroke="none" opacity="0.5"/>
+              <circle class="rocket-flame" cx="4.5" cy="19.5" r="1" fill="var(--accent-secondary)" stroke="none"/>
             </svg>
           </div>
           <h3>Make it Fly</h3>
