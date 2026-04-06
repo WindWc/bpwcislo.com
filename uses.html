@@ -218,6 +218,7 @@
       if (saved && valid.indexOf(saved) !== -1) {
         document.documentElement.setAttribute('data-theme', saved);
       }
+      try { localStorage.setItem('visited-uses', '1'); } catch(e) {}
     })();
   </script>
 

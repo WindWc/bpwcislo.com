@@ -3598,6 +3598,14 @@ if (window.location.hash) {
       };
     })();
 
+    // Award points if visitor came back from /uses
+    try {
+      if (localStorage.getItem('visited-uses') === '1') {
+        localStorage.removeItem('visited-uses');
+        SiteScore.once(401, 'uses-page');
+      }
+    } catch(e) {}
+
     // Points modal
     (function() {
       var overlay = document.getElementById('scoreModalOverlay');
@@ -3613,6 +3621,7 @@ if (window.location.hash) {
         ['Scroll to a new section', '15 pts'],
         ['Scroll or navigate the portfolio', '7–10 pts'],
         ['Each FlowForm step', '50 pts'],
+        ['Visit the /uses page', '401 pts'],
         ['Complete the FlowForm', '1,000 pts'],
       ];
 
