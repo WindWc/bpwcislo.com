@@ -2986,8 +2986,7 @@
     <div class="score-modal">
       <button class="score-modal-close" id="scoreModalClose" aria-label="Close">&times;</button>
       <h3 id="scoreModalTitle">This is an experiment.</h3>
-      <p>My site is one of my digital playgrounds, and I thought it'd be fun to see how much gamification I could sneak in without turning the whole thing into a casino. This is round one.</p>
-      <p>I may expand it, simplify it, or scrap it completely. For now, I'm learning and having fun with it.</p>
+      <p>My site is one of my digital playgrounds, and I thought it'd be fun to see how much gamification I could sneak in without turning the whole thing into a casino.</p>
       <h4>Here's how the points work:</h4>
       <div class="score-formula" id="scoreFormula"></div>
     </div>
@@ -3522,9 +3521,19 @@
       applyTheme(saved || 'jungle');
 
       // Wire up dots
+      var themeFirstSwitch = true;
       document.querySelectorAll('.theme-dot').forEach(function(dot) {
         dot.addEventListener('click', function() {
+          var prev = document.documentElement.getAttribute('data-theme');
           applyTheme(dot.dataset.theme);
+          if (dot.dataset.theme !== prev) {
+            if (themeFirstSwitch) {
+              SiteScore.award(50, 'theme-first');
+              themeFirstSwitch = false;
+            } else {
+              SiteScore.award(25, 'theme-switch', 3000);
+            }
+          }
         });
       });
     })();
@@ -3601,6 +3610,7 @@
       var formula = [
         ['Hover on a card or element', '3–7 pts'],
         ['Click a nav link', '10 pts'],
+        ['Switch a color theme', '25–50 pts'],
         ['Scroll to a new section', '15 pts'],
         ['Scroll or navigate the portfolio', '7–10 pts'],
         ['Each FlowForm step', '50 pts'],
