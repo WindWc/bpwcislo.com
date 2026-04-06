@@ -2928,18 +2928,22 @@
         "itemReviewed": { "@id": "https://bpwcislo.com/#service" },
         "author": { "@type": "Person", "name": "Denis Aumiller", "jobTitle": "Creative Director, LVMH" },
         "reviewBody": "Brian has a unique ability to build and lead highly effective teams. Whether developing immersive interactive experiences or overseeing the entire creative process, he brings a refreshing level of joy and dedication to every project."
-      },
-      {
-        "@type": "Review",
-        "itemReviewed": { "@id": "https://bpwcislo.com/#service" },
-        "author": { "@type": "Person", "name": "Ryan Nedza", "jobTitle": "Owner, Associated Restaurant Services" },
-        "reviewBody": "Brian makes things possible we never would have dreamed of. His ability to see all the moving parts and build the bridge from where we are to where we want to be is nothing short of astonishing. Grateful to have him in our corner for the last 17 years."
       }
     ]
   }
   </script>
 </head>
 <body>
+<script>
+if (window.location.hash) {
+  document.documentElement.style.scrollBehavior = 'auto';
+  requestAnimationFrame(function() {
+    setTimeout(function() {
+      document.documentElement.style.scrollBehavior = '';
+    }, 50);
+  });
+}
+</script>
   <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- Navigation -->
@@ -3341,11 +3345,6 @@
           <span class="testimonial-title">Creative Director, <span class="company">LVMH</span></span>
         </div>
 
-        <div class="testimonial-card">
-          <p class="testimonial-quote">"Brian makes things possible we never would have dreamed of. His ability to see all the moving parts and build the bridge from where we are to where we want to be is nothing short of astonishing. Grateful to have him in our corner for the last 17 years."</p>
-          <span class="testimonial-author">Ryan Nedza</span>
-          <span class="testimonial-title">Owner, <span class="company">Associated Restaurant Services</span></span>
-        </div>
       </div>
     </div>
   </section>

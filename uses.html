@@ -35,8 +35,55 @@
       --white: #ffffff;
       --accent: #65a30d;
       --accent-hover: #4d7c0f;
+      --accent-secondary: #d97706;
       --font-display: 'Sora', sans-serif;
       --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    [data-theme="jungle"] {
+      --accent: #65a30d;
+      --accent-hover: #4d7c0f;
+      --accent-secondary: #d97706;
+    }
+
+    [data-theme="ocean"] {
+      --accent: #0ea5e9;
+      --accent-hover: #0284c7;
+      --accent-secondary: #6366f1;
+    }
+
+    [data-theme="miami"] {
+      --accent: #f472b6;
+      --accent-hover: #ec4899;
+      --accent-secondary: #2dd4bf;
+      --white:      #0d1117;
+      --slate-50:   #111827;
+      --slate-100:  #1a2235;
+      --slate-200:  #1e293b;
+      --slate-300:  #334155;
+      --slate-400:  #475569;
+      --slate-500:  #64748b;
+      --slate-600:  #94a3b8;
+      --slate-700:  #cbd5e1;
+      --slate-800:  #e2e8f0;
+      --slate-900:  #f1f5f9;
+    }
+
+    [data-theme="ember"] {
+      --accent: #f59e0b;
+      --accent-hover: #d97706;
+      --accent-secondary: #ef4444;
+      --white:      #0d1117;
+      --slate-50:   #111827;
+      --slate-100:  #1a2235;
+      --slate-200:  #1e293b;
+      --slate-300:  #334155;
+      --slate-400:  #475569;
+      --slate-500:  #64748b;
+      --slate-600:  #94a3b8;
+      --slate-700:  #cbd5e1;
+      --slate-800:  #e2e8f0;
+      --slate-900:  #f1f5f9;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -158,7 +205,21 @@
         margin-left: 0;
       }
     }
+    body, .back-link, .tool, .tool-name, .tool-desc, h1, h2, header p, .updated {
+      transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+    }
   </style>
+
+  <script>
+    (function() {
+      var valid = ['jungle', 'miami', 'ocean', 'ember'];
+      var saved;
+      try { saved = localStorage.getItem('wind-theme'); } catch(e) {}
+      if (saved && valid.indexOf(saved) !== -1) {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
@@ -178,7 +239,7 @@
 <body>
   <div class="container">
     <header>
-      <a href="/" class="back-link">
+      <a href="/#contact" class="back-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
         Back to home
       </a>
