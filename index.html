@@ -2441,6 +2441,50 @@
       font-variant-numeric: tabular-nums;
     }
 
+    .score-formula-row.sf-egg {
+      cursor: pointer;
+      transition: transform 150ms ease;
+    }
+    .score-formula-row.sf-egg:hover .sf-pts {
+      color: var(--accent-secondary);
+      animation: eggPulse 600ms ease;
+    }
+    @keyframes eggPulse {
+      0%   { transform: scale(1); }
+      40%  { transform: scale(1.18); }
+      70%  { transform: scale(0.95); }
+      100% { transform: scale(1); }
+    }
+
+    .egg-video-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10001;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 400ms ease;
+      pointer-events: none;
+    }
+    .egg-video-overlay.visible {
+      background: rgba(0, 0, 0, 0.92);
+      pointer-events: auto;
+    }
+    .egg-video-overlay video {
+      max-width: min(90vw, 640px);
+      max-height: 80vh;
+      border-radius: 8px;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 500ms ease 100ms, transform 500ms ease 100ms;
+    }
+    .egg-video-overlay.visible video {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     @media (max-width: 768px) {
       .nav-left { gap: var(--space-3, 12px); }
       .site-score { font-size: 0.6rem; }
@@ -2994,6 +3038,10 @@ if (window.location.hash) {
       <h4>Here's how the points work:</h4>
       <div class="score-formula" id="scoreFormula"></div>
     </div>
+  </div>
+
+  <div class="egg-video-overlay" id="eggVideoOverlay">
+    <video id="eggVideo" src="/401-easter-egg.mp4" playsinline muted preload="none"></video>
   </div>
 
   <!-- Floating Background Shapes -->
@@ -3627,12 +3675,33 @@ if (window.location.hash) {
 
       var html = '';
       formula.forEach(function(row) {
-        html += '<div class="score-formula-row">'
+        var isEgg = row[1] === '401 pts';
+        html += '<div class="score-formula-row' + (isEgg ? ' sf-egg' : '') + '"' + (isEgg ? ' id="sfEggRow"' : '') + '>'
           + '<span class="sf-action">' + row[0] + '</span>'
           + '<span class="sf-pts">' + row[1] + '</span>'
           + '</div>';
       });
       formulaEl.innerHTML = html;
+
+      var eggRow = document.getElementById('sfEggRow');
+      var eggOverlay = document.getElementById('eggVideoOverlay');
+      var eggVideo = document.getElementById('eggVideo');
+      if (eggRow && eggOverlay && eggVideo) {
+        function openEgg(e) {
+          e.stopPropagation();
+          eggOverlay.classList.add('visible');
+          eggVideo.currentTime = 0;
+          var p = eggVideo.play();
+          if (p && p.catch) p.catch(function() {});
+        }
+        function closeEgg() {
+          eggOverlay.classList.remove('visible');
+          eggVideo.pause();
+        }
+        eggRow.addEventListener('click', openEgg);
+        eggOverlay.addEventListener('click', closeEgg);
+        eggVideo.addEventListener('ended', closeEgg);
+      }
 
       function openModal() {
         overlay.hidden = false;
