@@ -3670,7 +3670,8 @@ if (window.location.hash) {
         ['Scroll or navigate the portfolio', '8–9 pts'],
         ['Each FlowForm step', '33 pts'],
         ['Visit the /uses page', '401 pts'],
-        ['Complete the FlowForm', '1,008 pts'],
+        ['Find the Easter egg', '1,008 pts'],
+        ['Complete the FlowForm', '1,111 pts'],
       ];
 
       var html = '';
@@ -3689,6 +3690,7 @@ if (window.location.hash) {
       if (eggRow && eggOverlay && eggVideo) {
         function openEgg(e) {
           e.stopPropagation();
+          SiteScore.once(1008, 'egg-video');
           eggOverlay.classList.add('visible');
           eggVideo.currentTime = 0;
           var p = eggVideo.play();
@@ -4409,7 +4411,7 @@ if (window.location.hash) {
         ffCard.className = 'flowform-card ' + animClass;
 
         if (screen.type === 'confirmation') {
-          SiteScore.once(1008, 'ff-complete');
+          SiteScore.once(1111, 'ff-complete');
         } else if (step > 0) {
           SiteScore.once(33, 'ff-step-' + step);
         }
