@@ -186,6 +186,24 @@
       color: #0d1117;
     }
 
+    /* Dark theme sidebar overrides */
+    [data-theme="miami"] .theme-sidebar,
+    [data-theme="ember"] .theme-sidebar {
+      /* pill ring adapts */
+    }
+    [data-theme="miami"] .theme-pill,
+    [data-theme="ember"] .theme-pill {
+      border-color: var(--accent);
+    }
+    @media (max-width: 768px) {
+      [data-theme="miami"] .theme-sidebar,
+      [data-theme="ember"] .theme-sidebar {
+        background: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+    }
+
     /* Smooth theme transitions */
     body, .site-nav, section, .service-card, .project-card,
     .essential-card, .score-modal, .flowform-card {
@@ -2491,42 +2509,187 @@
       .score-modal { padding: var(--space-6); }
     }
 
-    /* Theme Picker */
-    .theme-picker {
+    /* ── Theme Sidebar ───────────────────────────────────── */
+    .theme-sidebar {
+      position: fixed;
+      left: 24px;
+      top: 30vh;
+      z-index: 900;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 10px;
+      transition: top 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .theme-dot {
+    .theme-pill {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      padding: 0;
+      cursor: pointer;
+      position: relative;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+                  border-color 300ms ease,
+                  box-shadow 250ms ease;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .theme-pill:hover {
+      transform: scale(1.12);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .theme-pill-dot {
+      display: block;
       width: 10px;
       height: 10px;
       border-radius: 50%;
+      background: var(--slate-900);
+      transition: background 300ms ease;
+    }
+
+    @keyframes eyeBlink {
+      0%   { transform: scaleY(1); }
+      42%  { transform: scaleY(1); }
+      46%  { transform: scaleY(0.08); }
+      52%  { transform: scaleY(1); }
+      100% { transform: scaleY(1); }
+    }
+
+    .theme-pill.blink {
+      animation: eyeBlink 1.2s ease-in-out forwards;
+    }
+
+    .theme-options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: max-height 280ms cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 200ms ease;
+    }
+
+    .theme-sidebar.open .theme-options {
+      max-height: 160px;
+      opacity: 1;
+      pointer-events: auto;
+      transition: max-height 350ms cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 250ms ease 60ms;
+    }
+
+    .theme-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
       background: var(--dot-color);
-      border: none;
+      border: 2px solid transparent;
       padding: 0;
       cursor: pointer;
-      opacity: 0.4;
-      transition: transform 200ms ease, opacity 200ms ease, width 200ms ease, height 200ms ease;
+      opacity: 0;
+      transform: translateY(-8px) scale(0.5);
+      transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 280ms ease,
+                  border-color 200ms ease,
+                  box-shadow 200ms ease;
       flex-shrink: 0;
     }
 
+    .theme-sidebar.open .theme-dot {
+      opacity: 0.55;
+      transform: translateY(0) scale(1);
+    }
+
+    .theme-sidebar.open .theme-dot:nth-child(1) { transition-delay: 0ms; }
+    .theme-sidebar.open .theme-dot:nth-child(2) { transition-delay: 50ms; }
+    .theme-sidebar.open .theme-dot:nth-child(3) { transition-delay: 100ms; }
+    .theme-sidebar.open .theme-dot:nth-child(4) { transition-delay: 150ms; }
+
+    .theme-sidebar:not(.open) .theme-dot {
+      transition-delay: 0ms;
+      transition-duration: 180ms;
+    }
+
     .theme-dot:hover {
-      transform: scale(1.25);
-      opacity: 1;
+      opacity: 1 !important;
+      transform: scale(1.2);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
     }
 
     .theme-dot.active {
-      width: 13px;
-      height: 13px;
-      opacity: 1;
+      opacity: 1 !important;
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
+    /* Mobile: inside nav, to the left of hamburger */
     @media (max-width: 768px) {
-      .theme-picker {
-        gap: 21px;
+      .theme-sidebar {
+        position: static;
+        flex-direction: row-reverse;
+        align-items: center;
+        order: 2;
+        background: none;
+        padding: 0;
+        margin: 0 10px 0 0;
+        box-shadow: none;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        z-index: auto;
+        flex-shrink: 0;
       }
-      .theme-dot { width: 11px; height: 11px; }
+      .nav-hamburger { order: 3; }
+      .theme-pill {
+        width: 22px;
+        height: 22px;
+        transition: border-color 300ms ease;
+      }
+      .theme-sidebar.open .theme-pill {
+        border-color: var(--slate-900);
+      }
+      .theme-pill-dot {
+        width: 9px;
+        height: 9px;
+        transition: background 300ms ease;
+      }
+      .theme-sidebar.open .theme-pill-dot {
+        background: var(--accent);
+      }
+      .theme-options {
+        flex-direction: row;
+        gap: 10px;
+        max-height: none;
+        max-width: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-width 280ms cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 200ms ease;
+      }
+      .theme-sidebar.open .theme-options {
+        max-width: 140px;
+        opacity: 1;
+        transition: max-width 350ms cubic-bezier(0.16, 1, 0.3, 1),
+                    opacity 250ms ease 60ms;
+      }
+      .theme-dot {
+        width: 16px;
+        height: 16px;
+        transform: translateX(6px) scale(0.5);
+      }
+      .theme-sidebar.open .theme-dot {
+        transform: translateX(0) scale(1);
+      }
+      .nav-left {
+        margin-right: auto;
+      }
     }
 
     .nav-links {
@@ -2618,8 +2781,7 @@
 
     .nav-name-short { display: none; }
 
-    .nav-mobile-header,
-    .nav-mobile-theme {
+    .nav-mobile-header {
       display: none;
     }
 
@@ -2675,10 +2837,6 @@
         font-weight: 600;
         color: var(--accent);
         letter-spacing: 0.02em;
-      }
-
-      .nav-mobile-theme {
-        display: none;
       }
 
       .nav-links li {
@@ -2992,6 +3150,18 @@ if (window.location.hash) {
 
   <!-- Navigation -->
   <nav class="site-nav">
+    <!-- Theme Sidebar -->
+    <div class="theme-sidebar" id="themeSidebar" role="group" aria-label="Color theme">
+      <button class="theme-pill" id="themePillToggle" aria-expanded="false" aria-label="Change color theme">
+        <span class="theme-pill-dot"></span>
+      </button>
+      <div class="theme-options" id="themeOptions">
+        <button class="theme-dot" data-theme="jungle" aria-label="Jungle" style="--dot-color:#65a30d"></button>
+        <button class="theme-dot" data-theme="miami" aria-label="Miami Night" style="--dot-color:#f472b6"></button>
+        <button class="theme-dot" data-theme="ocean" aria-label="Ocean" style="--dot-color:#0ea5e9"></button>
+        <button class="theme-dot" data-theme="ember" aria-label="Ember Night" style="--dot-color:#f59e0b"></button>
+      </div>
+    </div>
     <div class="nav-left">
       <a href="#" class="nav-name"><span class="nav-name-full">Brian Wcislo</span><span class="nav-name-short">BPW</span></a>
       <button class="site-score" id="siteScore" aria-label="Points counter — click to learn more" aria-haspopup="dialog">
@@ -2999,13 +3169,6 @@ if (window.location.hash) {
         <span class="site-score-tooltip" aria-hidden="true">What's this?</span>
       </button>
     </div>
-    <div class="theme-picker" role="group" aria-label="Color theme">
-      <button class="theme-dot" data-theme="jungle" aria-label="Jungle theme" style="--dot-color:#65a30d"></button>
-      <button class="theme-dot" data-theme="miami"  aria-label="Miami Night theme" style="--dot-color:#f472b6"></button>
-      <button class="theme-dot" data-theme="ocean"  aria-label="Ocean theme"  style="--dot-color:#0ea5e9"></button>
-      <button class="theme-dot" data-theme="ember"  aria-label="Ember Night theme"  style="--dot-color:#f59e0b"></button>
-    </div>
-
     <button class="nav-hamburger" id="navHamburger" aria-label="Toggle navigation menu" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -3020,12 +3183,6 @@ if (window.location.hash) {
       <li><a href="#partners">Partners</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li class="nav-mobile-theme" aria-hidden="true">
-        <button class="theme-dot" data-theme="jungle" aria-label="Jungle theme" style="--dot-color:#65a30d"></button>
-        <button class="theme-dot" data-theme="miami"  aria-label="Miami Night theme" style="--dot-color:#f472b6"></button>
-        <button class="theme-dot" data-theme="ocean"  aria-label="Ocean theme"  style="--dot-color:#0ea5e9"></button>
-        <button class="theme-dot" data-theme="ember"  aria-label="Ember Night theme"  style="--dot-color:#f59e0b"></button>
-      </li>
     </ul>
   </nav>
 
@@ -3053,6 +3210,7 @@ if (window.location.hash) {
   </div>
   
   <main>
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
@@ -3548,29 +3706,69 @@ if (window.location.hash) {
   </form>
 
   <script>
-    // ─── THEME PICKER ────────────────────────────────────────
+    // ─── THEME SIDEBAR ──────────────────────────────────────
     (function() {
-      var THEMES = ['jungle', 'miami', 'ocean', 'ember'];
-      var STORAGE_KEY = 'wind-theme';
+      var THEMES   = ['jungle', 'miami', 'ocean', 'ember'];
+      var COLORS   = { jungle: '#65a30d', miami: '#f472b6', ocean: '#0ea5e9', ember: '#f59e0b' };
+      var STORAGE  = 'wind-theme';
+
+      var sidebar   = document.getElementById('themeSidebar');
+      var pill      = document.getElementById('themePillToggle');
+      var options   = document.getElementById('themeOptions');
+      var dots      = sidebar.querySelectorAll('.theme-dot');
+      var heroHeadline = document.querySelector('.hero-headline');
+      var heroImg   = document.querySelector('.hero-image-container');
+
+      var isMobile  = function() { return window.innerWidth <= 768; };
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       function applyTheme(theme) {
         if (THEMES.indexOf(theme) === -1) theme = 'jungle';
         document.documentElement.setAttribute('data-theme', theme);
-        document.querySelectorAll('.theme-dot').forEach(function(dot) {
-          dot.classList.toggle('active', dot.dataset.theme === theme);
+        dots.forEach(function(d) {
+          d.classList.toggle('active', d.dataset.theme === theme);
         });
-        try { localStorage.setItem(STORAGE_KEY, theme); } catch(e) {}
+        try { localStorage.setItem(STORAGE, theme); } catch(e) {}
       }
 
-      // Restore saved or default
       var saved;
-      try { saved = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+      try { saved = localStorage.getItem(STORAGE); } catch(e) {}
       applyTheme(saved || 'jungle');
 
-      // Wire up dots
+      // ── Toggle expand / collapse ─────────────────────────
+      function openSidebar() {
+        sidebar.classList.add('open');
+        pill.setAttribute('aria-expanded', 'true');
+      }
+      function closeSidebar() {
+        sidebar.classList.remove('open');
+        pill.setAttribute('aria-expanded', 'false');
+      }
+
+      pill.addEventListener('click', function(e) {
+        e.stopPropagation();
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+      });
+
+      sidebar.addEventListener('mouseenter', function() {
+        openSidebar();
+      });
+
+      sidebar.addEventListener('mouseleave', function() {
+        closeSidebar();
+      });
+
+      document.addEventListener('click', function(e) {
+        if (sidebar.classList.contains('open') && !sidebar.contains(e.target)) {
+          closeSidebar();
+        }
+      });
+
+      // ── Theme selection ──────────────────────────────────
       var themeFirstSwitch = true;
-      document.querySelectorAll('.theme-dot').forEach(function(dot) {
-        dot.addEventListener('click', function() {
+      dots.forEach(function(dot) {
+        dot.addEventListener('click', function(e) {
+          e.stopPropagation();
           var prev = document.documentElement.getAttribute('data-theme');
           applyTheme(dot.dataset.theme);
           if (dot.dataset.theme !== prev) {
@@ -3583,8 +3781,26 @@ if (window.location.hash) {
           }
         });
       });
+
+      // ── Desktop: set fixed position once, aligned with headline ──
+      if (!isMobile() && heroHeadline) {
+        var rect = heroHeadline.getBoundingClientRect();
+        sidebar.style.top = rect.top + 'px';
+      }
+
+      // ── Eye blink every 7 seconds ──────────────────────────
+      if (!reducedMotion) {
+        setInterval(function() {
+          if (sidebar.classList.contains('open') || isMobile()) return;
+          pill.classList.add('blink');
+          pill.addEventListener('animationend', function handler() {
+            pill.classList.remove('blink');
+            pill.removeEventListener('animationend', handler);
+          });
+        }, 7000);
+      }
     })();
-    // ─── END THEME PICKER ────────────────────────────────────
+    // ─── END THEME SIDEBAR ────────────────────────────────────
 
     const circleWrapper = document.querySelector('.circle-wrapper');
     const squareWrapper = document.querySelector('.square-wrapper');
