@@ -1,0 +1,46 @@
+---
+layout: false
+pageTitle: "Blog | Brian Patrick Wcislo"
+description: "Reflections on building apps, operations systems, and a life that moves — from the jungle in Costa Rica."
+permalink: /blog/
+tags: []
+eleventyExcludeFromCollections: true
+---
+{% extends "layouts/base.njk" %}
+
+{% block head_css %}
+<link rel="stylesheet" href="/css/blog.css">
+{% endblock %}
+
+{% block body %}
+<main class="blog-listing">
+  <div class="container">
+    <header class="blog-header blog-fade">
+      <h1><strong>Building</strong></h1>
+      <p class="blog-intro">Notes on building apps, systems, and a life that moves.</p>
+    </header>
+
+    <div class="blog-grid">
+      {% for post in collections.posts %}
+      <a href="{{ post.url }}" class="blog-card blog-fade">
+        {% if post.data.featuredImage %}
+        <img src="{{ post.data.featuredImage }}" alt="{{ post.data.title }}" loading="lazy" class="blog-card-image">
+        {% endif %}
+        <div class="blog-card-body">
+          <time datetime="{{ post.date | dateISO }}">{{ post.date | dateDisplay }}</time>
+          <h2>{{ post.data.title }}</h2>
+          <p>{{ post.data.excerpt | default(post.data.description) }}</p>
+          <span class="blog-card-meta">{{ post.content | readingTime }}</span>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}
+
+{% block body_js %}
+<script>
+  if (typeof SiteScore !== 'undefined') SiteScore.once(108, 'visit-blog');
+</script>
+{% endblock %}

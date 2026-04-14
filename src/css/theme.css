@@ -1,0 +1,164 @@
+:root {
+  /* Slate-based palette from design.md */
+  --slate-900: #0f172a;
+  --slate-800: #1e293b;
+  --slate-700: #334155;
+  --slate-600: #475569;
+  --slate-500: #64748b;
+  --slate-400: #94a3b8;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50: #f8fafc;
+  --white: #ffffff;
+  
+  /* Accent - keeping your green but refined */
+  --accent: #65a30d;
+  --accent-hover: #4d7c0f;
+  --accent-light: rgba(101, 163, 13, 0.1);
+  --accent-secondary: #d97706;
+  
+  /* Complementary gold for geometric shape */
+  --gold: #d97706;
+  
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  /* Spacing scale from design.md */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-24: 96px;
+}
+
+/* ─── THEMES ─────────────────────────────────────────── */
+
+/* Jungle (default — accent vars already set in :root) */
+[data-theme="jungle"] {
+  --accent: #65a30d;
+  --accent-hover: #4d7c0f;
+  --accent-light: rgba(101, 163, 13, 0.1);
+  --accent-secondary: #d97706;
+  --gold: #d97706;
+}
+
+/* Ocean — crisp sky blue */
+[data-theme="ocean"] {
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
+  --accent-light: rgba(14, 165, 233, 0.1);
+  --accent-secondary: #6366f1;
+  --gold: #6366f1;
+}
+
+/* Miami Night — dark mode + hot pink + teal */
+[data-theme="miami"] {
+  --accent: #f472b6;
+  --accent-hover: #ec4899;
+  --accent-light: rgba(244, 114, 182, 0.12);
+  --accent-secondary: #2dd4bf;
+  --gold: #2dd4bf;
+  --white:      #0d1117;
+  --slate-50:   #111827;
+  --slate-100:  #1a2235;
+  --slate-200:  #1e293b;
+  --slate-300:  #334155;
+  --slate-400:  #475569;
+  --slate-500:  #64748b;
+  --slate-600:  #94a3b8;
+  --slate-700:  #cbd5e1;
+  --slate-800:  #e2e8f0;
+  --slate-900:  #f1f5f9;
+}
+
+/* Ember Night — dark mode + warm amber */
+[data-theme="ember"] {
+  --accent: #f59e0b;
+  --accent-hover: #d97706;
+  --accent-light: rgba(245, 158, 11, 0.12);
+  --accent-secondary: #ef4444;
+  --gold: #ef4444;
+  --white:      #0d1117;
+  --slate-50:   #111827;
+  --slate-100:  #1a2235;
+  --slate-200:  #1e293b;
+  --slate-300:  #334155;
+  --slate-400:  #475569;
+  --slate-500:  #64748b;
+  --slate-600:  #94a3b8;
+  --slate-700:  #cbd5e1;
+  --slate-800:  #e2e8f0;
+  --slate-900:  #f1f5f9;
+}
+
+/* Dark theme nav/UI patches (shared by Miami + Ember) */
+[data-theme="miami"] .site-nav,
+[data-theme="ember"] .site-nav {
+  background: rgba(13, 17, 23, 0.65);
+}
+[data-theme="miami"] .site-nav.scrolled,
+[data-theme="ember"] .site-nav.scrolled {
+  background: rgba(13, 17, 23, 0.88);
+  border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+[data-theme="miami"] .nav-links,
+[data-theme="ember"] .nav-links {
+  background: rgba(13, 17, 23, 0.94) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+[data-theme="miami"] .score-modal,
+[data-theme="ember"] .score-modal {
+  background: var(--slate-100);
+}
+[data-theme="miami"] .nav-hamburger span,
+[data-theme="ember"] .nav-hamburger span {
+  background: var(--slate-900);
+}
+[data-theme="miami"] .hero-name-card,
+[data-theme="ember"] .hero-name-card {
+  background: rgba(241, 245, 249, 0.95);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.35);
+}
+[data-theme="miami"] .hero-name,
+[data-theme="ember"] .hero-name {
+  color: #0d1117;
+}
+[data-theme="miami"] .hero-name-card:hover,
+[data-theme="ember"] .hero-name-card:hover {
+  background: var(--accent-secondary);
+}
+[data-theme="miami"] .hero-name-card:hover .hero-name {
+  color: #0d1117;
+}
+[data-theme="ember"] .hero-name-card:hover .hero-name {
+  color: #0d1117;
+}
+
+/* Dark theme sidebar overrides */
+[data-theme="miami"] .theme-sidebar,
+[data-theme="ember"] .theme-sidebar {
+  /* pill ring adapts */
+}
+[data-theme="miami"] .theme-pill,
+[data-theme="ember"] .theme-pill {
+  border-color: var(--accent);
+}
+@media (max-width: 768px) {
+  [data-theme="miami"] .theme-sidebar,
+  [data-theme="ember"] .theme-sidebar {
+    background: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
+/* Smooth theme transitions */
+body, .site-nav, section, .service-card, .project-card,
+.essential-card, .score-modal, .flowform-card {
+  transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+}
+/* ─── END THEMES ──────────────────────────────────────── */

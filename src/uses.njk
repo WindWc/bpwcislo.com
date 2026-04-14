@@ -1,0 +1,292 @@
+---
+pageTitle: "Uses — Brian Patrick Wcislo"
+description: "The tools, tech, and setup Brian Patrick Wcislo uses to build custom apps, training platforms, and workflow systems."
+canonicalUrl: "https://bpwcislo.com/uses"
+permalink: /uses/
+---
+{% extends "layouts/base.njk" %}
+
+{% block head_css %}
+<style>
+  .uses-container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  .uses-header {
+    margin-bottom: 64px;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-display);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--slate-500);
+    text-decoration: none;
+    transition: color 200ms ease;
+    margin-bottom: 32px;
+  }
+  .back-link:hover { color: var(--accent); }
+  .back-link svg { width: 16px; height: 16px; }
+
+  .uses-header h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .uses-header p {
+    font-size: 1.0625rem;
+    color: var(--slate-600);
+    max-width: 540px;
+  }
+
+  .uses-section {
+    margin-bottom: 56px;
+  }
+
+  .uses-section h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+  }
+
+  .tool-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .tool {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--slate-100);
+  }
+
+  .tool:last-child {
+    border-bottom: none;
+  }
+
+  .tool-name {
+    font-weight: 600;
+    color: var(--slate-900);
+  }
+
+  .tool-desc {
+    font-size: 0.875rem;
+    color: var(--slate-500);
+    text-align: right;
+    flex-shrink: 0;
+    margin-left: 24px;
+  }
+
+  .uses-updated {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid var(--slate-200);
+    font-size: 0.8125rem;
+    color: var(--slate-400);
+  }
+
+  @media (max-width: 480px) {
+    .tool {
+      flex-direction: column;
+      gap: 2px;
+    }
+    .tool-desc {
+      text-align: left;
+      margin-left: 0;
+    }
+  }
+
+  .uses-container, .back-link, .tool, .tool-name, .tool-desc,
+  .uses-header h1, .uses-section h2, .uses-header p, .uses-updated {
+    transition: background-color 350ms ease, color 350ms ease, border-color 350ms ease;
+  }
+</style>
+{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Uses — Brian Patrick Wcislo",
+  "description": "{{ description }}",
+  "url": "{{ canonicalUrl }}",
+  "author": {
+    "@type": "Person",
+    "name": "Brian Patrick Wcislo",
+    "url": "https://bpwcislo.com"
+  }
+}
+</script>
+{% endblock %}
+
+{% block body %}
+<div class="uses-container">
+  <header class="uses-header">
+    <a href="/#contact" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to home
+    </a>
+    <h1>What I Use</h1>
+    <p>The tools, tech, and setup behind the work. Updated when something earns a permanent spot in the rotation.</p>
+  </header>
+
+  <main>
+    <div class="uses-section">
+      <h2>Dev Stack</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">React / Next.js</span>
+          <span class="tool-desc">Web apps and marketing sites</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">React Native</span>
+          <span class="tool-desc">iOS & Android apps</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">TypeScript</span>
+          <span class="tool-desc">Everything, always</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Supabase</span>
+          <span class="tool-desc">Auth, database, realtime, storage</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Node.js</span>
+          <span class="tool-desc">APIs and server-side logic</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Tailwind CSS</span>
+          <span class="tool-desc">Utility-first styling</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Vercel / Netlify</span>
+          <span class="tool-desc">Hosting and deploy pipelines</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="uses-section">
+      <h2>Design</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">Figma</span>
+          <span class="tool-desc">UI design and prototyping</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Whimsical</span>
+          <span class="tool-desc">Wireframes and flow diagrams</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Adobe Creative Suite</span>
+          <span class="tool-desc">When the job calls for it</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="uses-section">
+      <h2>AI & Automation</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">Claude</span>
+          <span class="tool-desc">Deep thinking and writing partner</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Cursor</span>
+          <span class="tool-desc">AI-native code editor</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">ChatGPT</span>
+          <span class="tool-desc">Brainstorming and quick research</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">v0 by Vercel</span>
+          <span class="tool-desc">Rapid UI prototyping</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="uses-section">
+      <h2>Productivity</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">Linear</span>
+          <span class="tool-desc">Project and task management</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Notion</span>
+          <span class="tool-desc">Docs, specs, and knowledge base</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Slack</span>
+          <span class="tool-desc">Team communication</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Loom</span>
+          <span class="tool-desc">Async video walkthroughs</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">GitHub</span>
+          <span class="tool-desc">Version control and collaboration</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="uses-section">
+      <h2>Hardware</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">MacBook Pro</span>
+          <span class="tool-desc">Primary machine</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">iPad Pro</span>
+          <span class="tool-desc">Testing, sketching, reading</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="uses-section">
+      <h2>The Office</h2>
+      <div class="tool-grid">
+        <div class="tool">
+          <span class="tool-name">Costa Rica</span>
+          <span class="tool-desc">The permanent backdrop</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Morning yoga</span>
+          <span class="tool-desc">Before the first line of code</span>
+        </div>
+        <div class="tool">
+          <span class="tool-name">Local coffee</span>
+          <span class="tool-desc">The real fuel</span>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <p class="uses-updated">Last updated February 2026</p>
+</div>
+
+{% endblock %}
+
+{% block body_js %}
+<script>
+  try { localStorage.setItem('visited-uses', '1'); } catch(e) {}
+</script>
+{% endblock %}

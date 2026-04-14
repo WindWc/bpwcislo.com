@@ -1,0 +1,11 @@
+{% extends "layouts/base.njk" %}
+
+{% block head_preload %}{{ head_preload | safe }}{% endblock %}
+{% block head_css %}{{ head_css | safe }}{% endblock %}
+{% block head_extra %}{{ head_extra | safe }}{% endblock %}
+
+{% block body %}
+{{ content | safe }}
+{% endblock %}
+
+{% block body_js %}{{ body_js | safe }}{% endblock %}

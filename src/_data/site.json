@@ -1,0 +1,15 @@
+{
+  "title": "Brian Patrick Wcislo",
+  "tagline": "Apps That Move Business Forward",
+  "url": "https://bpwcislo.com",
+  "description": "Operational leverage for organizations ready to scale. Custom apps, training platforms, and workflow systems — from first sketch to production-ready product.",
+  "author": {
+    "name": "Brian Patrick Wcislo",
+    "url": "https://bpwcislo.com",
+    "linkedin": "https://www.linkedin.com/in/brianwcislo/",
+    "image": "https://bpwcislo.com/assets/images/Brian-BrandPhotos-Ronan-40.jpg",
+    "jobTitle": "App Architect & Operations Builder",
+    "location": "Costa Rica"
+  },
+  "themes": ["jungle", "miami", "ocean", "ember"]
+}

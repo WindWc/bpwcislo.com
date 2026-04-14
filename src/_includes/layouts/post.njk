@@ -1,0 +1,90 @@
+{% extends "layouts/base.njk" %}
+
+{% block head_css %}
+<link rel="stylesheet" href="/css/blog.css">
+{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ title }}",
+  "description": "{{ description }}",
+  "datePublished": "{{ date | dateISO }}",
+  "dateModified": "{{ modified | default(date) | dateISO }}",
+  "author": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person",
+    "name": "{{ site.author.name }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "@id": "{{ site.url }}/#person"
+  },
+  "image": "{{ site.url }}{{ featuredImage | default('/assets/images/og-share.jpg') }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "mainEntityOfPage": "{{ site.url }}{{ page.url }}"
+}
+</script>
+{% endblock %}
+
+{% block body %}
+<main class="blog-post">
+  <article>
+    <header class="post-header blog-fade">
+      <a href="/blog/" class="back-to-blog">&larr; Back to Blog</a>
+      <h1>{{ title }}</h1>
+      <div class="post-meta">
+        <time datetime="{{ date | dateISO }}">{{ date | dateDisplay }}</time>
+        <span class="reading-time">{{ content | readingTime }}</span>
+        {% if tags %}
+        <div class="post-tags">
+          {% for tag in tags %}{% if tag != "post" %}
+          <span class="tag">{{ tag }}</span>
+          {% endif %}{% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% if featuredImage %}
+      <img class="post-featured-image" src="{{ featuredImage }}" alt="{{ featuredImageAlt | default(title) }}" loading="lazy">
+      {% endif %}
+    </header>
+
+    <div class="post-content blog-fade">
+      {{ content | safe }}
+    </div>
+
+    <nav class="post-nav" aria-label="Blog navigation">
+      {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+      {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+      {% if previousPost %}<a href="{{ previousPost.url }}" class="post-nav-prev">&larr; {{ previousPost.data.title }}</a>{% endif %}
+      {% if nextPost %}<a href="{{ nextPost.url }}" class="post-nav-next">{{ nextPost.data.title }} &rarr;</a>{% endif %}
+    </nav>
+  </article>
+</main>
+{% endblock %}
+
+{% block body_js %}
+<script>
+(function() {
+  if (typeof SiteScore !== 'undefined') SiteScore.once(117, 'read-post-' + location.pathname);
+
+  var awarded25 = false, awarded50 = false, awarded100 = false;
+  var article = document.querySelector('.post-content');
+  if (!article) return;
+
+  window.addEventListener('scroll', function() {
+    var rect = article.getBoundingClientRect();
+    var articleTop = rect.top + window.scrollY;
+    var articleHeight = rect.height;
+    var scrolled = window.scrollY + window.innerHeight - articleTop;
+    var pct = Math.min(scrolled / articleHeight, 1);
+
+    if (pct > 0.25 && !awarded25)  { SiteScore.once(10, 'read-25-' + location.pathname); awarded25 = true; }
+    if (pct > 0.50 && !awarded50)  { SiteScore.once(15, 'read-50-' + location.pathname); awarded50 = true; }
+    if (pct > 0.95 && !awarded100) { SiteScore.once(25, 'read-100-' + location.pathname); awarded100 = true; }
+  });
+})();
+</script>
+{% endblock %}

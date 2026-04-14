@@ -1,17 +1,18 @@
 {
   "name": "bpwcislo.com",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "2.0.0",
+  "description": "Personal portfolio + blog — built with Eleventy",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy",
     "snapshot": "node scripts/snapshot.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Brian Patrick Wcislo",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@11ty/eleventy": "^3.1.5",
     "live-server": "^1.2.2"
   },
   "devDependencies": {
