@@ -1,10 +1,10 @@
 ---
 title: "Build the Blueprint, Then Build the Thing"
-description: "I just started building Phase 2 of a custom workflow app — after weeks of thinking and planning. Four documents. Zero production code. Let me show you what it looks like when the thinking happens first."
-excerpt: "Four documents. Zero production code. That's not slow — it's solid. Here's what the planning process actually looks like IRL."
+description: "I just started building Phase 2 of a custom workflow app after weeks of thinking and planning. Four documents. Zero production code. Let me show you what it looks like when the thinking happens first."
+excerpt: "Four documents. Zero production code. That's not slow; it's solid. Here's what the planning process actually looks like IRL."
 date: 2026-04-13
 featuredImage: /assets/images/og-build-the-blueprint.png
-featuredImageAlt: "6-Phase Job Lifecycle — from request to payment, mapped before writing a line of code"
+featuredImageAlt: "6-Phase Job Lifecycle, from request to payment, mapped before writing a line of code"
 tags:
   - post
   - building
@@ -701,17 +701,17 @@ tags:
 }
 </style>
 
-<p>I just started developing Phase 2 of a custom workflow application — and I'm genuinely excited about this one. It's for a facilities management company that serves a major national brand.</p>
+<p>I just started developing Phase 2 of a custom workflow application, and I'm genuinely excited about this one. It's for a facilities management company that serves a major national brand.</p>
 
-<p>In Phase 1, we built the complete lifecycle for one line of business: Refurbishment. Now that it's humming along, we're expanding into Facilities Maintenance & Management. These lines of business are extremely unique — other than some shared infrastructure, this is almost a full new build.</p>
+<p>In Phase 1, we built the complete lifecycle for one line of business: Refurbishment. Now that it's humming along, we're expanding into Facilities Maintenance & Management. These lines of business are extremely unique. Other than some shared infrastructure, this is almost a full new build.</p>
 
 <p>But before I write a single line of production code, here's what already exists:</p>
 
-<p>A <strong>development scope document</strong> that maps a 6-phase job lifecycle — from the moment a work request arrives to the moment the invoice gets paid. Every phase has defined statuses, required fields, and clear handoff points between team members.</p>
+<p>A <strong>development scope document</strong> that maps a 6-phase job lifecycle: from the moment a work request arrives to the moment the invoice gets paid. Every phase has defined statuses, required fields, and clear handoff points between team members.</p>
 
-<p>A <strong>full data model specification</strong> — 13 database tables, 6 enum types, 14 foreign key relationships, row-level security policies — all derived from tracing a single real job through the client's actual workflow. Not hypothetical. Not "best practice." Real.</p>
+<p>A <strong>full data model specification</strong>: 13 database tables, 6 enum types, 14 foreign key relationships, row-level security policies, all derived from tracing a single real job through the client's actual workflow. Not hypothetical. Not "best practice." Real.</p>
 
-<p>An <strong>interactive swim lane diagram</strong> showing every actor, every decision point, every handoff across the entire process. The owner, the admin team, the field crew, the client stakeholders — each one mapped to what they do, when, and what triggers the next step.</p>
+<p>An <strong>interactive swim lane diagram</strong> showing every actor, every decision point, every handoff across the entire process. The owner, the admin team, the field crew, the client stakeholders, each one mapped to what they do, when, and what triggers the next step.</p>
 
 <p>A <strong>screen-by-screen blueprint</strong> covering 16 screens across a 3-month build, with wireframes, data connections, role-based access rules, and the specific fields each view needs to display.</p>
 
@@ -724,7 +724,7 @@ tags:
   <div class="bp-lifecycle" id="bp-lifecycle">
     <div class="bp-lifecycle-header">
       <h3>6-Phase Job Lifecycle</h3>
-      <p>Every job follows this path — from request to payment</p>
+      <p>Every job follows this path: from request to payment</p>
     </div>
     <div class="bp-flow">
       <div class="bp-flow-step bp-receipt">
@@ -776,7 +776,7 @@ tags:
       </div>
     </div>
   </div>
-  <p class="bp-visual-caption">Development scope: 6 phases, 16 screens, 3-month roadmap — all mapped before writing a line of code</p>
+  <p class="bp-visual-caption">Development scope: 6 phases, 16 screens, 3-month roadmap, all mapped before writing a line of code</p>
 </div>
 
 <h2>Why the Blueprint Comes First</h2>
@@ -785,13 +785,13 @@ tags:
 
 <p>Here's what I know for sure: the projects that thrive aren't the ones with the best developers. They're the ones where the thinking happened before the typing.</p>
 
-<p>When the blueprint is clear, development flows. Teams know what they're building, why, and in what order. Questions get answered in a planning doc, not in a code editor at 2am. Scope stays honest because the boundaries were drawn intentionally — not discovered mid-sprint.</p>
+<p>When the blueprint is clear, development flows. Teams know what they're building, why, and in what order. Questions get answered in a planning doc, not in a code editor at 2am. Scope stays honest because the boundaries were drawn intentionally, not discovered mid-sprint.</p>
 
 <p>That clarity? It's the difference between a three-month build and a nine-month odyssey.</p>
 
 <h2>What the Process Actually Looks Like</h2>
 
-<p>I sit with the client and trace real jobs through their actual process. Not the idealized version. The living, breathing one — five systems holding pieces of the same truth, proposals threading through inboxes, a billing team that's built impressive workarounds to keep everything moving.</p>
+<p>I sit with the client and trace real jobs through their actual process. Not the idealized version. The living, breathing one: five systems holding pieces of the same truth, proposals threading through inboxes, a billing team that's built impressive workarounds to keep everything moving.</p>
 
 <p>That complexity isn't a problem. It's the raw material. And honestly? It's where I come alive.</p>
 
@@ -910,26 +910,26 @@ tags:
       </div>
     </div>
   </div>
-  <p class="bp-visual-caption">Real workflow mapped from Store #9660 Rockaway — every actor, every handoff, every decision point</p>
+  <p class="bp-visual-caption">Real workflow mapped from Store #9660 Rockaway: every actor, every handoff, every decision point</p>
 </div>
 
 <p>Then I map that process completely. Every actor. Every decision. Every status change. Every piece of data that needs to exist for the next step to happen.</p>
 
-<p>From that map, I build the data model. Not from a template — from the workflow itself. Every table, every relationship, every enum value comes from something real. If a field exists in the schema, it's because a human being needs it at a specific moment in their day.</p>
+<p>From that map, I build the data model. Not from a template. From the workflow itself. Every table, every relationship, every enum value comes from something real. If a field exists in the schema, it's because a human being needs it at a specific moment in their day.</p>
 
 <p>Then I design the screens. Each one tied to a specific phase of the workflow, built for the specific role that uses it. The owner sees pricing. The field crew sees instructions and photo capture. The client sees status and documentation. Nobody sees more than they need.</p>
 
-<p>And only then — after the scope is locked, the data model is solid, the screens are mapped, and the timeline is realistic — do I start building.</p>
+<p>And only then, after the scope is locked, the data model is solid, the screens are mapped, and the timeline is realistic, do I start building.</p>
 
 <h2>This Is Where AI Changes the Game</h2>
 
-<p>I use AI as a thinking partner throughout this entire process. Not to generate code — to generate clarity.</p>
+<p>I use AI as a thinking partner throughout this entire process. Not to generate code. To generate clarity.</p>
 
 <p>I describe a client's workflow in plain language and collaborate with AI to produce a data model that accounts for edge cases I might miss on my own. I map a 12-step process across 4 actors and get it reflected back as an interactive diagram the client can actually review and understand. Not a static PDF buried in a drive. A living document.</p>
 
 <p>The planning artifacts for this project? Interactive swim lane diagrams. Color-coded status flows. Wireframes with real data. A database schema with annotations explaining why every field exists. Beautiful, detailed, and functional.</p>
 
-<p>A few years ago, this level of documentation would've taken weeks and cost thousands in billable consulting hours. Now I produce it in days — not because the thinking is faster, but because the translation from thinking to documentation is wildly more efficient.</p>
+<p>A few years ago, this level of documentation would've taken weeks and cost thousands in billable consulting hours. Now I produce it in days, not because the thinking is faster, but because the translation from thinking to documentation is wildly more efficient.</p>
 
 <p>AI doesn't replace 25 years of knowing which questions to ask. It amplifies the output once I know the answers.</p>
 
@@ -947,16 +947,16 @@ tags:
 
 <p>For this particular project, here's what that clarity created:</p>
 
-<p><strong>A 3-month development roadmap that both the client and I believe in</strong> — because it's built on defined screens, not vague feature descriptions. Month 1 handles the core workflow (receipt through approval). Month 2 builds the execution engine (pre-construction checklists through change orders). Month 3 closes the loop (billing, client portal, archive).</p>
+<p><strong>A 3-month development roadmap that both the client and I believe in</strong>, because it's built on defined screens, not vague feature descriptions. Month 1 handles the core workflow (receipt through approval). Month 2 builds the execution engine (pre-construction checklists through change orders). Month 3 closes the loop (billing, client portal, archive).</p>
 
-<p><strong>Intentional scope decisions</strong> — 7 items explicitly deferred with clear reasoning for each. Construction workflows, vendor management, automated integrations — all acknowledged, all documented, all moved to future phases. Not forgotten. Chosen.</p>
+<p><strong>Intentional scope decisions</strong>: 7 items explicitly deferred with clear reasoning for each. Construction workflows, vendor management, automated integrations. All acknowledged, all documented, all moved to future phases. Not forgotten. Chosen.</p>
 
 {# ═══════════════ VISUAL 3: DATA ARCHITECTURE ERD ═══════════════ #}
 <div class="bp-visual">
   <div class="bp-erd">
     <div class="bp-erd-header">
       <h3>Data Architecture — Entity Relationships</h3>
-      <p>13 tables, 6 enum types, 14 foreign keys — derived from real workflow</p>
+      <p>13 tables, 6 enum types, 14 foreign keys, derived from real workflow</p>
     </div>
     <div class="bp-erd-grid">
       {# Left column: Lookup + Workflow entities #}
@@ -1086,12 +1086,12 @@ tags:
       </div>
     </div>
   </div>
-  <p class="bp-visual-caption">Every table derived from tracing a real job — Store #9660 Rockaway, WT 32760360</p>
+  <p class="bp-visual-caption">Every table derived from tracing a real job: Store #9660 Rockaway, WT 32760360</p>
 </div>
 
 <p><strong>A data architecture designed for where the platform is going</strong>, not just where it is. JSONB metadata fields for extensibility. Soft deletes everywhere. Timestamp tracking on every record. Row-level security that ensures the field crew never sees pricing and the client never sees margins.</p>
 
-<p><strong>And a client who can look at these documents and see their entire business reflected back</strong> — clearly, accurately, and organized in a way that makes the path forward obvious.</p>
+<p><strong>And a client who can look at these documents and see their entire business reflected back</strong>: clearly, accurately, and organized in a way that makes the path forward obvious.</p>
 
 {# ═══════════════ VISUAL 4: SCREEN BLUEPRINT PREVIEW ═══════════════ #}
 <div class="bp-visual">
@@ -1148,7 +1148,7 @@ tags:
           <h4>Job Detail — Tile Replace + WOM</h4>
           <span class="bp-screen-route">/facilities/jobs/:id</span>
           <span class="bp-screen-role" style="background:#071c3f;color:#fff;">Owner</span>
-          <p class="bp-screen-desc">Everything about a single job. Timeline, photos, proposal, PO, pricing — one view, role-filtered.</p>
+          <p class="bp-screen-desc">Everything about a single job. Timeline, photos, proposal, PO, pricing. One view, role-filtered.</p>
           <div class="bp-wf-fields">
             <div class="bp-wf-field"><div class="bp-wf-field-label">Store</div><div class="bp-wf-field-value">#9660 Rockaway Town Square</div></div>
             <div class="bp-wf-field"><div class="bp-wf-field-label">Category</div><div class="bp-wf-field-value">Flooring</div></div>
@@ -1209,18 +1209,18 @@ tags:
       </div>
     </div>
   </div>
-  <p class="bp-visual-caption">16 screens, 4 user roles — each view shows only what that role needs, when they need it</p>
+  <p class="bp-visual-caption">16 screens, 4 user roles, each view shows only what that role needs, when they need it</p>
 </div>
 
 <p>That clarity? That's what I build.</p>
 
 <hr>
 
-<p>What does your planning process look like before you start building? Whether you're a solo builder, part of a team, or hiring someone to build for you — I'm curious how much of the thinking happens before the typing.</p>
+<p>What does your planning process look like before you start building? Whether you're a solo builder, part of a team, or hiring someone to build for you, I'm curious how much of the thinking happens before the typing.</p>
 
 <p>Would love to hear what's working for you.</p>
 
-<p class="post-signoff">Grateful for the work and the people it serves.<br><br>Your friend in Costa Rica,<br>Wind</p>
+<p class="post-signoff">Grateful for the work and the people it serves.<br><br>Your friend in Costa Rica 🌴</p>
 
 {# ═══════════════ INTERACTIVE JS ═══════════════ #}
 <script>
