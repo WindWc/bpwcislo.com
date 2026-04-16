@@ -245,13 +245,15 @@ description: "Operational leverage for organizations ready to scale. Custom apps
         <span class="stat-pill"><strong>9</strong>-week initial build</span>
         <span class="stat-pill stat-pill--accent"><strong>Phase 2</strong> in progress</span>
       </div>
-      <div class="project-actions">
-        <button class="project-expand-toggle" aria-expanded="false" onclick="var e=this.getAttribute('aria-expanded')==='false'?'true':'false';this.setAttribute('aria-expanded',e);this.closest('.project-actions').nextElementSibling.classList.toggle('visible')">More about this project <span class="project-expand-icon">+</span></button>
-        <a href="/blog/build-the-blueprint/" class="project-blog-link">Read blog article →</a>
-      </div>
-      <div class="project-expand-content">
-        <p>One platform that gives every facility job a clear path — from the moment a work task is dispatched through final invoice. Phase 2 was blueprinted from real job data — <strong>12 process documents</strong> from an actual project were reverse-engineered into swim lane diagrams, a <strong>13-table data model</strong>, and screen-by-screen wireframes before a single line of code was written. The highest-value screen — a <strong>proposal builder</strong> with line-item management, auto-totals, and one-click PDF export — turns what used to take manual effort every time into something that flows in minutes.</p>
-      </div>
+      <details class="project-expand project-expand--with-blog">
+        <summary>
+          <span class="project-expand-label">More about this project</span>
+          <a href="/blog/build-the-blueprint/" class="project-blog-link" onclick="event.stopPropagation()">Read blog article →</a>
+        </summary>
+        <div class="project-expand-content">
+          <p>One platform that gives every facility job a clear path — from the moment a work task is dispatched through final invoice. Phase 2 was blueprinted from real job data — <strong>12 process documents</strong> from an actual project were reverse-engineered into swim lane diagrams, a <strong>13-table data model</strong>, and screen-by-screen wireframes before a single line of code was written. The highest-value screen — a <strong>proposal builder</strong> with line-item management, auto-totals, and one-click PDF export — turns what used to take manual effort every time into something that flows in minutes.</p>
+        </div>
+      </details>
     </div>
     <div class="project-gallery">
       <div class="project-gallery-track">
