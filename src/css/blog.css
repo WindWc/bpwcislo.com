@@ -281,6 +281,15 @@
   margin-bottom: 0;
 }
 
+.post-content blockquote cite {
+  display: block;
+  margin-top: var(--space-4);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--slate-900);
+}
+
 /* Images */
 .post-content img {
   max-width: 100%;
