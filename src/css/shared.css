@@ -931,6 +931,10 @@ section {
   font-weight: 600;
 }
 
+.project-expand--with-blog summary::after {
+  content: none;
+}
+
 .project-expand[open] summary::after {
   content: ' −';
 }
