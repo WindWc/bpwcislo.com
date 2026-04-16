@@ -874,11 +874,11 @@ section {
   color: var(--accent);
 }
 
-.project-expand--with-blog summary {
+.project-expand--with-blog > summary {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-8);
 }
 
 .project-expand--with-blog .project-expand-label {
@@ -931,8 +931,10 @@ section {
   font-weight: 600;
 }
 
-.project-expand--with-blog summary::after {
+.project-expand--with-blog summary::after,
+.project-expand--with-blog[open] summary::after {
   content: none;
+  display: none;
 }
 
 .project-expand[open] summary::after {
