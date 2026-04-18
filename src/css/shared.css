@@ -875,10 +875,15 @@ section {
 }
 
 .project-expand--with-blog > summary {
-  display: flex;
+  text-align: center;
+}
+
+.project-expand--with-blog .project-expand-summary-inner {
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   gap: var(--space-8);
+  flex-wrap: wrap;
 }
 
 .project-expand--with-blog .project-expand-label {
@@ -889,6 +894,7 @@ section {
 .project-expand--with-blog .project-expand-label::after {
   content: ' +';
   font-weight: 600;
+  margin-left: 0.25em;
 }
 
 .project-expand--with-blog[open] .project-expand-label::after {
@@ -931,14 +937,14 @@ section {
   font-weight: 600;
 }
 
-.project-expand--with-blog summary::after,
-.project-expand--with-blog[open] summary::after {
-  content: none;
-  display: none;
-}
-
 .project-expand[open] summary::after {
   content: ' −';
+}
+
+.project-expand--with-blog > summary::after,
+.project-expand--with-blog[open] > summary::after {
+  content: none !important;
+  display: none !important;
 }
 
 .project-expand-content {
