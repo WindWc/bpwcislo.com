@@ -27,6 +27,26 @@
         hamburger.setAttribute('aria-expanded', 'false');
       }
     });
+    function closeMobileMenu() {
+      navList.classList.remove('mobile-open');
+      hamburger.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    document.addEventListener('click', function(e) {
+      if (!navList.classList.contains('mobile-open')) return;
+      if (navList.contains(e.target) || hamburger.contains(e.target)) return;
+      closeMobileMenu();
+    });
+    // Close on user-initiated scroll gestures only — touchmove (mobile
+    // drag) and wheel (desktop). Plain scroll events also fire from iOS
+    // momentum scrolling and from anchor-link navigation, which would
+    // close the menu unexpectedly.
+    function onScrollGesture() {
+      if (!navList.classList.contains('mobile-open')) return;
+      closeMobileMenu();
+    }
+    window.addEventListener('touchmove', onScrollGesture, { passive: true });
+    window.addEventListener('wheel', onScrollGesture, { passive: true });
   }
 
   const navSections = Array.from(navLinks).map(link =>
