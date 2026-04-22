@@ -752,6 +752,7 @@ section {
   overflow: hidden;
   pointer-events: none;
   z-index: 9999;
+  will-change: transform;
 }
 
 .rocket-launching {

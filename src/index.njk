@@ -1144,6 +1144,17 @@ description: "Operational leverage for organizations ready to scale. Custom apps
 
       rocket.style.visibility = 'hidden';
 
+      // Scroll compensation: shift the stage by -scrollDelta so the
+      // clone visually tracks the rocket's spot in the page without
+      // touching the clone's own animation. Cheap passive listener,
+      // single transform write per scroll event.
+      const initialScrollY = window.scrollY;
+      function onScroll() {
+        const delta = window.scrollY - initialScrollY;
+        stage.style.transform = 'translate3d(0, ' + (-delta) + 'px, 0)';
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+
       // Trajectory: rocket nose points up-and-right at ~-45°
       const angle = -Math.PI / 4;
       const distance = Math.hypot(window.innerWidth, window.innerHeight) * 1.4;
@@ -1206,13 +1217,6 @@ description: "Operational leverage for organizations ready to scale. Custom apps
       // Phase 3 — Snap to far lower-left along the same trajectory line
       // Phase 4 — Decelerate back into origin
       setTimeout(() => {
-        // Re-anchor to the rocket's CURRENT viewport position in case
-        // the user scrolled while it was offscreen — otherwise the
-        // return lands at the original launch coordinates.
-        const nowRect = rocket.getBoundingClientRect();
-        clone.style.left = nowRect.left + 'px';
-        clone.style.top = nowRect.top + 'px';
-
         clone.style.transition = 'none';
         clone.style.transform =
           'translate(' + (-dx) + 'px, ' + (-dy) + 'px) rotate(-12deg) scale(0.45)';
@@ -1228,6 +1232,7 @@ description: "Operational leverage for organizations ready to scale. Custom apps
 
       // Cleanup
       setTimeout(() => {
+        window.removeEventListener('scroll', onScroll);
         rocket.style.visibility = '';
         stage.remove();
         launching = false;
