@@ -75,9 +75,14 @@
   });
 
   // ── Desktop: set fixed position once, aligned with headline ──
+  // Use the headline's document-absolute top so we land in the right
+  // viewport position even if the page was loaded mid-scroll (e.g. via
+  // a #hash link). Otherwise rect.top can be negative and the sidebar
+  // ends up above the viewport.
   if (!isMobile() && heroHeadline) {
     var rect = heroHeadline.getBoundingClientRect();
-    sidebar.style.top = rect.top + 'px';
+    var viewportTop = rect.top + window.scrollY;
+    sidebar.style.top = viewportTop + 'px';
   }
 
   // ── Eye blink every 7 seconds ──────────────────────────

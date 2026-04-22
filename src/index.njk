@@ -1092,6 +1092,242 @@ description: "Operational leverage for organizations ready to scale. Custom apps
     });
   }
 
+  // ─── Rocket Easter Egg ────────────────────────────────────
+  // Click the "Make it Fly" rocket — it shoots off-screen along its
+  // trajectory, leaves a sparking trail, then flies back into place
+  // from the bottom-left along the same line.
+  (function() {
+    const rocket = document.querySelector('.icon-rocket');
+    if (!rocket) return;
+
+    rocket.setAttribute('role', 'button');
+    rocket.setAttribute('tabindex', '0');
+    rocket.setAttribute('aria-label', 'Launch the rocket');
+
+    let launching = false;
+
+    function launch() {
+      if (launching) return;
+      launching = true;
+
+      SiteScore.once(108, 'rocket-first-launch');
+      SiteScore.award(11, 'rocket-launch', 8000);
+
+      if (prefersReducedMotion) {
+        rocket.style.transition = 'opacity 250ms ease';
+        rocket.style.opacity = '0.15';
+        setTimeout(() => {
+          rocket.style.opacity = '';
+          rocket.style.transition = '';
+          launching = false;
+        }, 900);
+        return;
+      }
+
+      const rect = rocket.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+
+      // Stage clips off-screen movement so no scrollbars flash
+      const stage = document.createElement('div');
+      stage.className = 'rocket-launch-stage';
+      document.body.appendChild(stage);
+
+      const clone = rocket.cloneNode(true);
+      clone.classList.add('rocket-launching');
+      clone.style.position = 'absolute';
+      clone.style.left = rect.left + 'px';
+      clone.style.top = rect.top + 'px';
+      clone.style.width = w + 'px';
+      clone.style.height = h + 'px';
+      stage.appendChild(clone);
+
+      rocket.style.visibility = 'hidden';
+
+      // Trajectory: rocket nose points up-and-right at ~-45°
+      const angle = -Math.PI / 4;
+      const distance = Math.hypot(window.innerWidth, window.innerHeight) * 1.4;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+
+      const accent = (getComputedStyle(document.documentElement)
+        .getPropertyValue('--accent-secondary').trim()) || '#d97706';
+
+      const WINDUP = 220;
+      const FLIGHT = 1100;
+      const PAUSE = 950;
+      const RETURN = 1250;
+
+      // Phase 1 — Windup: slight backward recoil
+      clone.style.transition = 'transform ' + WINDUP + 'ms cubic-bezier(0.34, 1.56, 0.64, 1)';
+      clone.style.transform = 'translate(-9px, 9px) rotate(-10deg) scale(1.12)';
+
+      // Phase 2 — Launch off-screen along trajectory, accelerating
+      setTimeout(() => {
+        // Ignition burst at the launch point
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        spawnShockwave(stage, cx, cy, accent);
+        for (let i = 0; i < 14; i++) {
+          spawnBurstSpark(stage, cx, cy, accent);
+        }
+
+        clone.style.transition =
+          'transform ' + FLIGHT + 'ms cubic-bezier(0.55, 0.08, 0.85, 0.18), ' +
+          'opacity ' + FLIGHT + 'ms cubic-bezier(0.5, 0, 1, 0.4)';
+        clone.style.transform =
+          'translate(' + dx + 'px, ' + dy + 'px) rotate(28deg) scale(0.5)';
+        clone.style.opacity = '0.85';
+
+        // Live-sample rocket position to spawn an exhaust trail behind it
+        const trailStart = performance.now();
+        const trailDuration = FLIGHT * 0.85;
+        let lastSpawn = 0;
+        function tick(now) {
+          const elapsed = now - trailStart;
+          if (elapsed > trailDuration || !stage.isConnected) return;
+          if (elapsed - lastSpawn >= 30) {
+            lastSpawn = elapsed;
+            const r = clone.getBoundingClientRect();
+            spawnParticle(
+              stage,
+              r.left + r.width / 2,
+              r.top + r.height / 2,
+              angle,
+              accent,
+              elapsed / trailDuration
+            );
+          }
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }, WINDUP);
+
+      // Phase 3 — Snap to far lower-left along the same trajectory line
+      // Phase 4 — Decelerate back into origin
+      setTimeout(() => {
+        // Re-anchor to the rocket's CURRENT viewport position in case
+        // the user scrolled while it was offscreen — otherwise the
+        // return lands at the original launch coordinates.
+        const nowRect = rocket.getBoundingClientRect();
+        clone.style.left = nowRect.left + 'px';
+        clone.style.top = nowRect.top + 'px';
+
+        clone.style.transition = 'none';
+        clone.style.transform =
+          'translate(' + (-dx) + 'px, ' + (-dy) + 'px) rotate(-12deg) scale(0.45)';
+        clone.style.opacity = '0';
+        void clone.offsetWidth;
+
+        clone.style.transition =
+          'transform ' + RETURN + 'ms cubic-bezier(0.16, 1, 0.3, 1), ' +
+          'opacity 480ms ease-out';
+        clone.style.transform = 'translate(0, 0) rotate(0deg) scale(1)';
+        clone.style.opacity = '1';
+      }, WINDUP + FLIGHT + PAUSE);
+
+      // Cleanup
+      setTimeout(() => {
+        rocket.style.visibility = '';
+        stage.remove();
+        launching = false;
+      }, WINDUP + FLIGHT + PAUSE + RETURN + 80);
+    }
+
+    function spawnShockwave(stage, x, y, color) {
+      const ring = document.createElement('div');
+      ring.className = 'rocket-shockwave';
+      const startSize = 10;
+      ring.style.cssText =
+        'left:' + x + 'px;' +
+        'top:' + y + 'px;' +
+        'width:' + startSize + 'px;' +
+        'height:' + startSize + 'px;' +
+        'border-color:' + color + ';' +
+        'box-shadow:0 0 28px ' + color + ', inset 0 0 18px ' + color + ';' +
+        'transition:transform 700ms cubic-bezier(0.16, 1, 0.3, 1), opacity 700ms ease-out, border-width 700ms ease-out;';
+      stage.appendChild(ring);
+      requestAnimationFrame(() => {
+        ring.style.transform = 'translate(-50%, -50%) scale(14)';
+        ring.style.opacity = '0';
+        ring.style.borderWidth = '0.5px';
+      });
+      setTimeout(() => ring.remove(), 750);
+    }
+
+    function spawnBurstSpark(stage, x, y, color) {
+      const p = document.createElement('div');
+      p.className = 'rocket-trail-particle';
+      const size = 4 + Math.random() * 7;
+      const life = 500 + Math.random() * 300;
+      p.style.cssText =
+        'left:' + x + 'px;' +
+        'top:' + y + 'px;' +
+        'width:' + size + 'px;' +
+        'height:' + size + 'px;' +
+        'background:' + color + ';' +
+        'opacity:1;' +
+        'box-shadow:0 0 ' + (8 + size) + 'px ' + color + ';' +
+        'transition:transform ' + life + 'ms cubic-bezier(0.22, 1, 0.36, 1), opacity ' + life + 'ms ease-out;';
+      stage.appendChild(p);
+
+      // Radial outward burst, full 360°
+      const a = Math.random() * Math.PI * 2;
+      const dist = 60 + Math.random() * 90;
+      const px = Math.cos(a) * dist;
+      const py = Math.sin(a) * dist;
+
+      requestAnimationFrame(() => {
+        p.style.transform =
+          'translate(calc(-50% + ' + px + 'px), calc(-50% + ' + py + 'px)) scale(0.1)';
+        p.style.opacity = '0';
+      });
+      setTimeout(() => p.remove(), life + 50);
+    }
+
+    function spawnParticle(stage, x, y, angle, color, progress) {
+      const p = document.createElement('div');
+      p.className = 'rocket-trail-particle';
+      const size = 3 + Math.random() * 6;
+      const life = 650 + Math.random() * 250;
+      p.style.cssText =
+        'left:' + x + 'px;' +
+        'top:' + y + 'px;' +
+        'width:' + size + 'px;' +
+        'height:' + size + 'px;' +
+        'background:' + color + ';' +
+        'opacity:' + (0.9 - progress * 0.3) + ';' +
+        'box-shadow:0 0 ' + (6 + size) + 'px ' + color + ';' +
+        'transition:transform ' + life + 'ms cubic-bezier(0.22, 1, 0.36, 1), opacity ' + life + 'ms ease-out;';
+      stage.appendChild(p);
+
+      // Drift opposite of launch direction with random spread
+      const spread = (Math.random() - 0.5) * 0.8;
+      const drift = 24 + Math.random() * 70;
+      const px = Math.cos(angle + Math.PI + spread) * drift;
+      const py = Math.sin(angle + Math.PI + spread) * drift;
+
+      requestAnimationFrame(() => {
+        p.style.transform =
+          'translate(calc(-50% + ' + px + 'px), calc(-50% + ' + py + 'px)) scale(0.15)';
+        p.style.opacity = '0';
+      });
+      setTimeout(() => p.remove(), life + 50);
+    }
+
+    rocket.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      launch();
+    });
+    rocket.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        launch();
+      }
+    });
+  })();
+
   // Score: hover on service, testimonial, essential, partner cards
   document.querySelectorAll('.service-card').forEach((c, i) => {
     c.addEventListener('mouseenter', () => SiteScore.award(7, 'svc-' + i, 5000));
