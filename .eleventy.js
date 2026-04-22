@@ -4,6 +4,11 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("assets");
 
+  // Cache-busting token regenerated each build. Appended to long-cached
+  // CSS/JS asset URLs so deploys don't get masked by an old immutable
+  // copy in the browser cache.
+  eleventyConfig.addGlobalData("assetVersion", Date.now().toString(36));
+
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByTag("post").reverse();
   });
